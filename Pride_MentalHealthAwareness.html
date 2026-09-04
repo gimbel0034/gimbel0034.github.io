@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pride & Mental Health Awareness</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #fff;
+      background: #000;
+    }
+
+    /* American flag-style header */
+    header {
+      background: linear-gradient(to right,
+        #3c3b6e 0 30%,
+        #b22234 30% 40%,
+        #ffffff 40% 50%,
+        #b22234 50% 60%,
+        #ffffff 60% 70%,
+        #b22234 70% 80%,
+        #ffffff 80% 90%,
+        #b22234 90% 100%);
+      padding: 20px;
+      text-align: center;
+      position: relative;
+    }
+
+    .stars {
+      position: absolute;
+      left: 5%;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 18px;
+      line-height: 1.4;
+      text-align: left;
+      white-space: pre;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 28px;
+      text-shadow: 0 0 5px rgba(0,0,0,0.7);
+    }
+
+    /* Pride gradient bar */
+    .pride-bar {
+      height: 10px;
+      background: linear-gradient(to right,
+        #e40303, /* red */
+        #ff8c00, /* orange */
+        #ffed00, /* yellow */
+        #008026, /* green */
+        #004dff, /* blue */
+        #750787  /* violet */
+      );
+    }
+
+    main {
+      padding: 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section {
+      margin-bottom: 25px;
+      padding: 15px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .section h2 {
+      margin-top: 0;
+      font-size: 22px;
+      color: #ffed00;
+    }
+
+    .tags {
+      margin-top: 8px;
+      font-size: 13px;
+      color: #ccc;
+    }
+
+    .tags span {
+      display: inline-block;
+      margin-right: 8px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.1);
+    }
+
+    /* Simple button */
+    button {
+      margin-top: 10px;
+      padding: 8px 14px;
+      border: none;
+      border-radius: 4px;
+      background: #004dff;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #002f99;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 15px;
+      font-size: 13px;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="stars">
+★ ★ ★ ★ ★
+★ ★ ★ ★ ★
+★ ★ ★ ★ ★
+★ ★ ★ ★ ★
+    </div>
+    <h1>Pride, Freedom & Mental Health Awareness</h1>
+  </header>
+
+  <div class="pride-bar"></div>
+
+  <main>
+    <div class="section" id="lgbtq">
+      <h2>LGBTQ+ Pride</h2>
+      <p>
+        This space honors LGBTQ+ identities and experiences. Pride is about visibility,
+        safety, and the freedom to live authentically.
+      </p>
+      <div class="tags">
+        <span>#LoveIsLove</span>
+        <span>#Equality</span>
+        <span>#Pride</span>
+      </div>
+      <button onclick="showMessage('lgbtq')">Learn more</button>
+    </div>
+
+    <div class="section" id="autism">
+      <h2>Learning about Autism</h2>
+      <p>
+        Autism is a neurodevelopmental difference that affects how someone experiences
+        communication, social interaction, and sensory input. Understanding autism
+        means respecting different ways of thinking and being.
+      </p>
+      <div class="tags">
+        <span>#Neurodiversity</span>
+        <span>#Acceptance</span>
+      </div>
+      <button onclick="showMessage('autism')">Learn more</button>
+    </div>
+
+    <div class="section" id="bipolar">
+      <h2>Bipolar Disorder & Schizoaffective</h2>
+      <p>
+        Bipolar disorder involves shifts in mood, energy, and activity levels.
+        Schizoaffective disorder includes mood symptoms along with features like
+        hallucinations or delusions. Both are real, treatable conditions that
+        deserve compassion and support.
+      </p>
+      <div class="tags">
+        <span>#MentalHealth</span>
+        <span>#Support</span>
+      </div>
+      <button onclick="showMessage('bipolar')">Learn more</button>
+    </div>
+
+    <div class="section" id="tardive">
+      <h2>Tardive Dyskinesia & Medication Awareness</h2>
+      <p>
+        Some medications can cause movement-related side effects, such as tardive
+        dyskinesia. Learning about side effects and talking openly with healthcare
+        providers is an important part of mental health care.
+      </p>
+      <div class="tags">
+        <span>#MedicationAwareness</span>
+        <span>#Advocacy</span>
+      </div>
+      <button onclick="showMessage('tardive')">Learn more</button>
+    </div>
+
+    <div class="section" id="awareness">
+      <h2>Mental Health Awareness</h2>
+      <p>
+        Mental health is part of everyone’s life. Awareness means reducing stigma,
+        listening without judgment, and encouraging people to seek help when they
+        need it.
+      </p>
+      <div class="tags">
+        <span>#EndTheStigma</span>
+        <span>#YouAreNotAlone</span>
+      </div>
+      <button onclick="showMessage('awareness')">Learn more</button>
+    </div>
+  </main>
+
+  <footer>
+    Built with HTML, CSS & JavaScript • Respect, Pride & Understanding
+  </footer>
+
+  <script>
+    function showMessage(sectionId) {
+      const messages = {
+        lgbtq: "Pride is about safety, visibility, and the right to exist as you are.",
+        autism: "Autistic experiences are diverse—listening and learning from autistic voices matters.",
+        bipolar: "Treatment and support can help people with bipolar or schizoaffective live meaningful lives.",
+        tardive: "Always discuss side effects and concerns with a qualified healthcare professional.",
+        awareness: "Checking in on yourself and others is a powerful act of care."
+      };
+
+      alert(messages[sectionId] || "Keep learning, keep caring.");
+    }
+  </script>
+</body>
+</html>
