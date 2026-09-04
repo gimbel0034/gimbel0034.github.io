@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Henderson, Nevada • Freedom & Service</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0b1220;
+      color: #f5f5f5;
+    }
+
+    /* Hero with subtle flag + city overlay */
+    header {
+      background: linear-gradient(
+        to right,
+        rgba(10, 30, 80, 0.95),
+        rgba(178, 34, 52, 0.9)
+      );
+      padding: 25px 15px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: "★ ★ ★ ★ ★ ★ ★ ★ ★ ★";
+      position: absolute;
+      top: 10px;
+      left: 15px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.35);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 30px;
+      text-shadow: 0 0 8px rgba(0,0,0,0.7);
+    }
+
+    .subtitle {
+      margin-top: 8px;
+      font-size: 15px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #ffeb99;
+    }
+
+    nav {
+      margin-top: 15px;
+    }
+
+    nav button {
+      margin: 4px;
+      padding: 8px 14px;
+      border: none;
+      border-radius: 4px;
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    nav button:hover {
+      background: rgba(255,255,255,0.25);
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .section {
+      margin-bottom: 25px;
+      padding: 18px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .section h2 {
+      margin-top: 0;
+      font-size: 22px;
+      color: #ffeb99;
+    }
+
+    .badge-row {
+      margin-top: 10px;
+    }
+
+    .badge {
+      display: inline-block;
+      margin: 4px 6px 0 0;
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      font-size: 12px;
+      color: #ccc;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>City of Henderson, Nevada</h1>
+    <div class="subtitle">Community • Freedom • Service</div>
+    <nav>
+      <button onclick="showSection('henderson')">Henderson</button>
+      <button onclick="showSection('freedom')">Freedom & Liberty</button>
+      <button onclick="showSection('navy')">U.S. Navy</button>
+      <button onclick="showSection('army')">U.S. Army</button>
+      <button onclick="showSection('cadets')">Cadets & Future Leaders</button>
+    </nav>
+  </header>
+
+  <main>
+    <div class="section" id="henderson">
+      <h2>Henderson, Nevada</h2>
+      <p>
+        Henderson is a vibrant city in Southern Nevada, known for its neighborhoods,
+        parks, and strong sense of community. This page celebrates the people who
+        call Henderson home and those who serve our country.
+      </p>
+      <div class="badge-row">
+        <span class="badge">#HendersonPride</span>
+        <span class="badge">#NevadaStrong</span>
+      </div>
+    </div>
+
+    <div class="section" id="freedom" style="display:none;">
+      <h2>America • Freedom & Liberty</h2>
+      <p>
+        Freedom and liberty are core American values—protected by everyday citizens
+        and those who serve in uniform. Honoring these values means respecting
+        rights, responsibilities, and the diversity of people who make up this nation.
+      </p>
+      <div class="badge-row">
+        <span class="badge">#Freedom</span>
+        <span class="badge">#Liberty</span>
+        <span class="badge">#UnitedWeStand</span>
+      </div>
+    </div>
+
+    <div class="section" id="navy" style="display:none;">
+      <h2>United States Navy</h2>
+      <p>
+        The Navy protects our nation at sea and around the world. Sailors serve with
+        courage, discipline, and commitment to safeguarding freedom on the oceans.
+      </p>
+      <div class="badge-row">
+        <span class="badge">#NavyPride</span>
+        <span class="badge">#HonorCourageCommitment</span>
+      </div>
+    </div>
+
+    <div class="section" id="army" style="display:none;">
+      <h2>United States Army</h2>
+      <p>
+        The Army defends the nation on land, at home and abroad. Soldiers train,
+        deploy, and serve to protect communities and uphold the values of the
+        United States.
+      </p>
+      <div class="badge-row">
+        <span class="badge">#ArmyStrong</span>
+        <span class="badge">#Service</span>
+      </div>
+    </div>
+
+    <div class="section" id="cadets" style="display:none;">
+      <h2>Cadets & Future Leaders</h2>
+      <p>
+        Cadet programs help young people learn leadership, discipline, and respect
+        for service. They represent the next generation of community builders and
+        defenders of freedom.
+      </p>
+      <div class="badge-row">
+        <span class="badge">#Cadets</span>
+        <span class="badge">#FutureLeaders</span>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    Built with HTML, CSS & JavaScript • Henderson, Nevada • America Freedom & Service
+  </footer>
+
+  <script>
+    function showSection(id) {
+      const sections = ['henderson', 'freedom', 'navy', 'army', 'cadets'];
+      sections.forEach(sec => {
+        document.getElementById(sec).style.display = (sec === id) ? 'block' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>
