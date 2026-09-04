@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Christmas Art Store</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: radial-gradient(circle at top, #1b2540 0%, #050814 55%, #020308 100%);
+      color: #fff;
+      min-height: 100vh;
+    }
+
+    header {
+      position: relative;
+      text-align: center;
+      padding: 30px 10px 20px;
+    }
+
+    header h1 {
+      font-size: 2.4rem;
+      color: #ffe66d;
+      text-shadow: 0 0 10px rgba(255, 230, 109, 0.8);
+    }
+
+    header p {
+      margin-top: 8px;
+      font-size: 1rem;
+      color: #f8f9ff;
+    }
+
+    /* Shining stars background */
+    .stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .star {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: #fff;
+      border-radius: 50%;
+      opacity: 0.7;
+      animation: twinkle 2s infinite alternate;
+    }
+
+    @keyframes twinkle {
+      0% { transform: scale(1); opacity: 0.4; }
+      100% { transform: scale(1.8); opacity: 1; }
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 20px;
+    }
+
+    .store-section, .canvas-section {
+      background: rgba(12, 18, 40, 0.9);
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+
+    .store-section h2,
+    .canvas-section h2 {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+      color: #ffdf9a;
+    }
+
+    .store-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 15px;
+      margin-top: 10px;
+    }
+
+    .product-card {
+      background: rgba(255,255,255,0.06);
+      border-radius: 10px;
+      padding: 12px;
+      border: 1px solid rgba(255,255,255,0.15);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .product-title {
+      font-size: 1rem;
+      margin-bottom: 6px;
+      color: #ffe66d;
+    }
+
+    .product-desc {
+      font-size: 0.85rem;
+      color: #dbe4ff;
+      margin-bottom: 8px;
+    }
+
+    .product-price {
+      font-size: 0.9rem;
+      color: #ffb3b3;
+      margin-bottom: 8px;
+    }
+
+    .product-btn {
+      align-self: flex-start;
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.85rem;
+      background: #ff4f5e;
+      color: #fff;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .product-btn:hover {
+      background: #ff6f7b;
+      transform: translateY(-1px);
+    }
+
+    /* Painting / circle artist area */
+    .canvas-section p {
+      font-size: 0.9rem;
+      color: #dbe4ff;
+      margin-bottom: 10px;
+    }
+
+    #artCanvas {
+      border-radius: 10px;
+      background: #111827;
+      border: 1px solid rgba(255,255,255,0.2);
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .controls label {
+      font-size: 0.85rem;
+      margin-right: 4px;
+    }
+
+    .controls input[type="color"],
+    .controls input[type="range"] {
+      cursor: pointer;
+    }
+
+    .controls button {
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.85rem;
+      background: #22c55e;
+      color: #fff;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .controls button:hover {
+      background: #4ade80;
+      transform: translateY(-1px);
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px 10px 25px;
+      font-size: 0.8rem;
+      color: #cbd5f5;
+    }
+
+    @media (max-width: 800px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Shining stars layer -->
+  <div class="stars" id="starsLayer"></div>
+
+  <header>
+    <h1>Christmas Art Store</h1>
+    <p>Shining stars, cozy colors, and circle art for the holiday season.</p>
+  </header>
+
+  <main>
+    <!-- Store side -->
+    <section class="store-section">
+      <h2>Holiday Art & Supplies</h2>
+      <p>Browse magical Christmas-themed art kits, paints, and circle-art tools.</p>
+
+      <div class="store-grid">
+        <div class="product-card">
+          <div>
+            <div class="product-title">Starry Night Paint Set</div>
+            <div class="product-desc">
+              Deep blues, shimmering golds, and snowy whites—perfect for winter skies.
+            </div>
+            <div class="product-price">$24.99</div>
+          </div>
+          <button class="product-btn">Add to Cart</button>
+        </div>
+
+        <div class="product-card">
+          <div>
+            <div class="product-title">Christmas Circle Art Kit</div>
+            <div class="product-desc">
+              Stencils, brushes, and metallic paints for wreaths, ornaments, and circular designs.
+            </div>
+            <div class="product-price">$19.99</div>
+          </div>
+          <button class="product-btn">Add to Cart</button>
+        </div>
+
+        <div class="product-card">
+          <div>
+            <div class="product-title">Snowflake Canvas Pack</div>
+            <div class="product-desc">
+              Pre-primed mini canvases ready for snowflakes, stars, and cozy cabin scenes.
+            </div>
+            <div class="product-price">$14.99</div>
+          </div>
+          <button class="product-btn">Add to Cart</button>
+        </div>
+
+        <div class="product-card">
+          <div>
+            <div class="product-title">Holiday Glow Brush Set</div>
+            <div class="product-desc">
+              Soft brushes designed for blending lights, halos, and glowing ornaments.
+            </div>
+            <div class="product-price">$12.99</div>
+          </div>
+          <button class="product-btn">Add to Cart</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Painting / circle artist side -->
+    <section class="canvas-section">
+      <h2>Circle Artist Studio</h2>
+      <p>Click on the canvas to paint glowing circles—ornaments, wreaths, or abstract Christmas lights.</p>
+
+      <canvas id="artCanvas" width="480" height="320"></canvas>
+
+      <div class="controls">
+        <label for="colorPicker">Color:</label>
+        <input type="color" id="colorPicker" value="#ff4f5e" />
+
+        <label for="sizeRange">Circle size:</label>
+        <input type="range" id="sizeRange" min="5" max="60" value="25" />
+
+        <button id="clearCanvas">Clear Canvas</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2026 Christmas Art Store · Made with stars, circles, and holiday cheer.
+  </footer>
+
+  <script>
+    // --- Shining stars generation ---
+    const starsLayer = document.getElementById("starsLayer");
+    const starCount = 80;
+
+    for (let i = 0; i < starCount; i++) {
+      const star = document.createElement("div");
+      star.className = "star";
+      const x = Math.random() * 100;
+      const y = Math.random() * 100;
+      const delay = Math.random() * 2;
+      const duration = 1.5 + Math.random() * 2;
+
+      star.style.left = x + "%";
+      star.style.top = y + "%";
+      star.style.animationDelay = delay + "s";
+      star.style.animationDuration = duration + "s";
+
+      starsLayer.appendChild(star);
+    }
+
+    // --- Circle artist canvas ---
+    const canvas = document.getElementById("artCanvas");
+    const ctx = canvas.getContext("2d");
+    const colorPicker = document.getElementById("colorPicker");
+    const sizeRange = document.getElementById("sizeRange");
+    const clearBtn = document.getElementById("clearCanvas");
+
+    function drawCircle(x, y) {
+      const radius = parseInt(sizeRange.value, 10);
+      const color = colorPicker.value;
+
+      const gradient = ctx.createRadialGradient(x, y, 0, x, y, radius);
+      gradient.addColorStop(0, "#ffffff");
+      gradient.addColorStop(0.3, color);
+      gradient.addColorStop(1, "#00000000");
+
+      ctx.beginPath();
+      ctx.fillStyle = gradient;
+      ctx.arc(x, y, radius, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    canvas.addEventListener("click", (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      drawCircle(x, y);
+    });
+
+    clearBtn.addEventListener("click", () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    });
+  </script>
+</body>
+</html>
