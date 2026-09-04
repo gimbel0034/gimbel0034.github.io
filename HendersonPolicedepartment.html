@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Henderson Cops – Help & Contact</title>
+
+<style>
+/* ===== Global Reset ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ===== Base Page ===== */
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #050608;
+    color: #e5e5e5;
+    line-height: 1.6;
+}
+
+/* ===== Header ===== */
+header {
+    background: linear-gradient(135deg, #1b1f24, #3b0b4f);
+    padding: 25px 40px;
+    border-bottom: 3px solid #19ff5a;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+header h1 {
+    font-size: 1.8rem;
+}
+
+header p {
+    opacity: 0.8;
+}
+
+/* ===== Main ===== */
+main {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+/* ===== Phone Section ===== */
+section#phones {
+    background: #0b0d11;
+    border: 1px solid #19ff5a;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(25, 255, 90, 0.2);
+}
+
+section#phones h2 {
+    color: #19ff5a;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #19ff5a;
+    padding-bottom: 8px;
+}
+
+/* Phone Cards */
+.phone-card {
+    background: #11141a;
+    border-left: 4px solid #3b0b4f;
+    padding: 15px 20px;
+    margin-bottom: 12px;
+    border-radius: 4px;
+}
+
+.phone-card h3 {
+    color: #19ff5a;
+    margin-bottom: 6px;
+}
+
+.phone-card p {
+    color: #cfd2d6;
+}
+
+.phone-number {
+    display: inline-block;
+    background: #19ff5a;
+    color: #050608;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+/* ===== Button ===== */
+#copyBtn {
+    margin-top: 15px;
+    padding: 10px 15px;
+    background: #19ff5a;
+    color: #050608;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: 0.2s;
+}
+
+#copyBtn:hover {
+    background: #3b0b4f;
+    color: #fff;
+}
+
+/* ===== Footer ===== */
+footer {
+    margin-top: 40px;
+    padding: 15px 40px;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #8b8f96;
+    border-top: 1px solid #3b0b4f;
+    background: #050608;
+}
+</style>
+
+</head>
+<body>
+
+<header>
+    <h1>Henderson Cops – Help & Contact</h1>
+    <p>Emergency, Non‑Emergency & Local Police Numbers</p>
+</header>
+
+<main>
+
+<section id="phones">
+    <h2>Police Contact Numbers</h2>
+
+    <div class="phone-card">
+        <h3>Emergency</h3>
+        <p>For life‑threatening situations.</p>
+        <div class="phone-number">911</div>
+    </div>
+
+    <div class="phone-card">
+        <h3>Henderson Police Non‑Emergency</h3>
+        <p>General help, suspicious activity, welfare checks.</p>
+        <div class="phone-number">(702) 267‑5000</div>
+    </div>
+
+    <div class="phone-card">
+        <h3>Henderson Detention Center</h3>
+        <p>Inmate information & booking.</p>
+        <div class="phone-number">(702) 267‑5245</div>
+    </div>
+
+    <div class="phone-card">
+        <h3>CCSD School Police – Henderson</h3>
+        <p>School safety & student incidents.</p>
+        <div class="phone-number">(702) 799‑7830</div>
+    </div>
+
+    <button id="copyBtn">Copy All Numbers</button>
+</section>
+
+</main>
+
+<footer>
+    <p>&copy; 2026 Henderson Safety Resource</p>
+</footer>
+
+<script>
+// ===== Copy All Numbers to Clipboard =====
+document.getElementById("copyBtn").addEventListener("click", () => {
+    const numbers = `
+Emergency: 911
+Non‑Emergency: (702) 267‑5000
+Detention Center: (702) 267‑5245
+School Police: (702) 799‑7830
+`;
+
+    navigator.clipboard.writeText(numbers.trim())
+        .then(() => alert("Phone numbers copied!"))
+        .catch(() => alert("Unable to copy numbers"));
+});
+</script>
+
+</body>
+</html>
