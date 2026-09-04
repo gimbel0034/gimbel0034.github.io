@@ -1,126 +1,51 @@
-/* ===== Global Reset ===== */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+// ===== Basic Welcome Message =====
+console.log("Website Loaded Successfully");
+
+// Show a welcome alert when the page loads
+window.addEventListener("load", () => {
+    console.log("Page is fully loaded");
+});
+
+
+// ===== Button Click Example =====
+const btn = document.getElementById("myButton");
+
+if (btn) {
+    btn.addEventListener("click", () => {
+        alert("You clicked the button!");
+    });
 }
 
-/* ===== Base Page ===== */
-body {
-    font-family: "Segoe UI", Arial, sans-serif;
-    background: #050608;              /* Dark, almost black */
-    color: #e5e5e5;
-    line-height: 1.6;
+
+// ===== Change Text Example =====
+const changeTextBtn = document.getElementById("changeTextBtn");
+const textBox = document.getElementById("textBox");
+
+if (changeTextBtn && textBox) {
+    changeTextBtn.addEventListener("click", () => {
+        textBox.textContent = "The text has been updated!";
+    });
 }
 
-/* ===== Lex / Cops Header ===== */
-header {
-    background: linear-gradient(135deg, #1b1f24, #3b0b4f); /* Dark + Lex purple */
-    color: #e5e5e5;
-    padding: 20px 40px;
-    border-bottom: 3px solid #19ff5a; /* Kryptonite green accent */
-    text-transform: uppercase;
-    letter-spacing: 2px;
+
+// ===== Add New Item to a List =====
+const addItemBtn = document.getElementById("addItemBtn");
+const list = document.getElementById("myList");
+
+if (addItemBtn && list) {
+    addItemBtn.addEventListener("click", () => {
+        const li = document.createElement("li");
+        li.textContent = "New item added!";
+        list.appendChild(li);
+    });
 }
 
-header h1 {
-    font-size: 2rem;
-}
 
-/* ===== Navigation (Police-style bar) ===== */
-nav {
-    background: #11141a;
-    border-bottom: 2px solid #19ff5a;
-}
+// ===== Toggle Dark Mode =====
+const toggleModeBtn = document.getElementById("toggleMode");
 
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-    padding: 10px 40px;
-}
-
-nav a {
-    color: #e5e5e5;
-    text-decoration: none;
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 0.9rem;
-    padding: 6px 10px;
-    border-radius: 4px;
-    transition: background 0.2s, color 0.2s;
-}
-
-nav a:hover {
-    background: #19ff5a;
-    color: #050608;
-}
-
-/* ===== Main Layout ===== */
-main {
-    max-width: 1000px;
-    margin: 30px auto;
-    padding: 0 20px;
-}
-
-/* ===== Rules Section (Case File Style) ===== */
-section#rules {
-    background: #0b0d11;
-    border: 1px solid #19ff5a;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 0 15px rgba(25, 255, 90, 0.2);
-}
-
-section#rules h2 {
-    color: #19ff5a;
-    text-transform: uppercase;
-    margin-bottom: 15px;
-    border-bottom: 1px solid #19ff5a;
-    padding-bottom: 8px;
-}
-
-/* Individual rule cards */
-.rule-card {
-    background: #11141a;
-    border-left: 4px solid #3b0b4f; /* Lex purple stripe */
-    padding: 15px 15px 15px 20px;
-    margin-bottom: 12px;
-    border-radius: 4px;
-}
-
-.rule-card h3 {
-    font-size: 1rem;
-    text-transform: uppercase;
-    color: #19ff5a;
-    margin-bottom: 6px;
-}
-
-.rule-card p {
-    font-size: 0.95rem;
-    color: #cfd2d6;
-}
-
-/* Badge / ID tag for “Cops” feel */
-.rule-tag {
-    display: inline-block;
-    background: #19ff5a;
-    color: #050608;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    padding: 3px 8px;
-    border-radius: 999px;
-    margin-bottom: 8px;
-}
-
-/* ===== Footer ===== */
-footer {
-    margin-top: 40px;
-    padding: 15px 40px;
-    text-align: center;
-    font-size: 0.85rem;
-    color: #8b8f96;
-    border-top: 1px solid #3b0b4f;
-    background: #050608;
+if (toggleModeBtn) {
+    toggleModeBtn.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+    });
 }
