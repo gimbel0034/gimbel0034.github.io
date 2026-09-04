@@ -119,4 +119,202 @@
       text-align: center;
       font-size: 0.8rem;
       color: #666;
-      padding
+      }
+
+    footer {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #666;
+      padding: 10px 0 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>My Mental Health Safety Plan</h1>
+    <p>This page is for me—my story, my warning signs, and my lifelines.</p>
+  </header>
+
+  <main>
+    <!-- 1. My story / life experiences -->
+    <section id="story">
+      <h2>My Story & Life Experiences</h2>
+      <label for="lifeExperiences">
+        What I’ve been through (in my own words):
+      </label>
+      <textarea id="lifeExperiences" placeholder="Write about your journey, what you’ve survived, what still hurts, and what gives you strength."></textarea>
+
+      <label for="reasonsToLive">
+        Reasons I want to stay alive:
+      </label>
+      <textarea id="reasonsToLive" placeholder="People, dreams, places, memories, future moments I don’t want to miss."></textarea>
+    </section>
+
+    <!-- 2. Warning signs -->
+    <section id="warning-signs">
+      <h2>Warning Signs</h2>
+      <label for="thoughtSigns">
+        Thoughts that tell me I’m not okay:
+      </label>
+      <textarea id="thoughtSigns" placeholder="Examples: 'I’m a burden', 'Nothing will ever change', 'Everyone would be better off without me'."></textarea>
+
+      <label for="feelingSigns">
+        Feelings that tell me I’m not okay:
+      </label>
+      <textarea id="feelingSigns" placeholder="Examples: intense sadness, numbness, panic, shame, hopelessness."></textarea>
+
+      <label for="behaviorSigns">
+        Behaviors that tell me I’m not okay:
+      </label>
+      <textarea id="behaviorSigns" placeholder="Examples: isolating, not answering messages, not eating, using substances more, self-harm urges."></textarea>
+    </section>
+
+    <!-- 3. Coping strategies -->
+    <section id="coping">
+      <h2>Things I Can Do When I Feel Unsafe</h2>
+      <label for="selfSoothing">
+        Self-soothing / grounding:
+      </label>
+      <textarea id="selfSoothing" placeholder="Examples: deep breathing, cold water on hands, listening to music, holding a comfort object, naming 5 things I can see."></textarea>
+
+      <label for="distractions">
+        Healthy distractions:
+      </label>
+      <textarea id="distractions" placeholder="Examples: watching a favorite show, drawing, journaling, going for a walk, calling someone safe."></textarea>
+    </section>
+
+    <!-- 4. People to contact -->
+    <section id="contacts">
+      <h2>People I Can Reach Out To</h2>
+      <p>These are people I can contact when I feel alone or unsafe.</p>
+
+      <div class="contact-card">
+        <label for="friendName1">Support person #1 (name):</label>
+        <input id="friendName1" class="small-input" type="text" placeholder="Name" />
+
+        <label for="friendPhone1">Phone / text:</label>
+        <input id="friendPhone1" class="small-input" type="text" placeholder="Phone or messaging handle" />
+
+        <label for="friendNotes1">Why they help me / what to say:</label>
+        <textarea id="friendNotes1" placeholder="Example: 'You help me feel heard. I might say: I’m not okay and I need you to listen.'"></textarea>
+      </div>
+
+      <div class="contact-card">
+        <label for="friendName2">Support person #2 (name):</label>
+        <input id="friendName2" class="small-input" type="text" placeholder="Name" />
+
+        <label for="friendPhone2">Phone / text:</label>
+        <input id="friendPhone2" class="small-input" type="text" placeholder="Phone or messaging handle" />
+
+        <label for="friendNotes2">Why they help me / what to say:</label>
+        <textarea id="friendNotes2" placeholder="Example: 'You remind me I matter. I might say: I’m scared and need reassurance.'"></textarea>
+      </div>
+
+      <div class="contact-card">
+        <label for="therapistName">Therapist / counselor:</label>
+        <input id="therapistName" class="small-input" type="text" placeholder="Name" />
+
+        <label for="therapistPhone">Phone / office:</label>
+        <input id="therapistPhone" class="small-input" type="text" placeholder="Phone / office info" />
+
+        <label for="therapistNotes">Notes:</label>
+        <textarea id="therapistNotes" placeholder="Session times, how to reach them, what feels safe to talk about first."></textarea>
+      </div>
+    </section>
+
+    <!-- 5. When there feels like no one else -->
+    <section id="no-one">
+      <h2>When It Feels Like There’s No One Else</h2>
+      <p>
+        This section is for moments when I feel completely alone. I still have options.
+      </p>
+
+      <label for="selfTalk">
+        Words I can say to myself:
+      </label>
+      <textarea id="selfTalk" placeholder="Example: 'This feeling will pass. I’ve survived every hard day so far. I deserve help and care.'"></textarea>
+
+      <label for="onlineSupports">
+        Online / text-based supports I trust:
+      </label>
+      <textarea id="onlineSupports" placeholder="List crisis lines, chats, or apps you trust. Include how to reach them."></textarea>
+
+      <div class="emergency">
+        <p>
+          <strong>Emergency options (customize for your country):</strong><br />
+          • Call 911 or your local emergency number if you are in immediate danger.<br />
+          • Use your country’s suicide/crisis hotline or text line.<br />
+          • Go to the nearest emergency room or urgent care and tell them you are in crisis.
+        </p>
+      </div>
+    </section>
+
+    <!-- 6. Safety commitments -->
+    <section id="commitments">
+      <h2>My Safety Commitments</h2>
+      <label for="commitmentsText">
+        What I promise myself in crisis:
+      </label>
+      <textarea id="commitmentsText" placeholder="Example: 'I will not act on suicidal thoughts without first using this plan and reaching out for help.'"></textarea>
+    </section>
+
+    <div class="buttons">
+      <button class="save-btn" id="savePlan">Save Plan (on this device)</button>
+      <button class="clear-btn" id="clearPlan">Clear All</button>
+    </div>
+  </main>
+
+  <footer>
+    This page is not a substitute for professional help. If you are in crisis, please contact a trusted person or emergency services.
+  </footer>
+
+  <script>
+    // Simple localStorage save/load so your plan stays on your device
+    const fields = [
+      "lifeExperiences", "reasonsToLive",
+      "thoughtSigns", "feelingSigns", "behaviorSigns",
+      "selfSoothing", "distractions",
+      "friendName1", "friendPhone1", "friendNotes1",
+      "friendName2", "friendPhone2", "friendNotes2",
+      "therapistName", "therapistPhone", "therapistNotes",
+      "selfTalk", "onlineSupports",
+      "commitmentsText"
+    ];
+
+    function loadPlan() {
+      fields.forEach(id => {
+        const saved = localStorage.getItem("safetyPlan_" + id);
+        if (saved !== null) {
+          const el = document.getElementById(id);
+          if (el) el.value = saved;
+        }
+      });
+    }
+
+    function savePlan() {
+      fields.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          localStorage.setItem("safetyPlan_" + id, el.value);
+        }
+      });
+      alert("Your safety plan has been saved on this device.");
+    }
+
+    function clearPlan() {
+      if (!confirm("Clear everything from this safety plan?")) return;
+      fields.forEach(id => {
+        localStorage.removeItem("safetyPlan_" + id);
+        const el = document.getElementById(id);
+        if (el) el.value = "";
+      });
+    }
+
+    document.getElementById("savePlan").addEventListener("click", savePlan);
+    document.getElementById("clearPlan").addEventListener("click", clearPlan);
+
+    // Load on start
+    loadPlan();
+  </script>
+</body>
+</html>
