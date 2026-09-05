@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Frosty America – Learning, Life & Scenery</title>
+  <style>
+    /* ===== ROOT COLORS & GLOBAL STYLES ===== */
+    :root {
+      --snow-white: #f9fafb;
+      --ice-blue: #60a5fa;
+      --deep-blue: #1e3a8a;
+      --mountain-gray: #4b5563;
+      --forest-green: #15803d;
+      --flag-red: #b91c1c;
+      --flag-blue: #1d4ed8;
+      --flag-white: #ffffff;
+      --desert-sand: #fbbf24;
+      --text-dark: #111827;
+      --bg-dark: #020617;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #0f172a 0%, #020617 55%, #000000 100%);
+      color: var(--snow-white);
+      min-height: 100vh;
+    }
+
+    a {
+      color: var(--ice-blue);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* ===== HEADER & NAV ===== */
+    header {
+      background: linear-gradient(90deg, var(--flag-blue), var(--flag-red));
+      color: var(--flag-white);
+      padding: 1.5rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .site-title {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .snowflake-logo {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--snow-white), var(--ice-blue));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.7);
+      position: relative;
+    }
+
+    .snowflake-logo::before,
+    .snowflake-logo::after {
+      content: "";
+      position: absolute;
+      width: 36px;
+      height: 2px;
+      background: var(--deep-blue);
+    }
+
+    .snowflake-logo::before {
+      transform: rotate(0deg);
+    }
+
+    .snowflake-logo::after {
+      transform: rotate(60deg);
+    }
+
+    .snowflake-logo span {
+      position: absolute;
+      width: 36px;
+      height: 2px;
+      background: var(--deep-blue);
+      transform: rotate(120deg);
+    }
+
+    .site-title h1 {
+      font-size: 1.6rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    nav a {
+      padding: 0.4rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    nav a:hover {
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    /* ===== MAIN LAYOUT ===== */
+    main {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem 3rem;
+    }
+
+    section {
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 1rem;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
+    }
+
+    section h2 {
+      font-size: 1.4rem;
+      margin-bottom: 0.75rem;
+      color: var(--ice-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    section h3 {
+      font-size: 1.1rem;
+      margin: 0.75rem 0 0.5rem;
+      color: var(--snow-white);
+    }
+
+    p {
+      margin-bottom: 0.5rem;
+      color: #e5e7eb;
+    }
+
+    ul {
+      margin-left: 1.2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    li {
+      margin-bottom: 0.35rem;
+    }
+
+    /* ===== GRID & CARDS ===== */
+    .two-column {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+      margin-top: 0.75rem;
+    }
+
+    .card {
+      background: rgba(31, 41, 55, 0.95);
+      border-radius: 0.75rem;
+      padding: 1rem 1.1rem;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.4rem;
+    }
+
+    .badge-blue {
+      background: var(--ice-blue);
+      color: var(--text-dark);
+    }
+
+    .badge-red {
+      background: var(--flag-red);
+      color: var(--flag-white);
+    }
+
+    .badge-green {
+      background: var(--forest-green);
+      color: var(--snow-white);
+    }
+
+    .badge-gold {
+      background: var(--desert-sand);
+      color: var(--text-dark);
+    }
+
+    /* ===== SENTENCE STRUCTURE LEARNING ===== */
+    .sentence-example {
+      border-left: 3px solid var(--ice-blue);
+      padding-left: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .sentence-example span {
+      display: inline-block;
+      margin-right: 0.35rem;
+      padding: 0.15rem 0.4rem;
+      border-radius: 0.35rem;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      font-size: 0.85rem;
+    }
+
+    /* ===== RECIPE LISTS ===== */
+    .recipe-list li::before {
+      content: "❄ ";
+      color: var(--ice-blue);
+    }
+
+    /* ===== LOCATION TAGS ===== */
+    .location-tags span {
+      display: inline-block;
+      margin: 0.15rem 0.25rem 0.15rem 0;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      font-size: 0.8rem;
+    }
+
+    /* ===== ANIMALS ===== */
+    .animal-list li::before {
+      content: "🐾 ";
+    }
+
+    /* ===== COLOR WHEEL & DESIGN ELEMENTS ===== */
+    .color-wheel {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .color-swatch {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid rgba(15, 23, 42, 0.9);
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+    }
+
+    .swatch-red {
+      background: var(--flag-red);
+    }
+
+    .swatch-blue {
+      background: var(--flag-blue);
+    }
+
+    .swatch-white {
+      background: var(--flag-white);
+    }
+
+    .swatch-green {
+      background: var(--forest-green);
+    }
+
+    .swatch-yellow {
+      background: var(--desert-sand);
+    }
+
+    .design-elements-list li::before {
+      content: "● ";
+      color: var(--ice-blue);
+    }
+
+    /* ===== SCENERY & MOUNTAINS ===== */
+    .scenery {
+      margin-top: 0.75rem;
+      border-radius: 0.75rem;
+      padding: 0.75rem;
+      background: linear-gradient(to top, #0f172a, #1e3a8a);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mountain {
+      position: absolute;
+      bottom: 0;
+      width: 0;
+      height: 0;
+      border-left: 120px solid transparent;
+      border-right: 120px solid transparent;
+      border-bottom: 160px solid var(--mountain-gray);
+      opacity: 0.9;
+    }
+
+    .mountain.m1 {
+      left: 10%;
+    }
+
+    .mountain.m2 {
+      left: 40%;
+      border-bottom-color: #6b7280;
+    }
+
+    .mountain.m3 {
+      left: 70%;
+      border-bottom-color: #9ca3af;
+    }
+
+    .snow-cap {
+      position: absolute;
+      bottom: 140px;
+      width: 0;
+      height: 0;
+      border-left: 40px solid transparent;
+      border-right: 40px solid transparent;
+      border-bottom: 40px solid var(--snow-white);
+      opacity: 0.9;
+    }
+
+    .snow-cap.c1 {
+      left: 18%;
+    }
+
+    .snow-cap.c2 {
+      left: 48%;
+    }
+
+    .snow-cap.c3 {
+      left: 78%;
+    }
+
+    .scenery-text {
+      position: relative;
+      margin-top: 140px;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    /* ===== SAFETY PLAN ===== */
+    .safety-steps {
+      counter-reset: safety;
+      margin-top: 0.5rem;
+    }
+
+    .safety-step {
+      position: relative;
+      padding-left: 2.4rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .safety-step::before {
+      counter-increment: safety;
+      content: counter(safety);
+      position: absolute;
+      left: 0;
+      top: 0.1rem;
+      width: 1.7rem;
+      height: 1.7rem;
+      border-radius: 50%;
+      background: var(--flag-blue);
+      color: var(--flag-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      box-shadow: 0 0 6px rgba(15, 23, 42, 0.8);
+    }
+
+    /* ===== BUTTONS & JS INTERACTION ===== */
+    .btn {
+      display: inline-block;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--snow-white);
+      font-size: 0.85rem;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 0.4rem;
+    }
+
+    .btn:hover {
+      background: var(--ice-blue);
+      color: var(--text-dark);
+      border-color: var(--desert-sand);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    /* ===== SIMPLE AMERICAN FLAG ICON ===== */
+    .flag-icon {
+      width: 80px;
+      height: 50px;
+      background:
+        linear-gradient(to bottom,
+          var(--flag-red) 0%,
+          var(--flag-red) 33.33%,
+          var(--flag-white) 33.33%,
+          var(--flag-white) 66.66%,
+          var(--flag-red) 66.66%,
+          var(--flag-red) 100%);
+      position: relative;
+      border: 2px solid var(--flag-white);
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+      margin-top: 0.5rem;
+    }
+
+    .flag-icon::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 45%;
+      height: 50%;
+      background: var(--flag-blue);
+    }
+
+    .flag-icon::after {
+      content: "★ ★ ★ ★ ★";
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      width: 40%;
+      font-size: 7px;
+      color: var(--flag-white);
+      line-height: 1.2;
+      white-space: normal;
+    }
+
+    /* ===== SVG JESUS ICON ===== */
+    .jesus-svg-wrapper {
+      margin-top: 0.75rem;
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 0.75rem;
+      padding: 0.75rem;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      text-align: center;
+    }
+
+    .jesus-svg-wrapper svg {
+      max-width: 160px;
+      height: auto;
+    }
+
+    .jesus-caption {
+      font-size: 0.85rem;
+      margin-top: 0.4rem;
+      color: #e5e7eb;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center;
+      padding: 1.5rem 1rem 2rem;
+      color: #9ca3af;
+      font-size: 0.85rem;
+    }
+
+    footer span {
+      color: var(--ice-blue);
+    }
+
+    @media (max-width: 640px) {
+      header {
+        padding: 1rem;
+      }
+      .site-title h1 {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div class="site-title">
+        <div class="snowflake-logo" aria-hidden="true">
+          <span></span>
+        </div>
+        <h1>Frosty America – Learning, Life & Scenery</h1>
+      </div>
+      <nav>
+        <a href="#snow">Snow & Olaf</a>
+        <a href="#recipes">Snowball Recipes</a>
+        <a href="#locations">Utah & Nevada</a>
+        <a href="#animals">Animals</a>
+        <a href="#schools">Schools</a>
+        <a href="#learning">Learning & Design</a>
+        <a href="#scenery">Mountains & Life</a>
+        <a href="#safety">Safety Plan</a>
+        <a href="#jesus">SVG Jesus</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== FROSTY SNOWFLAKES, SNOWMAN & OLAF ===== -->
+    <section id="snow">
+      <h2>Frosty Snowflakes, Snowmen & Olaf</h2>
+      <div class="two-column">
+        <div class="card">
+          <span class="badge badge-blue">Winter Magic</span>
+          <h3>Snowflakes & Snowmen</h3>
+          <p>
+            Frosty snowflakes drift through the air, each one unique and delicate. When they
+            gather on the ground, they invite children and families to build snowmen together.
+          </p>
+          <p>
+            A snowman is more than snow; it is a moment of joy, a shared laugh, and a memory
+            that melts slowly into spring.
+          </p>
+          <ul>
+            <li>Roll three snowballs: small, medium, and large.</li>
+            <li>Stack them carefully to form the snowman’s body.</li>
+            <li>Add a carrot nose, buttons, and a warm scarf.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="badge badge-gold">Disney Fun</span>
+          <h3>Olaf & Disneyland Castle</h3>
+          <p>
+            Olaf, the friendly snowman from Disney, reminds us that warmth comes from
+            friendship and kindness, even in the coldest winter.
+          </p>
+          <p>
+            At Disneyland, the castle glows with lights and color, welcoming visitors into
+            stories where snow, magic, and imagination live side by side.
+          </p>
+          <p>
+            Sentence structure example:
+          </p>
+          <div class="sentence-example">
+            <span>Subject:</span> <span>Olaf</span>
+            <span>Verb:</span> <span>smiles</span>
+            <span>Object:</span> <span>at his friends in the snow.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SNOWBALL RECIPES ===== -->
+    <section id="recipes">
+      <h2>Snowball Recipes – Sweet Winter Treats</h2>
+      <div class="two-column">
+        <div class="card">
+          <span class="badge badge-blue">Recipe</span>
+          <h3>Classic Coconut Snowballs</h3>
+          <ul class="recipe-list">
+            <li>Mix powdered sugar, butter, and vanilla until smooth.</li>
+            <li>Shape into small balls and chill.</li>
+            <li>Roll in shredded coconut to create a “snowy” look.</li>
+          </ul>
+          <p>
+            These treats look like tiny snowballs and bring winter cheer to any gathering.
+          </p>
+        </div>
+        <div class="card">
+          <span class="badge badge-green">Healthy Twist</span>
+          <h3>Fruit & Yogurt Snowballs</h3>
+          <ul class="recipe-list">
+            <li>Combine Greek yogurt with finely chopped fruit.</li>
+            <li>Freeze in small scoops on a tray.</li>
+            <li>Dust lightly with coconut or crushed cereal.</li>
+          </ul>
+          <p>
+            A lighter option that still feels festive and fun, perfect for school or family
+            celebrations.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== LOCATIONS: UTAH, NEVADA, HENDERSON, SALT LAKE CITY ===== -->
+    <section id="locations">
+      <h2>Utah, Nevada & Western Scenery</h2>
+      <p>
+        The American West is full of deserts, lakes, rivers, and mountains. Utah and Nevada
+        share wide skies and changing seasons, each city and town adding its own story.
+      </p>
+      <div class="two-column">
+        <div class="card">
+          <span class="badge badge-gold">Places</span>
+          <h3>Cities & Towns</h3>
+          <div class="location-tags">
+            <span>Henderson, Nevada</span>
+            <span>Salt Lake City, Utah</span>
+            <span>Utah Lakes & Rivers</span>
+            <span>Nevada Desert Scenery</span>
+          </div>
+          <p>
+            Lakes and rivers reflect the sky like mirrors, while desert sands glow gold at
+            sunrise and sunset.
+          </p>
+        </div>
+        <div class="card">
+          <span class="badge badge-blue">Atlas</span>
+          <h3>United States Atlas & Flag</h3>
+          <p>
+            An atlas shows the shapes of states, the paths of rivers, and the lines of
+            mountains. The American flag reminds us that these places are connected in one
+            nation.
+          </p>
+          <div class="flag-icon" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ANIMALS: BEAR & WOLVES ===== -->
+    <section id="animals">
+      <h2>Different Animals – Bears & Wolves</h2>
+      <div class="two-column">
+        <div class="card">
+          <span class="badge badge-green">Wildlife</span>
+          <h3>Bears</h3>
+          <p>
+            Bears are strong, curious animals that live in forests and mountains. They search
+            for berries, fish, and shelter, moving carefully through their habitat.
+          </p>
+          <ul class="animal-list">
+            <li>Respect their space and observe from a safe distance.</li>
+            <li>Store food properly when camping.</li>
+            <li>Learn local safety guidelines for wildlife.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="badge badge-red">Wildlife</span>
+          <h3>Wolves</h3>
+          <p>
+            Wolves travel in packs, communicating with howls and body language. They work
+            together to survive, showing the power of teamwork and family.
+          </p>
+          <ul class="animal-list">
+            <li>Wolves help keep ecosystems balanced.</li>
+            <li>They rely on cooperation and trust within the pack.</li>
+            <li>They remind us that community matters in life circumstances.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SCHOOLS & BASIC HIGH SCHOOL LEARNING ===== -->
+    <section id="schools">
+      <h2>Schools & Basic High School Learning</h2>
+      <div class="two-column">
+        <div class="card">
+          <span class="badge badge-blue">Schools</span>
+          <h3>Local Schools</h3>
+          <ul>
+            <li>Brown Jr. High School</li>
+            <li>Sue H. Morrow Elementary</li>
+            <li>Dooley Elementary School</li>
+          </ul>
+          <p>
+            These schools help students grow in reading, writing, math, science, and art.
+            Each classroom is a small community where sentence structure, creativity, and
+            kindness are practiced every day.
+          </p>
+        </div>
+        <div class="card">
+          <span class="badge badge-gold">Sentence Structure</span>
+          <h3>Full-Length Sentence Structure</h3>
+          <p>
+            A strong sentence has a clear subject, a verb, and often an object or complement.
+          </p>
+          <div class="sentence-example">
+            <span>Subject:</span> <span>The student</span>
+            <span>Verb:</span> <span>writes</span>
+            <span>Object:</span> <span>a thoughtful essay about winter scenery.</span>
+          </div>
+          <p>
+            Practice: Write one sentence about snow, one about mountains, and one about your
+            favorite place in the United States.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== LEARNING TYPES, DESIGN ELEMENTS & COLOR WHEEL ===== -->
+    <section id="learning">
+      <h2>Different Types of Learning & Elements of Design</h2>
+      <div class="two-column">
+        <div class="card">
+          <span class="badge badge-blue">Learning</span>
+          <h3>Types of Learning</h3>
+          <ul>
+            <li><strong>Visual Learning:</strong> Understanding through pictures, charts, and colors.</li>
+            <li><strong>Auditory Learning:</strong> Learning by listening to explanations and stories.</li>
+            <li><strong>Kinesthetic Learning:</strong> Learning by doing, building, and moving.</li>
+          </ul>
+          <p>
+            Each student can mix these styles to find a path that fits their life circumstances
+            and goals.
+          </p>
+        </div>
+        <div class="card">
+          <span class="badge badge-red">Design</span>
+          <h3>Elements of Design & Color Wheel</h3>
+          <ul class="design-elements-list">
+            <li>Line, shape, and form.</li>
+            <li>Color, value, and texture.</li>
+            <li>Space and balance.</li>
+          </ul>
+          <p>Color wheel swatches:</p>
+          <div class="color-wheel">
+            <div class="color-swatch swatch-red" title="Red"></div>
+            <div class="color-swatch swatch-blue" title="Blue"></div>
+            <div class="color-swatch swatch-white" title="White"></div>
+            <div class="color-swatch swatch-green" title="Green"></div>
+            <div class="color-swatch swatch-yellow" title="Yellow"></div>
+          </div>
+          <p>
+            Scheme of life: just like colors, life has bright moments, shadows, and gentle
+            transitions that create a full picture.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SCENERY, MOUNTAINS & LIFE SITUATIONS ===== -->
+    <section id="scenery">
+      <h2>Scenery, Mountains & Life Situations</h2>
+      <p>
+        Mountains rise above valleys, reminding us that challenges can be climbed step by
+        step. Life situations change like weather: sometimes clear, sometimes cloudy, but
+        always moving forward.
+      </p>
+      <div class="scenery">
+        <div class="mountain m1"></div>
+        <div class="mountain m2"></div>
+        <div class="mountain m3"></div>
+        <div class="snow-cap c1"></div>
+        <div class="snow-cap c2"></div>
+        <div class="snow-cap c3"></div>
+        <div class="scenery-text">
+          Snow rests on the peaks, rivers flow below, and people walk paths that lead toward
+          hope and safety.
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SAFETY PLAN & LIFE CIRCUMSTANCES ===== -->
+    <section id="safety">
+      <h2>Safety Plan for Everyday Life Circumstances</h2>
+      <p>
+        A simple safety plan helps students, families, and communities feel prepared. It can
+        be used at school, at home, and while exploring lakes, rivers, and mountains.
+      </p>
+      <div class="safety-steps">
+        <div class="safety-step">
+          <strong>Observe Your Surroundings:</strong>
+          Notice exits, safe areas, and trusted adults wherever you are.
+        </div>
+        <div class="safety-step">
+          <strong>Share Your Plan:</strong>
+          Tell a family member or teacher where you are going and when you will return.
+        </div>
+        <div class="safety-step">
+          <strong>Carry Essentials:</strong>
+          Keep important phone numbers, a small flashlight, and any needed medication with you.
+        </div>
+        <div class="safety-step">
+          <strong>Stay Connected:</strong>
+          Use the buddy system when walking, hiking, or attending events.
+        </div>
+        <div class="safety-step">
+          <strong>Reflect & Improve:</strong>
+          After drills or real situations, talk about what worked and what could be better.
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SVG PICTURE OF JESUS (SYMBOLIC) ===== -->
+    <section id="jesus">
+      <h2>Symbolic SVG Picture of Jesus</h2>
+      <p>
+        This simple SVG illustration uses gentle lines and shapes to represent Jesus in a
+        respectful, symbolic way. It focuses on a calm figure and a cross, reminding viewers
+        of peace, hope, and compassion.
+      </p>
+      <div class="jesus-svg-wrapper">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-labelledby="jesusTitle jesusDesc" role="img">
+          <title id="jesusTitle">Symbolic SVG of Jesus</title>
+          <desc id="jesusDesc">
+            A simple, stylized figure with a robe and a cross behind, representing Jesus.
+          </desc>
+
+          <!-- Background halo -->
+          <circle cx="100" cy="70" r="40" fill="#fde68a" opacity="0.8" />
+
+          <!-- Cross -->
+          <rect x="94" y="30" width="12" height="80" fill="#78350f" />
+          <rect x="70" y="55" width="60" height="10" fill="#78350f" />
+
+          <!-- Head -->
+          <circle cx="100" cy="70" r="18" fill="#f9fafb" stroke="#374151" stroke-width="2" />
+
+          <!-- Hair -->
+          <path d="M82 70 C82 50 118 50 118 70 C118 85 110 95 100 95 C90 95 82 85 82 70 Z"
+                fill="#4b5563" opacity="0.9" />
+
+          <!-- Body / Robe -->
+          <path d="M70 110 Q100 140 130 110 L130 170 Q100 190 70 170 Z"
+                fill="#e5e7eb" stroke="#374151" stroke-width="2" />
+
+          <!-- Sash -->
+          <path d="M90 110 L115 180" stroke="#ef4444" stroke-width="4" />
+
+          <!-- Arms -->
+          <path d="M70 120 Q50 130 45 150" stroke="#f9fafb" stroke-width="6" stroke-linecap="round" />
+          <path d="M130 120 Q150 130 155 150" stroke="#f9fafb" stroke-width="6" stroke-linecap="round" />
+        </svg>
+        <div class="jesus-caption">
+          A calm, symbolic image of Jesus with a cross and gentle colors, created as an SVG.
+        </div>
+      </div>
+      <button class="btn" id="toggleJesusInfo">Toggle Extra Reflection</button>
+      <p id="jesusReflection" class="hidden">
+        Many people find comfort in images of Jesus, especially during difficult life
+        circumstances. This simple SVG reminds us that compassion, forgiveness, and hope can
+        guide our choices, just as a safety plan guides our steps.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>
+      Frosty snowflakes, mountains, schools, and symbols of faith — <span>United States of
+      America</span> — learning through life, design, and scenery.
+    </p>
+  </footer>
+
+  <script>
+    // Toggle extra reflection for SVG Jesus
+    const toggleJesusInfo = document.getElementById("toggleJesusInfo");
+    const jesusReflection = document.getElementById("jesusReflection");
+
+    toggleJesusInfo.addEventListener("click", () => {
+      jesusReflection.classList.toggle("hidden");
+    });
+  </script>
+</body>
+</html>
