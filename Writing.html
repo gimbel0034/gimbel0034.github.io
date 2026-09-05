@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Writing, Life & Holidays – Learning Journey</title>
+  <style>
+    /* ===== ROOT COLORS & GLOBAL STYLES ===== */
+    :root {
+      --bg-dark: #020617;
+      --bg-panel: #0f172a;
+      --accent-blue: #3b82f6;
+      --accent-gold: #facc15;
+      --accent-red: #ef4444;
+      --accent-green: #22c55e;
+      --accent-purple: #a855f7;
+      --text-light: #e5e7eb;
+      --text-muted: #9ca3af;
+      --border-soft: #64748b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #0f172a 0%, #020617 55%, #000000 100%);
+      color: var(--text-light);
+      min-height: 100vh;
+    }
+
+    a {
+      color: var(--accent-gold);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* ===== HEADER & NAV ===== */
+    header {
+      background: linear-gradient(90deg, #1d4ed8, #ef4444);
+      color: #f9fafb;
+      padding: 1.5rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .site-title {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .magic-logo {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #f9fafb, #a855f7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.7);
+      position: relative;
+    }
+
+    .magic-logo::before {
+      content: "✦";
+      font-size: 1.6rem;
+      color: #1e293b;
+    }
+
+    .site-title h1 {
+      font-size: 1.6rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    nav a {
+      padding: 0.4rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    nav a:hover {
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    /* ===== MAIN LAYOUT ===== */
+    main {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem 3rem;
+    }
+
+    section {
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 1rem;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
+    }
+
+    section h2 {
+      font-size: 1.4rem;
+      margin-bottom: 0.75rem;
+      color: var(--accent-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    section h3 {
+      font-size: 1.1rem;
+      margin: 0.75rem 0 0.5rem;
+      color: var(--text-light);
+    }
+
+    p {
+      margin-bottom: 0.5rem;
+      color: var(--text-light);
+    }
+
+    ul {
+      margin-left: 1.2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    li {
+      margin-bottom: 0.35rem;
+    }
+
+    /* ===== GRID & CARDS ===== */
+    .two-column {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+      margin-top: 0.75rem;
+    }
+
+    .card {
+      background: rgba(31, 41, 55, 0.95);
+      border-radius: 0.75rem;
+      padding: 1rem 1.1rem;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.4rem;
+    }
+
+    .badge-blue {
+      background: var(--accent-blue);
+      color: #0b1120;
+    }
+
+    .badge-gold {
+      background: var(--accent-gold);
+      color: #0b1120;
+    }
+
+    .badge-red {
+      background: var(--accent-red);
+      color: #f9fafb;
+    }
+
+    .badge-green {
+      background: var(--accent-green);
+      color: #022c22;
+    }
+
+    .badge-purple {
+      background: var(--accent-purple);
+      color: #0b1120;
+    }
+
+    /* ===== SENTENCE & PARAGRAPH ===== */
+    .sentence-example {
+      border-left: 3px solid var(--accent-blue);
+      padding-left: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .sentence-example span {
+      display: inline-block;
+      margin-right: 0.35rem;
+      padding: 0.15rem 0.4rem;
+      border-radius: 0.35rem;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      font-size: 0.85rem;
+    }
+
+    .paragraph-box {
+      margin-top: 0.5rem;
+      padding: 0.75rem;
+      border-radius: 0.75rem;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px dashed rgba(148, 163, 184, 0.7);
+      font-size: 0.9rem;
+    }
+
+    /* ===== WRITING STYLES ===== */
+    .style-list li::before {
+      content: "✎ ";
+      color: var(--accent-purple);
+    }
+
+    /* ===== MAPS & DIRECTIONS ===== */
+    .map-box {
+      margin-top: 0.5rem;
+      border-radius: 0.75rem;
+      padding: 0.75rem;
+      background: linear-gradient(to top, #0f172a, #1e3a8a);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .map-path {
+      position: relative;
+      width: 100%;
+      height: 120px;
+      border-radius: 0.75rem;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .map-path::before {
+      content: "";
+      position: absolute;
+      left: 10%;
+      top: 20%;
+      width: 80%;
+      height: 2px;
+      background: var(--accent-gold);
+      border-radius: 999px;
+    }
+
+    .map-point {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent-red);
+      border: 2px solid #f9fafb;
+    }
+
+    .map-point.start {
+      left: 8%;
+      top: 16%;
+    }
+
+    .map-point.end {
+      left: 88%;
+      top: 16%;
+    }
+
+    .map-label {
+      position: absolute;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .map-label.start {
+      left: 6%;
+      top: 40%;
+    }
+
+    .map-label.end {
+      left: 82%;
+      top: 40%;
+    }
+
+    /* ===== SAFETY PLAN FORM ===== */
+    .safety-form {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0.75rem;
+      margin-top: 0.75rem;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    input, textarea, select {
+      background: #020617;
+      border: 1px solid var(--border-soft);
+      border-radius: 0.5rem;
+      padding: 0.4rem 0.5rem;
+      color: var(--text-light);
+      font-size: 0.85rem;
+    }
+
+    textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    /* ===== BUTTONS & JS ===== */
+    .btn {
+      display: inline-block;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text-light);
+      font-size: 0.85rem;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 0.4rem;
+    }
+
+    .btn:hover {
+      background: var(--accent-blue);
+      color: #0b1120;
+      border-color: var(--accent-gold);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    /* ===== HOLIDAYS ===== */
+    .holiday-list li::before {
+      content: "★ ";
+      color: var(--accent-gold);
+    }
+
+    .holiday-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-top: 0.75rem;
+    }
+
+    .holiday-card {
+      background: rgba(31, 41, 55, 0.95);
+      border-radius: 0.75rem;
+      padding: 0.75rem;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      font-size: 0.9rem;
+    }
+
+    /* ===== DESIGN ELEMENTS ===== */
+    .design-elements-list li::before {
+      content: "● ";
+      color: var(--accent-blue);
+    }
+
+    /* ===== GIFTS & QUOTES ===== */
+    .gift-list li::before {
+      content: "🎁 ";
+    }
+
+    .quote-box {
+      margin-top: 0.5rem;
+      padding: 0.75rem;
+      border-radius: 0.75rem;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      font-style: italic;
+      font-size: 0.9rem;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center;
+      padding: 1.5rem 1rem 2rem;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    footer span {
+      color: var(--accent-blue);
+    }
+
+    @media (max-width: 640px) {
+      header {
+        padding: 1rem;
+      }
+      .site-title h1 {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div class="site-title">
+        <div class="magic-logo" aria-hidden="true"></div>
+        <h1>Writing, Life & World Holidays</h1>
+      </div>
+      <nav>
+        <a href="#writing">Sentence & Paragraph</a>
+        <a href="#styles">Writing Styles</a>
+        <a href="#maps">Directions & Maps</a>
+        <a href="#safety">Safety Plan</a>
+        <a href="#papers">Forms & Adoption</a>
+        <a href="#art">Art & Disney</a>
+        <a href="#holidays">World Holidays</a>
+        <a href="#design">Design Elements</a>
+        <a href="#gifts">Gifts & Quotes</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== SENTENCE STRUCTURE & PARAGRAPH ===== -->
+    <section id="writing">
+      <h2>Full-Length Sentence Structure & Paragraph Writing</h2>
+      <div class="two-column">
+        <div class="card">
+          <span class="badge badge-blue">Sentence</span>
+          <h3>Building a Strong Sentence</h3>
+          <p>
+            A clear sentence usually has a subject, a verb, and an object or complement.
+            It can also include phrases that describe time, place, or feeling.
+          </p>
+          <div class="sentence-example">
+            <span>Subject:</span> <span>The traveler</span>
+            <span>Verb:</span> <span>follows</span>
+            <span>Object:</span> <span>a magical map through the city.</span>
+          </div>
+          <p>
+            Practice: Write one sentence about a job you dream of, one about a magical item,
+            and one about a holiday you enjoy.
+          </p>
+        </div>
+        <div class="card">
+          <span class="badge badge-gold">Paragraph</span>
+          <h3>Paragraph of Writing</h3>
+          <p>
+            A paragraph gathers related sentences into one focused idea. It begins with a
+            topic sentence, adds supporting details, and ends with a closing thought.
+          </p>
+          <div class="paragraph-box">
+            In many life situations, people use writing to understand their choices. A
+            paragraph can describe a safety plan, a new job, or a holiday tradition. When
+            sentences connect smoothly, the reader can follow the story from beginning to
+            end and feel guided, not lost.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== WRITING STYLES ===== -->
+    <section id="styles">
+      <h2>Different Ways of Writing Styles</h2>
+      <div class="two-column">
+        <div class="card">
+          <span class="badge badge-purple">Styles</span>
+          <h3>Common Writing Styles</h3>
+          <ul class="style-list">
+            <li><strong>Narrative:</strong> Tells a story about events and characters.</li>
+            <li><strong>Descriptive:</strong> Paints a picture with sensory details.</li>
+            <li><strong>Expository:</strong> Explains facts, steps, or ideas clearly.</li>
+            <li><strong>Persuasive:</strong> Tries to convince the reader of a viewpoint.</li>
+          </ul>
+          <p>
+            You can mix styles—for example, a narrative about adoption paperwork that also
+            explains each step in an expository way.
+          </p>
+        </div>
+        <div class="card">
+          <span class="badge badge-blue">Interactive</span>
+          <h3>Style Example Generator</h3>
+          <p>Select a style to see a sample sentence:</p>
+          <select id="styleSelect">
+            <option value="">Choose a style…</option>
+            <option value="narrative">Narrative</option>
+            <option value="descriptive">Descriptive</option>
+            <option value="expository">Expository</option>
+            <option value="persuasive">Persuasive</option>
+          </select>
+          <button class="btn" id="styleButton">Show Example</button>
+          <p id="styleOutput" class="hidden"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== DIRECTIONS & MAPS ===== -->
+    <section id="maps">
+      <h2>Directions, Maps & Magical Items</h2>
+      <div class="two-column">
+        <div class="card">
+          <span class="badge badge-blue">Directions</span>
+          <h3>Writing Clear Directions</h3>
+          <p>
+            Directions use simple, ordered sentences to guide someone from one place to
+            another or through a task.
+          </p>
+          <ul>
+            <li>Use sequence words: first, next, then, finally.</li>
+            <li>Include landmarks: a school, a park, or a river.</li>
+            <li>Keep each step short and specific.</li>
+          </ul>
+          <p>
+            Example: “First, fill out the safety plan form. Next, review it with a trusted
+            adult. Finally, keep a copy in a safe place.”
+          </p>
+        </div>
+        <div class="card">
+          <span class="badge badge-gold">Map & Magic</span>
+          <h3>Maps & Magical Items</h3>
+          <p>
+            A map can be real or imagined. In stories, magical items—like glowing compasses
+            or enchanted pens—help characters find their way through life situations.
+          </p>
+          <div class="map-box">
+            <div class="map-path">
+              <div class="map-point start"></div>
+              <div class="map-point end"></div>
+              <div class="map-label start">Start: Home</div>
+              <div class="map-label end">End: New Opportunity</div>
+            </div>
+            <p style="margin-top:0.5rem;font-size:0.85rem;">
+              This simple path represents moving from confusion to clarity, guided by
+              directions, maps, and good plans.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SAFETY PLAN FORM ===== -->
+    <section id="safety">
+      <h2>Safety Plan – Filling Out a Simple Form</h2>
+      <p>
+        A safety plan helps you prepare for emergencies, stressful moments, or big changes.
+        Writing it down turns ideas into clear steps.
+      </p>
+      <div class="safety-form">
+        <div class="form-field">
+          <label for="nameField">Name</label>
+          <input id="nameField" type="text" placeholder="Your name" />
+        </div>
+        <div class="form-field">
+          <label for="contactField">Emergency Contact</label>
+          <input id="contactField" type="text" placeholder="Trusted person & phone" />
+        </div>
+        <div class="form-field">
+          <label for="placeField">Safe Place</label>
+          <input id="placeField" type="text" placeholder="Where you feel safe" />
+        </div>
+        <div class="form-field">
+          <label for="stepsField">Steps to Stay Safe</label>
+          <textarea id="stepsField" placeholder="Write 3–5 steps you can follow."></textarea>
+        </div>
+        <div class="form-field">
+          <label for="feelField">How I Want to Feel</label>
+          <input id="feelField" type="text" placeholder="Calm, supported, hopeful…" />
+        </div>
+      </div>
+      <button class="btn" id="planButton">Summarize My Plan</button>
+      <p id="planSummary" class="hidden" style="margin-top:0.75rem;"></p>
+    </section>
+
+    <!-- ===== FORMS, ADOPTION PAPERWORK & JOB ITEMS ===== -->
+    <section id="papers">
+      <h2>Filling Out Papers – Adoption & Jobs</h2>
+      <div class="two-column">
+        <div class="card">
+          <span class="badge badge-red">Adoption</span>
+          <h3>Adoption Paperwork</h3>
+          <p>
+            Adoption paperwork can feel big and serious. It often includes forms about
+            family history, health, and hopes for the future.
+          </p>
+          <p>
+            Clear writing helps everyone understand the story: who is involved, what they
+            need, and how love and safety will be protected.
+          </p>
+          <ul>
+            <li>Read each question slowly.</li>
+            <li>Ask for help if a word is confusing.</li>
+            <li>Keep copies of important documents.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="badge badge-green">Jobs</span>
+          <h3>Job Items & Life Ideas</h3>
+          <p>
+            Job applications, resumes, and cover letters show your skills and dreams. They
+            are papers that open doors.
+          </p>
+          <ul>
+            <li>List your strengths and experiences.</li>
+            <li>Describe why you want the job.</li>
+            <li>Share ideas for how you can help others.</li>
+          </ul>
+          <p>
+            Writing about jobs is also writing about life: what you value, how you grow, and
+            what kind of future you imagine.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ART CONCEPTS & DISNEY ===== -->
+    <section id="art">
+      <h2>Art Concepts, Disney & Learning About People</h2>
+      <div class="two-column">
+        <div class="card">
+          <span class="badge badge-purple">Art</span>
+          <h3>Art Concepts & Ideas for Life</h3>
+          <p>
+            Art can turn life situations into colors, shapes, and stories. Sketches, digital
+            art, and paintings all show how people feel and what they hope for.
+          </p>
+          <ul>
+            <li>Concept art for characters facing choices.</li>
+            <li>Scenes that show safety, courage, or change.</li>
+            <li>Symbolic objects like keys, maps, or stars.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="badge badge-gold">Disney</span>
+          <h3>Disney-Inspired Concepts</h3>
+          <p>
+            Disney stories often mix magic with everyday feelings: friendship, loss,
+            bravery, and joy. Concept art can explore castles, forests, and city streets
+            where characters learn about themselves.
+          </p>
+          <p>
+            Learning about people means noticing how they speak, move, and make choices.
+            Writing and art together can show that every person has a story worth telling.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== WORLD HOLIDAYS ===== -->
+    <section id="holidays">
+      <h2>World Holidays – America, Mexico, Japan & More</h2>
+      <p>
+        Holidays are gifts of time: moments when people pause to celebrate, remember, or
+        hope. Each culture has special days that shape its stories.
+      </p>
+      <div class="holiday-grid">
+        <div class="holiday-card">
+          <span class="badge badge-blue">America</span>
+          <h3>American Holidays</h3>
+          <ul class="holiday-list">
+            <li>Christmas – sharing light, music, and kindness.</li>
+            <li>Halloween – costumes, stories, and playful scares.</li>
+            <li>Independence Day – fireworks and reflections on freedom.</li>
+          </ul>
+        </div>
+        <div class="holiday-card">
+          <span class="badge badge-red">Mexico</span>
+          <h3>Mexico Holidays</h3>
+          <ul class="holiday-list">
+            <li>Día de los Muertos – honoring loved ones with color and memory.</li>
+            <li>Independence Day – parades, flags, and community pride.</li>
+          </ul>
+        </div>
+        <div class="holiday-card">
+          <span class="badge badge-green">Japan</span>
+          <h3>Japan Holidays</h3>
+          <ul class="holiday-list">
+            <li>New Year (Shōgatsu) – fresh beginnings and family gatherings.</li>
+            <li>Children’s Day – celebrating growth and hope for the future.</li>
+          </ul>
+        </div>
+        <div class="holiday-card">
+          <span class="badge badge-purple">World</span>
+          <h3>Different World Holidays</h3>
+          <ul class="holiday-list">
+            <li>Festivals of light, harvest, and peace.</li>
+            <li>Days of remembrance and gratitude.</li>
+            <li>Moments when communities share food, music, and stories.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ELEMENTS OF DESIGN & LEARNINGS ===== -->
+    <section id="design">
+      <h2>Different Elements of Design & Learnings</h2>
+      <div class="two-column">
+        <div class="card">
+          <span class="badge badge-blue">Design</span>
+          <h3>Elements of Design</h3>
+          <ul class="design-elements-list">
+            <li>Line, shape, and form.</li>
+            <li>Color, value, and texture.</li>
+            <li>Space, balance, and emphasis.</li>
+          </ul>
+          <p>
+            These elements help artists and writers organize ideas so that the viewer or
+            reader can feel guided through the work.
+          </p>
+        </div>
+        <div class="card">
+          <span class="badge badge-gold">Learnings</span>
+          <h3>Learnings from Life Situations</h3>
+          <p>
+            Every life situation—filling out papers, changing jobs, celebrating holidays,
+            or creating art—teaches something.
+          </p>
+          <p>
+            Writing about these moments turns experience into wisdom, and wisdom into
+            stories that can help others.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== GIFTS, SAYINGS & QUOTES ===== -->
+    <section id="gifts">
+      <h2>Gifts, Sayings & Quotes</h2>
+      <div class="two-column">
+        <div class="card">
+          <span class="badge badge-green">Gifts</span>
+          <h3>Gifts Beyond Objects</h3>
+          <ul class="gift-list">
+            <li>Time spent listening to someone’s story.</li>
+            <li>Words of encouragement written in a card.</li>
+            <li>Art or music created just for a friend.</li>
+          </ul>
+          <p>
+            Gifts can be physical or invisible; both can change how someone feels about
+            their life and future.
+          </p>
+        </div>
+        <div class="card">
+          <span class="badge badge-purple">Quotes</span>
+          <h3>Sayings & Quotes</h3>
+          <p>
+            Click the button to see a quote about writing, life, or holidays:
+          </p>
+          <button class="btn" id="quoteButton">Show Quote</button>
+          <div id="quoteBox" class="quote-box hidden"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>
+      Writing, maps, art, and holidays weave together into one learning journey —
+      <span>life, stories, and hope</span>.
+    </p>
+  </footer>
+
+  <script>
+    // Writing style examples
+    const styleSelect = document.getElementById("styleSelect");
+    const styleButton = document.getElementById("styleButton");
+    const styleOutput = document.getElementById("styleOutput");
+
+    const styleExamples = {
+      narrative:
+        "Narrative: On a cold December evening, a family fills out adoption paperwork, hoping to welcome a child into their home.",
+      descriptive:
+        "Descriptive: The Christmas lights shimmer across the quiet street, painting the snow in gold, blue, and red.",
+      expository:
+        "Expository: Adoption paperwork usually includes forms about identity, health, and legal guardianship, which must be completed carefully.",
+      persuasive:
+        "Persuasive: Everyone should learn basic safety planning, because clear steps can protect lives during unexpected situations."
+    };
+
+    styleButton.addEventListener("click", () => {
+      const value = styleSelect.value;
+      if (!value) {
+        styleOutput.textContent = "Please choose a style to see an example.";
+        styleOutput.classList.remove("hidden");
+        return;
+      }
+      styleOutput.textContent = styleExamples[value];
+      styleOutput.classList.remove("hidden");
+    });
+
+    // Safety plan summary
+    const planButton = document.getElementById("planButton");
+    const planSummary = document.getElementById("planSummary");
+
+    planButton.addEventListener("click", () => {
+      const name = document.getElementById("nameField").value || "This person";
+      const contact = document.getElementById("contactField").value || "a trusted contact";
+      const place = document.getElementById("placeField").value || "a safe place";
+      const steps = document.getElementById("stepsField").value || "personal steps to stay safe";
+      const feel = document.getElementById("feelField").value || "calm and supported";
+
+      planSummary.textContent =
+        name +
+        " plans to stay safe by reaching out to " +
+        contact +
+        ", going to " +
+        place +
+        " when needed, and following these steps: " +
+        steps +
+        ". The goal is to feel " +
+        feel +
+        " during difficult life situations.";
+      planSummary.classList.remove("hidden");
+    });
+
+    // Quotes
+    const quoteButton = document.getElementById("quoteButton");
+    const quoteBox = document.getElementById("quoteBox");
+
+    const quotes = [
+      "“Writing is a map that turns confusion into direction.”",
+      "“Every form you fill out is a step toward a new chapter.”",
+      "“Holidays remind us that joy can return, even after hard seasons.”",
+      "“Art is a quiet voice that says: your story matters.”",
+      "“Safety plans are promises we make to ourselves and the people we love.”"
+    ];
+
+    quoteButton.addEventListener("click", () => {
+      const random = quotes[Math.floor(Math.random() * quotes.length)];
+      quoteBox.textContent = random;
+      quoteBox.classList.remove("hidden");
+    });
+  </script>
+</body>
+</html>
