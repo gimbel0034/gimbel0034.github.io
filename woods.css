@@ -1,0 +1,271 @@
+/* Global */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Georgia", serif;
+  background: radial-gradient(circle at top, #1b3b2a 0%, #06120b 60%, #020605 100%);
+  color: #e8f5e9;
+  min-height: 100vh;
+}
+
+/* Header */
+.woods-header {
+  text-align: center;
+  padding: 40px 20px;
+  background: linear-gradient(to bottom, #163524, transparent);
+}
+
+.woods-header h1 {
+  font-size: 3rem;
+  color: #c8e6c9;
+  text-shadow: 0 0 15px #4caf50;
+}
+
+.woods-header p {
+  margin-top: 10px;
+  font-size: 1.1rem;
+  color: #a5d6a7;
+}
+
+#enterWoodsBtn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 999px;
+  background: #4caf50;
+  color: #02140a;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 0 10px #4caf50;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#enterWoodsBtn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 18px #81c784;
+}
+
+/* Main layout */
+.woods {
+  padding: 20px;
+  max-width: 1100px;
+  margin: 0 auto 40px auto;
+}
+
+/* Forest Scene */
+.forest-scene {
+  position: relative;
+  height: 350px;
+  margin-bottom: 40px;
+  overflow: hidden;
+  border-radius: 16px;
+  background: linear-gradient(to top, #0b1f13, #163524);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
+}
+
+/* Layers (background, mid, front) */
+.layer {
+  position: absolute;
+  inset: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.7;
+  transition: transform 0.6s ease;
+}
+
+.layer-back {
+  background-image: linear-gradient(to top, #06120b, #0f2618);
+}
+
+.layer-mid {
+  background-image: radial-gradient(circle at bottom, #0f2618 0%, transparent 60%);
+}
+
+.layer-front {
+  background-image: radial-gradient(circle at bottom, #1b3b2a 0%, transparent 50%);
+}
+
+/* Fireflies */
+.fireflies {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.fireflies::before,
+.fireflies::after {
+  content: "";
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #ffeb3b;
+  box-shadow:
+    50px 80px 8px #ffeb3b,
+    120px 200px 8px #fff59d,
+    300px 150px 8px #fff176,
+    500px 250px 8px #ffeb3b;
+  animation: blink 3s infinite alternate;
+}
+
+@keyframes blink {
+  0% { opacity: 0.2; transform: translateY(0); }
+  100% { opacity: 1; transform: translateY(-10px); }
+}
+
+/* Fog */
+.fog {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at bottom, rgba(255, 255, 255, 0.08), transparent 60%);
+  filter: blur(6px);
+  opacity: 0.6;
+  transition: opacity 0.6s ease;
+}
+
+/* Forest message */
+.forest-message {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  text-align: center;
+}
+
+.forest-message h2 {
+  font-size: 1.8rem;
+  color: #c8e6c9;
+  text-shadow: 0 0 10px #4caf50;
+}
+
+#whisperText {
+  margin-top: 8px;
+  font-size: 1rem;
+  color: #a5d6a7;
+}
+
+/* Sections */
+.woods-section {
+  margin-bottom: 40px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 20px;
+  border-left: 4px solid #8bc34a;
+}
+
+.woods-section h2 {
+  font-size: 1.6rem;
+  margin-bottom: 10px;
+  color: #c8e6c9;
+}
+
+/* Cards */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 10px;
+}
+
+.card {
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card h3 {
+  margin-bottom: 6px;
+  color: #aed581;
+}
+
+.card p {
+  font-size: 0.95rem;
+  color: #cfd8dc;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 18px rgba(0, 0, 0, 0.8);
+}
+
+/* Learnings */
+.learnings ul {
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+.learnings li {
+  margin-bottom: 6px;
+}
+
+/* Controls */
+.controls .control-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.control-btn {
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid #81c784;
+  background: rgba(0, 0, 0, 0.4);
+  color: #e8f5e9;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.control-btn:hover {
+  background: #2e7d32;
+  transform: translateY(-2px);
+}
+
+/* Footer */
+.woods-footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 0.85rem;
+  color: #a5d6a7;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Breeze effect (applied via JS) */
+.breezy .layer-back {
+  transform: translateX(-10px);
+}
+
+.breezy .layer-mid {
+  transform: translateX(10px);
+}
+
+.breezy .layer-front {
+  transform: translateX(20px);
+}
+
+/* Hidden states toggled by JS */
+.no-fireflies .fireflies {
+  display: none;
+}
+
+.no-fog .fog {
+  opacity: 0;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .forest-scene {
+    height: 280px;
+  }
+
+  .woods-header h1 {
+    font-size: 2.4rem;
+  }
+}
