@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Earth, America & Zero the Dog – Life & Design</title>
+  <style>
+    :root {
+      --bg-night: #020617;
+      --bg-panel: #0f172a;
+      --accent-blue: #3b82f6;
+      --accent-green: #22c55e;
+      --accent-gold: #facc15;
+      --accent-red: #ef4444;
+      --accent-purple: #a855f7;
+      --text-light: #e5e7eb;
+      --text-muted: #9ca3af;
+      --border-soft: #64748b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #0f172a 0%, #020617 55%, #000000 100%);
+      color: var(--text-light);
+      min-height: 100vh;
+    }
+
+    a {
+      color: var(--accent-blue);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    header {
+      background: linear-gradient(90deg, #1d4ed8, #22c55e, #ef4444);
+      color: #f9fafb;
+      padding: 1.5rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .site-title {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .earth-logo {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #f9fafb, #22c55e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.7);
+      position: relative;
+    }
+
+    .earth-logo::before {
+      content: "🌍";
+      font-size: 1.6rem;
+    }
+
+    .site-title h1 {
+      font-size: 1.6rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    nav a {
+      padding: 0.4rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    nav a:hover {
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem 3rem;
+    }
+
+    section {
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 1rem;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
+    }
+
+    section h2 {
+      font-size: 1.4rem;
+      margin-bottom: 0.75rem;
+      color: var(--accent-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    section h3 {
+      font-size: 1.1rem;
+      margin: 0.75rem 0 0.5rem;
+      color: var(--text-light);
+    }
+
+    p {
+      margin-bottom: 0.5rem;
+      color: var(--text-light);
+    }
+
+    ul {
+      margin-left: 1.2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    li {
+      margin-bottom: 0.35rem;
+    }
+
+    .two-column {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+      margin-top: 0.75rem;
+    }
+
+    .card {
+      background: rgba(31, 41, 55, 0.95);
+      border-radius: 0.75rem;
+      padding: 1rem 1.1rem;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.4rem;
+    }
+
+    .badge-blue { background: var(--accent-blue); color: #0b1120; }
+    .badge-green { background: var(--accent-green); color: #022c22; }
+    .badge-gold { background: var(--accent-gold); color: #0b1120; }
+    .badge-red { background: var(--accent-red); color: #f9fafb; }
+    .badge-purple { background: var(--accent-purple); color: #0b1120; }
+
+    .earth-map {
+      margin-top: 0.75rem;
+      border-radius: 0.75rem;
+      padding: 0.75rem;
+      background: linear-gradient(to top, #0f172a, #1e3a8a);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .earth-circle {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #22c55e 0%, #16a34a 40%, #0f172a 100%);
+      margin: 0 auto;
+      position: relative;
+      box-shadow: 0 0 18px rgba(0, 0, 0, 0.8);
+    }
+
+    .earth-circle::before {
+      content: "";
+      position: absolute;
+      left: 20%;
+      top: 30%;
+      width: 60px;
+      height: 40px;
+      border-radius: 50%;
+      background: #0ea5e9;
+    }
+
+    .earth-circle::after {
+      content: "";
+      position: absolute;
+      right: 15%;
+      bottom: 25%;
+      width: 50px;
+      height: 30px;
+      border-radius: 50%;
+      background: #0ea5e9;
+    }
+
+    .earth-caption {
+      text-align: center;
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .flag-icon {
+      width: 90px;
+      height: 55px;
+      background:
+        linear-gradient(to bottom,
+          #ef4444 0%,
+          #ef4444 33.33%,
+          #ffffff 33.33%,
+          #ffffff 66.66%,
+          #ef4444 66.66%,
+          #ef4444 100%);
+      position: relative;
+      border: 2px solid #ffffff;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+      margin-top: 0.5rem;
+    }
+
+    .flag-icon::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 45%;
+      height: 50%;
+      background: #1d4ed8;
+    }
+
+    .flag-icon::after {
+      content: "★ ★ ★ ★ ★";
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      width: 40%;
+      font-size: 7px;
+      color: #ffffff;
+      line-height: 1.2;
+      white-space: normal;
+    }
+
+    .design-elements-list li::before {
+      content: "● ";
+      color: var(--accent-blue);
+    }
+
+    .quote-box {
+      margin-top: 0.5rem;
+      padding: 0.75rem;
+      border-radius: 0.75rem;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      font-style: italic;
+      font-size: 0.9rem;
+    }
+
+    .zero-svg-wrapper {
+      margin-top: 0.75rem;
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 0.75rem;
+      padding: 0.75rem;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      text-align: center;
+    }
+
+    .zero-svg-wrapper svg {
+      max-width: 180px;
+      height: auto;
+    }
+
+    .zero-caption {
+      font-size: 0.85rem;
+      margin-top: 0.4rem;
+      color: var(--text-muted);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text-light);
+      font-size: 0.85rem;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 0.4rem;
+    }
+
+    .btn:hover {
+      background: var(--accent-blue);
+      color: #0b1120;
+      border-color: var(--accent-gold);
+    }
+
+    .hidden { display: none; }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem 1rem 2rem;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    footer span {
+      color: var(--accent-blue);
+    }
+
+    @media (max-width: 640px) {
+      header { padding: 1rem; }
+      .site-title h1 { font-size: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div class="site-title">
+        <div class="earth-logo"></div>
+        <h1>Earth Maps, America & Zero the Dog</h1>
+      </div>
+      <nav>
+        <a href="#earth">World Earth Maps</a>
+        <a href="#holidays">Earth Holidays</a>
+        <a href="#america">American Flag & Cops</a>
+        <a href="#design">Elements of Design</a>
+        <a href="#zero">Zero the Dog</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- EARTH MAPS -->
+    <section id="earth">
+      <h2>World Earth Maps & Life Circumstances</h2>
+      <div class="two-column">
+        <div class="card">
+          <span class="badge badge-green">Earth</span>
+          <h3>Seeing the World as One Map</h3>
+          <p>
+            World maps show continents, oceans, and borders, but they also remind us that
+            everyone shares the same planet. Life circumstances may be different in each
+            country, yet the Earth connects us.
+          </p>
+          <div class="earth-map">
+            <div class="earth-circle"></div>
+            <div class="earth-caption">
+              A simple symbolic Earth: green for land, blue for water, and night sky around it.
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <span class="badge badge-blue">Learning</span>
+          <h3>Learning from Maps</h3>
+          <p>
+            Maps help us understand where we live, where others live, and how journeys
+            happen. They can guide safety plans, travel dreams, and ideas about helping
+            communities.
+          </p>
+          <p>
+            In Henderson, Nevada, the map shows desert, roads, and neighborhoods where
+            people work, learn, and care for each other.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- EARTH HOLIDAYS -->
+    <section id="holidays">
+      <h2>Earth Holidays & Life Situations</h2>
+      <div class="two-column">
+        <div class="card">
+          <span class="badge badge-gold">Holidays</span>
+          <h3>Different Earth Holidays</h3>
+          <ul>
+            <li>New Year celebrations in many countries.</li>
+            <li>National days of independence and remembrance.</li>
+            <li>Local festivals for harvest, light, and community.</li>
+          </ul>
+          <p>
+            Holidays give people time to pause, reflect on life situations, and share
+            gratitude or hope.
+          </p>
+        </div>
+        <div class="card">
+          <span class="badge badge-purple">Reflection</span>
+          <h3>Life Circumstances & Celebration</h3>
+          <p>
+            Some holidays feel joyful; others feel heavy. Writing about them can help you
+            understand how your circumstances shape the way you celebrate.
+          </p>
+          <p>
+            A simple question: “What holiday makes me feel safe and loved?” can guide
+            conversations and personal planning.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- AMERICAN FLAG & COPS -->
+    <section id="america">
+      <h2>American Flag, Loving America & Cops</h2>
+      <div class="two-column">
+        <div class="card">
+          <span class="badge badge-blue">Flag</span>
+          <h3>American Flag & Loving America</h3>
+          <p>
+            The American flag’s stars and stripes represent states and history. Loving
+            America can mean caring about safety, fairness, and respect for everyone.
+          </p>
+          <div class="flag-icon" aria-hidden="true"></div>
+          <p style="margin-top:0.5rem;font-size:0.85rem;">
+            Red for courage, white for hope, blue for unity under the night sky.
+          </p>
+        </div>
+        <div class="card">
+          <span class="badge badge-red">Community</span>
+          <h3>Cops & Henderson, Nevada</h3>
+          <p>
+            In Henderson, Nevada, police officers and community members work together to
+            keep neighborhoods safe. Safety plans, communication, and trust help everyone
+            feel more secure.
+          </p>
+          <p>
+            Life situations can be complicated, but knowing who to call and where to go in
+            an emergency is part of loving your city and country.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ELEMENTS OF DESIGN -->
+    <section id="design">
+      <h2>Different Elements of Design</h2>
+      <div class="two-column">
+        <div class="card">
+          <span class="badge badge-blue">Design</span>
+          <h3>Core Elements</h3>
+          <ul class="design-elements-list">
+            <li>Line, shape, and form.</li>
+            <li>Color, value, and texture.</li>
+            <li>Space, balance, and emphasis.</li>
+          </ul>
+          <p>
+            These elements help artists and designers organize ideas so that viewers can
+            follow the story in a picture or layout.
+          </p>
+        </div>
+        <div class="card">
+          <span class="badge badge-gold">Life & Design</span>
+          <h3>Designing Life Circumstances</h3>
+          <p>
+            Just like design, life has balance, contrast, and focus. You can “design” your
+            days by choosing what to emphasize: safety, learning, creativity, or rest.
+          </p>
+          <div class="quote-box" id="designQuote">
+            “Design is not just what it looks like; it is how it works in your life.”
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ZERO THE DOG SVG -->
+    <section id="zero">
+      <h2>Zero the Dog from Nightmare Before Christmas</h2>
+      <p>
+        Zero is Jack Skellington’s ghost dog, glowing softly and guiding him through the
+        night. This simple SVG is a symbolic version of Zero, focusing on gentle curves and
+        a floating feeling.
+      </p>
+      <div class="zero-svg-wrapper">
+        <svg viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg" aria-labelledby="zeroTitle zeroDesc" role="img">
+          <title id="zeroTitle">Symbolic SVG of Zero the Dog</title>
+          <desc id="zeroDesc">
+            A stylized ghost dog with a flowing body and a glowing nose, inspired by Zero from Nightmare Before Christmas.
+          </desc>
+
+          <!-- Background moon -->
+          <circle cx="160" cy="50" r="35" fill="#facc15" opacity="0.4" />
+
+          <!-- Body -->
+          <path d="M40 90 Q80 40 130 70 Q170 90 190 120 Q150 110 120 120 Q80 130 40 110 Z"
+                fill="#e5e7eb" stroke="#9ca3af" stroke-width="2" />
+
+          <!-- Head -->
+          <path d="M60 70 Q70 50 95 55 Q110 60 115 70 Q100 75 85 78 Q70 80 60 70 Z"
+                fill="#e5e7eb" stroke="#9ca3af" stroke-width="2" />
+
+          <!-- Ear -->
+          <path d="M90 55 Q95 40 110 42" stroke="#9ca3af" stroke-width="3" fill="none" />
+
+          <!-- Eye -->
+          <circle cx="95" cy="63" r="3" fill="#111827" />
+
+          <!-- Nose (glowing pumpkin) -->
+          <circle cx="115" cy="72" r="5" fill="#fb923c" />
+          <path d="M112 72 Q115 68 118 72" stroke="#78350f" stroke-width="1" fill="none" />
+
+          <!-- Collar -->
+          <path d="M80 74 Q90 70 100 72" stroke="#a855f7" stroke-width="3" />
+
+          <!-- Tail swirl -->
+          <path d="M180 115 Q195 105 200 115 Q195 125 185 120"
+                stroke="#9ca3af" stroke-width="3" fill="none" />
+        </svg>
+        <div class="zero-caption">
+          Zero the ghost dog, floating under a soft moon, reminding us that even in spooky stories, loyalty and guidance matter.
+        </div>
+      </div>
+      <button class="btn" id="zeroButton">Show Zero Quote</button>
+      <p id="zeroQuote" class="hidden" style="margin-top:0.6rem;"></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>
+      Earth maps, holidays, America, Henderson, and Zero the Dog — <span>one story of life, design, and care</span>.
+    </p>
+  </footer>
+
+  <script>
+    const zeroButton = document.getElementById("zeroButton");
+    const zeroQuote = document.getElementById("zeroQuote");
+
+    zeroButton.addEventListener("click", () => {
+      zeroQuote.textContent =
+        "Zero follows Jack through the dark, just as good plans and kind people can guide us through difficult life circumstances.";
+      zeroQuote.classList.remove("hidden");
+    });
+  </script>
+</body>
+</html>
