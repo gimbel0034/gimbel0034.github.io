@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>United States of America – Military & Pride</title>
+  <style>
+    /* ===== GLOBAL STYLES ===== */
+    :root {
+      --usa-red: #b22234;
+      --usa-blue: #0b3d91;
+      --usa-white: #ffffff;
+      --usa-gold: #f4c542;
+      --bg-dark: #0f172a;
+      --bg-light: #f9fafb;
+      --text-dark: #111827;
+      --text-light: #e5e7eb;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(180deg, var(--bg-dark), #1f2937);
+      color: var(--text-light);
+      min-height: 100vh;
+    }
+
+    a {
+      color: var(--usa-gold);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* ===== HEADER & NAV ===== */
+    header {
+      background: linear-gradient(
+        90deg,
+        var(--usa-blue),
+        var(--usa-red)
+      );
+      color: var(--usa-white);
+      padding: 1.5rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .site-title {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .flag-icon {
+      width: 60px;
+      height: 40px;
+      background:
+        linear-gradient(to bottom,
+          var(--usa-red) 0%,
+          var(--usa-red) 33.33%,
+          var(--usa-white) 33.33%,
+          var(--usa-white) 66.66%,
+          var(--usa-red) 66.66%,
+          var(--usa-red) 100%);
+      position: relative;
+      border: 2px solid var(--usa-white);
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+    }
+
+    .flag-icon::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 45%;
+      height: 50%;
+      background: var(--usa-blue);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      padding: 3px;
+      box-sizing: border-box;
+    }
+
+    .flag-icon::after {
+      content: "★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★";
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      width: 40%;
+      font-size: 6px;
+      color: var(--usa-white);
+      line-height: 1.2;
+      white-space: normal;
+    }
+
+    .site-title h1 {
+      font-size: 1.6rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    nav a {
+      padding: 0.4rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    nav a:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    /* ===== MAIN LAYOUT ===== */
+    main {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem 3rem;
+    }
+
+    section {
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 1rem;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    section h2 {
+      font-size: 1.4rem;
+      margin-bottom: 0.75rem;
+      color: var(--usa-gold);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    section h3 {
+      font-size: 1.1rem;
+      margin: 0.75rem 0 0.5rem;
+      color: var(--usa-white);
+    }
+
+    p {
+      margin-bottom: 0.5rem;
+      color: var(--text-light);
+    }
+
+    ul {
+      margin-left: 1.2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    li {
+      margin-bottom: 0.35rem;
+    }
+
+    /* ===== GRID & CARDS ===== */
+    .two-column {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+      margin-top: 0.75rem;
+    }
+
+    .card {
+      background: rgba(31, 41, 55, 0.95);
+      border-radius: 0.75rem;
+      padding: 1rem 1.1rem;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+    }
+
+    .card h3 {
+      margin-top: 0;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.4rem;
+    }
+
+    .badge-blue {
+      background: var(--usa-blue);
+      color: var(--usa-white);
+    }
+
+    .badge-red {
+      background: var(--usa-red);
+      color: var(--usa-white);
+    }
+
+    .badge-gold {
+      background: var(--usa-gold);
+      color: var(--text-dark);
+    }
+
+    /* ===== SAFETY PLAN ===== */
+    .safety-steps {
+      counter-reset: safety;
+    }
+
+    .safety-step {
+      position: relative;
+      padding-left: 2.4rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .safety-step::before {
+      counter-increment: safety;
+      content: counter(safety);
+      position: absolute;
+      left: 0;
+      top: 0.1rem;
+      width: 1.7rem;
+      height: 1.7rem;
+      border-radius: 50%;
+      background: var(--usa-blue);
+      color: var(--usa-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      box-shadow: 0 0 6px rgba(15, 23, 42, 0.8);
+    }
+
+    /* ===== PRESIDENT FAMILY TREE ===== */
+    .tree-container {
+      margin-top: 1rem;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
+    }
+
+    .tree {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      min-width: 600px;
+    }
+
+    .tree-row {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+
+    .president-node {
+      background: rgba(31, 41, 55, 0.95);
+      border-radius: 0.75rem;
+      padding: 0.5rem 0.75rem;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      min-width: 120px;
+      text-align: center;
+      font-size: 0.85rem;
+      position: relative;
+    }
+
+    .president-node span {
+      display: block;
+    }
+
+    .president-node .years {
+      font-size: 0.7rem;
+      color: #9ca3af;
+    }
+
+    .tree-row::before {
+      content: "";
+      position: relative;
+      width: 80%;
+      height: 1px;
+      background: rgba(148, 163, 184, 0.6);
+      margin: 0 auto;
+    }
+
+    .tree-row:first-child::before {
+      display: none;
+    }
+
+    /* ===== FUN LEARNING & DANCE ===== */
+    .fun-list li::before {
+      content: "★ ";
+      color: var(--usa-gold);
+    }
+
+    .dance-list li::before {
+      content: "♪ ";
+      color: var(--usa-red);
+    }
+
+    /* ===== BUTTONS & JS INTERACTION ===== */
+    .btn {
+      display: inline-block;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--usa-white);
+      font-size: 0.85rem;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 0.4rem;
+    }
+
+    .btn:hover {
+      background: var(--usa-blue);
+      border-color: var(--usa-gold);
+    }
+
+    .flag-facts {
+      margin-top: 0.75rem;
+      border-left: 3px solid var(--usa-red);
+      padding-left: 0.75rem;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center;
+      padding: 1.5rem 1rem 2rem;
+      color: #9ca3af;
+      font-size: 0.85rem;
+    }
+
+    footer span {
+      color: var(--usa-gold);
+    }
+
+    @media (max-width: 640px) {
+      header {
+        padding: 1rem;
+      }
+      .site-title h1 {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div class="site-title">
+        <div class="flag-icon" aria-hidden="true"></div>
+        <h1>United States Military & American Pride</h1>
+      </div>
+      <nav>
+        <a href="#military">Military Cadets</a>
+        <a href="#safety">Safety Plan</a>
+        <a href="#retirees">Retirees</a>
+        <a href="#learning">Learning Fun</a>
+        <a href="#aids">Helping Aids</a>
+        <a href="#flag">Flag & Betsy Ross</a>
+        <a href="#inventions">Inventions & Pride</a>
+        <a href="#rotc">ROTC & Dance</a>
+        <a href="#presidents">Presidents Tree</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== MILITARY CADETS & LIFE CIRCUMSTANCES ===== -->
+    <section id="military">
+      <h2>Military Cadets & Life Circumstances</h2>
+      <div class="two-column">
+        <div class="card">
+          <span class="badge badge-blue">Cadets</span>
+          <h3>Life as a Military Cadet</h3>
+          <p>
+            Military cadets learn discipline, leadership, and teamwork. They balance school,
+            training, and family life while preparing to serve their country.
+          </p>
+          <p>
+            Life circumstances can be challenging—moving often, adjusting to new communities,
+            and managing responsibilities—but cadets grow stronger through service and support.
+          </p>
+          <ul>
+            <li>Respect for the American flag and national traditions.</li>
+            <li>Daily routines that build physical and mental resilience.</li>
+            <li>Mentorship from senior officers and instructors.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <span class="badge badge-red">Support</span>
+          <h3>Life Circumstances & Support</h3>
+          <p>
+            Every cadet and service member faces unique life circumstances—family needs,
+            health, finances, and transitions back to civilian life.
+          </p>
+          <p>
+            Support networks, counseling, and community programs help them navigate
+            these changes with dignity and strength.
+          </p>
+          <ul>
+            <li>Family readiness groups and community events.</li>
+            <li>Access to counseling and mental health resources.</li>
+            <li>Educational programs and scholarships for cadets.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SAFETY PLAN FOR MILITARY CADETS ===== -->
+    <section id="safety">
+      <h2>Safety Plan for Military Cadets</h2>
+      <p>
+        A clear safety plan helps cadets stay prepared, calm, and confident in any situation.
+        Here is a simple, memorable framework:
+      </p>
+      <div class="safety-steps">
+        <div class="safety-step">
+          <strong>Know Your Environment:</strong>
+          Identify exits, safe zones, and emergency equipment wherever you train or live.
+        </div>
+        <div class="safety-step">
+          <strong>Buddy System:</strong>
+          Stay connected with a partner during drills, travel, and high‑stress activities.
+        </div>
+        <div class="safety-step">
+          <strong>Communication Plan:</strong>
+          Keep important phone numbers saved and written down—command, family, and emergency services.
+        </div>
+        <div class="safety-step">
+          <strong>Checklists & Gear:</strong>
+          Maintain a small safety kit: flashlight, basic first aid, identification, and emergency contacts.
+        </div>
+        <div class="safety-step">
+          <strong>Report & Reflect:</strong>
+          After any incident or drill, report concerns and reflect on what can be improved.
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== HELPING NUMBERS FOR RETIREES ===== -->
+    <section id="retirees">
+      <h2>Helping Numbers for Military Retirees</h2>
+      <p>
+        Retirees deserve ongoing respect, care, and practical support. These example
+        “helping numbers” can be adapted to real local resources:
+      </p>
+      <ul>
+        <li><strong>Veterans Assistance Line:</strong> 1‑800‑VET‑HELP (example placeholder).</li>
+        <li><strong>Military Family Support:</strong> 1‑800‑FAM‑CARE (example placeholder).</li>
+        <li><strong>Retiree Benefits Office:</strong> 1‑800‑BEN‑USA1 (example placeholder).</li>
+        <li><strong>Crisis & Emotional Support:</strong> Local crisis hotline or national support line.</li>
+      </ul>
+      <p>
+        Retirees can also connect with local veteran organizations, community centers,
+        and online portals for benefits, healthcare, and social activities.
+      </p>
+    </section>
+
+    <!-- ===== LEARNING FUN ABOUT AMERICA ===== -->
+    <section id="learning">
+      <h2>Learning Fun About America</h2>
+      <div class="two-column">
+        <div class="card">
+          <span class="badge badge-gold">Fun Facts</span>
+          <h3>Quick Fun Facts</h3>
+          <ul class="fun-list">
+            <li>The United States has 50 states and one federal district.</li>
+            <li>The national bird is the bald eagle, symbolizing strength and freedom.</li>
+            <li>The national anthem is “The Star‑Spangled Banner.”</li>
+            <li>Independence Day is celebrated on July 4th.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="badge badge-blue">Mini Quiz</span>
+          <h3>Mini Learning Quiz</h3>
+          <p>Click the button to reveal a fun American pride question.</p>
+          <button class="btn" id="quizButton">Show Question</button>
+          <p id="quizQuestion" class="hidden"></p>
+          <p id="quizAnswer" class="hidden"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== HELPING AIDS FOR THE MILITARY ===== -->
+    <section id="aids">
+      <h2>Helping Aids for the Military</h2>
+      <div class="two-column">
+        <div class="card">
+          <span class="badge badge-blue">Practical Aids</span>
+          <h3>Daily Support Tools</h3>
+          <ul>
+            <li>Organized planners for schedules, drills, and appointments.</li>
+            <li>Physical training programs tailored to ability and recovery.</li>
+            <li>Online learning platforms for leadership and technical skills.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="badge badge-red">Emotional Aids</span>
+          <h3>Emotional & Social Support</h3>
+          <ul>
+            <li>Peer support groups and unit gatherings.</li>
+            <li>Access to counselors and chaplains.</li>
+            <li>Family nights, celebrations, and community dances.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== AMERICAN FLAG & BETSY ROSS ===== -->
+    <section id="flag">
+      <h2>American Flag & Betsy Ross</h2>
+      <p>
+        The American flag—red, white, and blue with stars and stripes—represents unity,
+        courage, and hope. The colors traditionally symbolize:
+      </p>
+      <ul>
+        <li><strong>Red:</strong> Valor and bravery.</li>
+        <li><strong>White:</strong> Purity and innocence.</li>
+        <li><strong>Blue:</strong> Vigilance, perseverance, and justice.</li>
+      </ul>
+
+      <div class="flag-facts">
+        <h3>Flag Facts & Betsy Ross</h3>
+        <p>
+          Betsy Ross is often credited in American legend with sewing one of the earliest
+          versions of the United States flag, featuring thirteen stars in a circle for the
+          original thirteen colonies.
+        </p>
+        <p>
+          Over time, the flag has changed as new states joined the Union—today it has
+          fifty stars and thirteen stripes, honoring both history and growth.
+        </p>
+        <button class="btn" id="toggleFlagStory">Toggle Extra Flag Story</button>
+        <p id="extraFlagStory" class="hidden">
+          The phrase “stars and stripes forever” reflects the enduring spirit of the nation.
+          The flag is folded with care, raised at dawn, and lowered at dusk on many bases,
+          schools, and homes across America.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== INVENTIONS OF AMERICA PRIDE & LIFE CYCLE ===== -->
+    <section id="inventions">
+      <h2>Inventions of American Pride & Life Cycle</h2>
+      <div class="two-column">
+        <div class="card">
+          <span class="badge badge-gold">Innovation</span>
+          <h3>Inventions that Inspire Pride</h3>
+          <ul>
+            <li>Advances in aviation, space exploration, and technology.</li>
+            <li>Medical breakthroughs that save lives worldwide.</li>
+            <li>Communication tools that connect families across distances.</li>
+          </ul>
+          <p>
+            These inventions reflect creativity, perseverance, and a desire to improve life
+            for future generations.
+          </p>
+        </div>
+        <div class="card">
+          <span class="badge badge-blue">Life Cycle</span>
+          <h3>Life Cycle of Service</h3>
+          <p>
+            Many Americans experience a “life cycle” of service: childhood inspiration,
+            training as cadets or ROTC students, active duty, and eventual retirement.
+          </p>
+          <p>
+            Each stage brings new responsibilities, lessons, and opportunities to give back
+            to the community and country.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ROTC & DANCES FOR THE MILITARY ===== -->
+    <section id="rotc">
+      <h2>Helping ROTC & Dances for the Military</h2>
+      <div class="two-column">
+        <div class="card">
+          <span class="badge badge-blue">ROTC</span>
+          <h3>ROTC Programs</h3>
+          <p>
+            ROTC (Reserve Officers’ Training Corps) helps students learn leadership,
+            discipline, and military skills while they attend school.
+          </p>
+          <ul>
+            <li>Scholarships and educational support.</li>
+            <li>Leadership labs and field training exercises.</li>
+            <li>Community service and ceremonial events.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="badge badge-red">Dance & Celebration</span>
+          <h3>Dances for the Military</h3>
+          <p>
+            Military balls and dances celebrate tradition, honor achievements, and bring
+            families and units together.
+          </p>
+          <ul class="dance-list">
+            <li>Formal military balls with dress uniforms.</li>
+            <li>Unit celebrations after deployments or major milestones.</li>
+            <li>Community patriotic dances on holidays.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FAMILY TREE OF PRESIDENTS ===== -->
+    <section id="presidents">
+      <h2>Family Tree Style – Presidents of the United States</h2>
+      <p>
+        This simple “family tree” style layout shows a few presidents as if they were
+        branches in American history. You can expand it with more names and dates.
+      </p>
+      <div class="tree-container">
+        <div class="tree">
+          <div class="tree-row">
+            <div class="president-node">
+              <span>George Washington</span>
+              <span class="years">1789–1797</span>
+            </div>
+          </div>
+          <div class="tree-row">
+            <div class="president-node">
+              <span>John Adams</span>
+              <span class="years">1797–1801</span>
+            </div>
+            <div class="president-node">
+              <span>Thomas Jefferson</span>
+              <span class="years">1801–1809</span>
+            </div>
+          </div>
+          <div class="tree-row">
+            <div class="president-node">
+              <span>Abraham Lincoln</span>
+              <span class="years">1861–1865</span>
+            </div>
+            <div class="president-node">
+              <span>Theodore Roosevelt</span>
+              <span class="years">1901–1909</span>
+            </div>
+            <div class="president-node">
+              <span>Franklin D. Roosevelt</span>
+              <span class="years">1933–1945</span>
+            </div>
+          </div>
+          <div class="tree-row">
+            <div class="president-node">
+              <span>John F. Kennedy</span>
+              <span class="years">1961–1963</span>
+            </div>
+            <div class="president-node">
+              <span>Ronald Reagan</span>
+              <span class="years">1981–1989</span>
+            </div>
+            <div class="president-node">
+              <span>Barack Obama</span>
+              <span class="years">2009–2017</span>
+            </div>
+            <div class="president-node">
+              <span>Current & Future</span>
+              <span class="years">Continuing</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>
+      Stars and stripes forever — <span>United States of America</span> — honoring cadets,
+      retirees, families, and the spirit of service.
+    </p>
+  </footer>
+
+  <script>
+    // Simple quiz interaction
+    const quizButton = document.getElementById("quizButton");
+    const quizQuestion = document.getElementById("quizQuestion");
+    const quizAnswer = document.getElementById("quizAnswer");
+
+    quizButton.addEventListener("click", () => {
+      quizQuestion.textContent =
+        "Question: How many stripes are on the American flag, and what do they represent?";
+      quizAnswer.textContent =
+        "Answer: There are 13 stripes, representing the original thirteen colonies.";
+      quizQuestion.classList.remove("hidden");
+      quizAnswer.classList.remove("hidden");
+    });
+
+    // Toggle extra flag story
+    const toggleFlagStory = document.getElementById("toggleFlagStory");
+    const extraFlagStory = document.getElementById("extraFlagStory");
+
+    toggleFlagStory.addEventListener("click", () => {
+      extraFlagStory.classList.toggle("hidden");
+    });
+  </script>
+</body>
+</html?
