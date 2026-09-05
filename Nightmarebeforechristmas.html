@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Nightmare Before Christmas – Learning, Life & Halloween Wishes</title>
+  <style>
+    /* ===== ROOT COLORS & GLOBAL STYLES ===== */
+    :root {
+      --bg-night: #020617;
+      --bg-panel: #0f172a;
+      --accent-purple: #a855f7;
+      --accent-orange: #fb923c;
+      --accent-green: #22c55e;
+      --accent-blue: #3b82f6;
+      --accent-red: #ef4444;
+      --text-light: #e5e7eb;
+      --text-muted: #9ca3af;
+      --border-soft: #64748b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #0f172a 0%, #020617 55%, #000000 100%);
+      color: var(--text-light);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: var(--accent-blue);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* ===== HEADER & NAV ===== */
+    header {
+      background: linear-gradient(90deg, #1d4ed8, #a855f7, #fb923c);
+      color: #f9fafb;
+      padding: 1.5rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .site-title {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .nbc-logo {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #f9fafb, #a855f7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.7);
+      position: relative;
+    }
+
+    .nbc-logo::before {
+      content: "🎃";
+      font-size: 1.6rem;
+    }
+
+    .site-title h1 {
+      font-size: 1.6rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    nav a {
+      padding: 0.4rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    nav a:hover {
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    /* ===== MAIN LAYOUT ===== */
+    main {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem 3rem;
+    }
+
+    section {
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 1rem;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
+    }
+
+    section h2 {
+      font-size: 1.4rem;
+      margin-bottom: 0.75rem;
+      color: var(--accent-purple);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    section h3 {
+      font-size: 1.1rem;
+      margin: 0.75rem 0 0.5rem;
+      color: var(--text-light);
+    }
+
+    p {
+      margin-bottom: 0.5rem;
+      color: var(--text-light);
+    }
+
+    ul {
+      margin-left: 1.2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    li {
+      margin-bottom: 0.35rem;
+    }
+
+    /* ===== GRID & CARDS ===== */
+    .two-column {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+      margin-top: 0.75rem;
+    }
+
+    .card {
+      background: rgba(31, 41, 55, 0.95);
+      border-radius: 0.75rem;
+      padding: 1rem 1.1rem;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.4rem;
+    }
+
+    .badge-purple {
+      background: var(--accent-purple);
+      color: #0b1120;
+    }
+
+    .badge-orange {
+      background: var(--accent-orange);
+      color: #0b1120;
+    }
+
+    .badge-green {
+      background: var(--accent-green);
+      color: #022c22;
+    }
+
+    .badge-blue {
+      background: var(--accent-blue);
+      color: #0b1120;
+    }
+
+    .badge-red {
+      background: var(--accent-red);
+      color: #f9fafb;
+    }
+
+    /* ===== SVG FLOATING OBJECTS ===== */
+    .svg-floating-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      opacity: 0.35;
+    }
+
+    .floating-svg {
+      position: absolute;
+      animation: float 16s linear infinite;
+    }
+
+    .floating-svg:nth-child(1) {
+      left: 5%;
+      top: 20%;
+      animation-duration: 18s;
+    }
+
+    .floating-svg:nth-child(2) {
+      left: 80%;
+      top: 10%;
+      animation-duration: 22s;
+    }
+
+    .floating-svg:nth-child(3) {
+      left: 15%;
+      top: 70%;
+      animation-duration: 20s;
+    }
+
+    .floating-svg:nth-child(4) {
+      left: 70%;
+      top: 60%;
+      animation-duration: 24s;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0px); }
+    }
+
+    /* ===== SENTENCE EXAMPLE ===== */
+    .sentence-example {
+      border-left: 3px solid var(--accent-purple);
+      padding-left: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .sentence-example span {
+      display: inline-block;
+      margin-right: 0.35rem;
+      padding: 0.15rem 0.4rem;
+      border-radius: 0.35rem;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      font-size: 0.85rem;
+    }
+
+    /* ===== LIFE PLAN & SAFETY ===== */
+    .life-plan-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 0.75rem;
+      margin-top: 0.75rem;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    input, textarea, select {
+      background: #020617;
+      border: 1px solid var(--border-soft);
+      border-radius: 0.5rem;
+      padding: 0.4rem 0.5rem;
+      color: var(--text-light);
+      font-size: 0.85rem;
+    }
+
+    textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    /* ===== BUTTONS & JS ===== */
+    .btn {
+      display: inline-block;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text-light);
+      font-size: 0.85rem;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 0.4rem;
+    }
+
+    .btn:hover {
+      background: var(--accent-purple);
+      color: #0b1120;
+      border-color: var(--accent-orange);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    /* ===== GAME AREA ===== */
+    .game-area {
+      margin-top: 0.75rem;
+      padding: 0.75rem;
+      border-radius: 0.75rem;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      font-size: 0.9rem;
+    }
+
+    .game-score {
+      font-size: 0.9rem;
+      color: var(--accent-orange);
+      margin-top: 0.4rem;
+    }
+
+    /* ===== HOLIDAY TYPES ===== */
+    .holiday-list li::before {
+      content: "★ ";
+      color: var(--accent-orange);
+    }
+
+    /* ===== YOUTUBE & LYRICS INFO ===== */
+    .info-box {
+      margin-top: 0.5rem;
+      padding: 0.75rem;
+      border-radius: 0.75rem;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px dashed rgba(148, 163, 184, 0.7);
+      font-size: 0.9rem;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center;
+      padding: 1.5rem 1rem 2rem;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    footer span {
+      color: var(--accent-purple);
+    }
+
+    @media (max-width: 640px) {
+      header {
+        padding: 1rem;
+      }
+      .site-title h1 {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- FLOATING SVG OBJECTS (PUMPKIN, PJ, SPIRAL HILL, STAR) -->
+  <div class="svg-floating-layer" aria-hidden="true">
+    <!-- Pumpkin SVG -->
+    <svg class="floating-svg" viewBox="0 0 80 80">
+      <circle cx="40" cy="40" r="22" fill="#fb923c" stroke="#78350f" stroke-width="3" />
+      <path d="M30 20 C32 10 48 10 50 20" stroke="#15803d" stroke-width="3" fill="none" />
+      <path d="M30 40 C30 30 50 30 50 40" stroke="#f97316" stroke-width="2" fill="none" />
+    </svg>
+
+    <!-- PJ SVG (simple pajamas icon) -->
+    <svg class="floating-svg" viewBox="0 0 80 80">
+      <rect x="20" y="18" width="40" height="30" rx="6" fill="#3b82f6" />
+      <rect x="26" y="48" width="10" height="20" rx="4" fill="#1d4ed8" />
+      <rect x="44" y="48" width="10" height="20" rx="4" fill="#1d4ed8" />
+      <circle cx="40" cy="30" r="6" fill="#f9fafb" />
+    </svg>
+
+    <!-- Spiral Hill SVG -->
+    <svg class="floating-svg" viewBox="0 0 80 80">
+      <path d="M10 60 Q40 20 70 60 Q40 40 30 50 Q25 55 30 60" fill="#111827" stroke="#4b5563" stroke-width="2" />
+    </svg>
+
+    <!-- Star SVG -->
+    <svg class="floating-svg" viewBox="0 0 80 80">
+      <polygon points="40,10 47,30 68,30 51,43 57,63 40,52 23,63 29,43 12,30 33,30"
+               fill="#facc15" />
+    </svg>
+  </div>
+
+  <header>
+    <div class="header-inner">
+      <div class="site-title">
+        <div class="nbc-logo"></div>
+        <h1>Nightmare Before Christmas – Life & Learning</h1>
+      </div>
+      <nav>
+        <a href="#nbc">Nightmare Before Christmas</a>
+        <a href="#tim">Tim Burton</a>
+        <a href="#life">Life Plan & Safety</a>
+        <a href="#games">Games</a>
+        <a href="#christmas">Types of Christmas</a>
+        <a href="#youtube">YouTube & Songs</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- NIGHTMARE BEFORE CHRISTMAS LEARNING -->
+    <section id="nbc">
+      <h2>Learning About Nightmare Before Christmas</h2>
+      <div class="two-column">
+        <div class="card">
+          <span class="badge badge-purple">Story</span>
+          <h3>Halloween Meets Christmas</h3>
+          <p>
+            “The Nightmare Before Christmas” blends Halloween and Christmas into one
+            imaginative world. Jack Skellington, the Pumpkin King, discovers Christmas and
+            wonders what it would be like if Halloween never ended.
+          </p>
+          <p>
+            The film explores curiosity, identity, and the desire to try something new,
+            even when it feels risky or confusing.
+          </p>
+          <div class="sentence-example">
+            <span>Subject:</span> <span>Jack Skellington</span>
+            <span>Verb:</span> <span>dreams</span>
+            <span>Object:</span> <span>of a Christmas filled with Halloween magic.</span>
+          </div>
+        </div>
+        <div class="card">
+          <span class="badge badge-orange">Learning</span>
+          <h3>What We Learn from the Story</h3>
+          <ul>
+            <li>Curiosity can lead to new experiences and mistakes.</li>
+            <li>Respecting other traditions keeps balance between worlds.</li>
+            <li>Returning to your true self can still include new ideas.</li>
+          </ul>
+          <p>
+            Life circumstances often feel like mixed holidays—some days are spooky, some
+            are joyful, and many are a blend of both.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TIM BURTON INFORMATION -->
+    <section id="tim">
+      <h2>Teaching Information About Tim Burton</h2>
+      <div class="two-column">
+        <div class="card">
+          <span class="badge badge-blue">Creator</span>
+          <h3>Tim Burton Stories & Style</h3>
+          <p>
+            Tim Burton is known for stories that mix dark visuals with heartfelt themes.
+            His characters often feel strange or misunderstood, yet they search for love,
+            belonging, and meaning.
+          </p>
+          <ul>
+            <li>Use of gothic, whimsical art concepts.</li>
+            <li>Stories that explore identity and difference.</li>
+            <li>Worlds where Halloween and Christmas can share the same sky.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="badge badge-green">Ideas</span>
+          <h3>Life, Learning & Ideas</h3>
+          <p>
+            Tim Burton’s work reminds us that unusual ideas can become powerful art. Life
+            plans do not have to look ordinary; they can include creative jobs, storytelling,
+            and design.
+          </p>
+          <p>
+            Learning about his films encourages us to accept our own style and to see
+            beauty in things that feel different.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- LIFE PLAN & SAFETY -->
+    <section id="life">
+      <h2>Life Plan & Safety Circumstances</h2>
+      <p>
+        Even in a world where Halloween visits Christmas, safety and planning matter.
+        A simple life plan can help you feel grounded when circumstances change.
+      </p>
+      <div class="life-plan-grid">
+        <div class="form-field">
+          <label for="goalField">Main Life Goal</label>
+          <input id="goalField" type="text" placeholder="Example: Create art, help others, learn more…" />
+        </div>
+        <div class="form-field">
+          <label for="supportField">Who Supports Me</label>
+          <input id="supportField" type="text" placeholder="Friends, family, mentors…" />
+        </div>
+        <div class="form-field">
+          <label for="safeField">Safe Place</label>
+          <input id="safeField" type="text" placeholder="Home, school, community center…" />
+        </div>
+        <div class="form-field">
+          <label for="stepsField">Steps for Safety</label>
+          <textarea id="stepsField" placeholder="Write a few steps you can follow when life feels scary."></textarea>
+        </div>
+        <div class="form-field">
+          <label for="holidayField">Holiday That Comforts Me</label>
+          <select id="holidayField">
+            <option value="">Choose a holiday…</option>
+            <option value="halloween">Halloween</option>
+            <option value="christmas">Christmas</option>
+            <option value="both">Halloween on Christmas</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn" id="lifeButton">Summarize My Life Plan</button>
+      <p id="lifeSummary" class="hidden" style="margin-top:0.75rem;"></p>
+    </section>
+
+    <!-- GAMES SECTION -->
+    <section id="games">
+      <h2>Games – Halloween on Christmas & Learning</h2>
+      <div class="two-column">
+        <div class="card">
+          <span class="badge badge-orange">Game</span>
+          <h3>Click the Pumpkin Game</h3>
+          <p>
+            This simple game counts how many times you click the pumpkin button. Imagine
+            each click as a wish that Halloween on Christmas never ends.
+          </p>
+          <div class="game-area">
+            <button class="btn" id="pumpkinButton">🎃 Click Pumpkin</button>
+            <p class="game-score" id="pumpkinScore">Score: 0 wishes</p>
+          </div>
+        </div>
+        <div class="card">
+          <span class="badge badge-purple">Learning Game</span>
+          <h3>Nightmare Before Christmas Quiz</h3>
+          <p>Select a question and reveal the answer:</p>
+          <select id="quizSelect">
+            <option value="">Choose a question…</option>
+            <option value="jack">Who is the Pumpkin King?</option>
+            <option value="holiday">What two holidays are mixed?</option>
+            <option value="lesson">What is one lesson from the film?</option>
+          </select>
+          <button class="btn" id="quizButton">Show Answer</button>
+          <p id="quizAnswer" class="hidden"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DIFFERENT TYPES OF CHRISTMAS -->
+    <section id="christmas">
+      <h2>Different Types of Christmas</h2>
+      <div class="two-column">
+        <div class="card">
+          <span class="badge badge-blue">Traditional</span>
+          <h3>Classic Christmas</h3>
+          <ul class="holiday-list">
+            <li>Lights, music, and family gatherings.</li>
+            <li>Warm pajamas and quiet nights.</li>
+            <li>Stories about kindness and hope.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="badge badge-red">Nightmare Style</span>
+          <h3>Halloween on Christmas</h3>
+          <ul class="holiday-list">
+            <li>Pumpkins and snowflakes together.</li>
+            <li>Spooky songs with gentle messages.</li>
+            <li>Characters who learn to respect both holidays.</li>
+          </ul>
+          <p>
+            Some people love the idea of Halloween on Christmas and wish it never ended,
+            because it feels like a celebration of every part of themselves.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- YOUTUBE & SONGS (NO LYRICS) -->
+    <section id="youtube">
+      <h2>YouTube Videos, “I Miss You” & Halloween Music</h2>
+      <p>
+        Many people listen to songs about missing someone, especially around holidays.
+        YouTube has videos of “I miss you” songs and Halloween-themed music that mix
+        nostalgia with spooky fun.
+      </p>
+      <div class="two-column">
+        <div class="card">
+          <span class="badge badge-green">Music</span>
+          <h3>Listening & Feelings</h3>
+          <p>
+            When you listen to songs about missing someone, it can help you understand your
+            feelings. Music becomes part of your life plan, giving you space to reflect.
+          </p>
+          <div class="info-box">
+            Remember: lyrics of published songs are copyrighted. Instead of writing them
+            out, you can summarize what they mean to you in your own words.
+          </div>
+        </div>
+        <div class="card">
+          <span class="badge badge-blue">Halloween & Christmas Playlists</span>
+          <h3>Creating Your Own Playlist</h3>
+          <p>
+            You can create playlists that mix Halloween and Christmas songs, including
+            tracks that say “I miss you” or celebrate spooky joy.
+          </p>
+          <p>
+            Write a short description for each song: why you chose it, what it reminds you
+            of, and how it fits your life circumstances.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>
+      Nightmare Before Christmas, Tim Burton stories, games, and safety plans weave together —
+      <span>learning through Halloween and Christmas</span>.
+    </p>
+  </footer>
+
+  <script>
+    // Life plan summary
+    const lifeButton = document.getElementById("lifeButton");
+    const lifeSummary = document.getElementById("lifeSummary");
+
+    lifeButton.addEventListener("click", () => {
+      const goal = document.getElementById("goalField").value || "discover creative paths";
+      const support = document.getElementById("supportField").value || "trusted people";
+      const safe = document.getElementById("safeField").value || "a safe place";
+      const steps = document.getElementById("stepsField").value || "personal steps for safety";
+      const holiday = document.getElementById("holidayField").value || "a holiday that feels right";
+
+      let holidayText = "";
+      if (holiday === "halloween") holidayText = "Halloween gives courage to face fears.";
+      else if (holiday === "christmas") holidayText = "Christmas brings warmth and hope.";
+      else if (holiday === "both") holidayText = "Halloween on Christmas mixes bravery and joy.";
+      else holidayText = "Any holiday can remind you that new seasons arrive.";
+
+      lifeSummary.textContent =
+        "Your main goal is to " +
+        goal +
+        ". You are supported by " +
+        support +
+        " and feel safe at " +
+        safe +
+        ". When life feels intense, you follow these steps: " +
+        steps +
+        ". " +
+        holidayText;
+      lifeSummary.classList.remove("hidden");
+    });
+
+    // Pumpkin game
+    const pumpkinButton = document.getElementById("pumpkinButton");
+    const pumpkinScore = document.getElementById("pumpkinScore");
+    let score = 0;
+
+    pumpkinButton.addEventListener("click", () => {
+      score++;
+      pumpkinScore.textContent = "Score: " + score + " wishes";
+    });
+
+    // Quiz
+    const quizSelect = document.getElementById("quizSelect");
+    const quizButton = document.getElementById("quizButton");
+    const quizAnswer = document.getElementById("quizAnswer");
+
+    quizButton.addEventListener("click", () => {
+      const value = quizSelect.value;
+      let answer = "";
+      if (!value) {
+        answer = "Please choose a question to see the answer.";
+      } else if (value === "jack") {
+        answer = "Jack Skellington is the Pumpkin King of Halloween Town.";
+      } else if (value === "holiday") {
+        answer = "The story mixes Halloween and Christmas into one magical adventure.";
+      } else if (value === "lesson") {
+        answer = "One lesson is that exploring new traditions is exciting, but respecting others’ holidays is important.";
+      }
+      quizAnswer.textContent = answer;
+      quizAnswer.classList.remove("hidden");
+    });
+  </script>
+</body>
+</html>
