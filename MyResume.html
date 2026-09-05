@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marissa Anne Gimbel – Resume</title>
+
+<style>
+    body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        margin: 0;
+        background: #f7f7f7;
+        color: #333;
+    }
+
+    header {
+        background: linear-gradient(135deg, #6a89cc, #b8e994);
+        color: white;
+        padding: 40px 20px;
+        text-align: center;
+    }
+
+    header h1 {
+        margin: 0;
+        font-size: 2.4rem;
+        letter-spacing: 1px;
+    }
+
+    header p {
+        margin: 8px 0 0;
+        font-size: 1.1rem;
+    }
+
+    .container {
+        width: 90%;
+        max-width: 900px;
+        margin: 30px auto;
+        background: white;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+        border-left: 5px solid #6a89cc;
+        padding-left: 10px;
+        margin-top: 40px;
+        font-size: 1.6rem;
+    }
+
+    .section {
+        margin-top: 20px;
+    }
+
+    .section ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .section li {
+        margin-bottom: 12px;
+        line-height: 1.5;
+    }
+
+    .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 10px;
+        margin-top: 15px;
+    }
+
+    .skill-box {
+        background: #eef2f7;
+        padding: 10px;
+        border-radius: 6px;
+        text-align: center;
+        font-weight: 600;
+    }
+
+    /* JavaScript toggle */
+    .toggle-btn {
+        background: #6a89cc;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+
+    .hidden {
+        display: none;
+    }
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Marissa Anne Gimbel</h1>
+    <p>Front-End Developer • UX Designer • Sanctuary-Builder</p>
+    <p>Henderson, Nevada • Born August 13, 1990</p>
+</header>
+
+<div class="container">
+
+    <h2>Professional Summary</h2>
+    <p>
+        Front-end developer and UX-focused creator specializing in HTML, CSS, and JavaScript. 
+        Known for building accessible, emotionally aware interfaces, single-page tools, overlays, 
+        and ceremonial digital spaces that support real people in real communities. 
+        Blends technical precision with healing-centered design.
+    </p>
+
+    <h2>Experience</h2>
+    <div class="section">
+        <ul>
+            <li>
+                <strong>Recreation Assistant – City of Henderson</strong><br>
+                2016–Present • Henderson, NV<br>
+                Supports safe, welcoming community recreation spaces. Coordinates activities, schedules, 
+                and communication with strong organization and empathy.
+            </li>
+
+            <li>
+                <strong>Front-End & UX Projects (Independent)</strong><br>
+                HTML • CSS • JavaScript<br>
+                Built single-page overlays for emotional safety plans, helper panels, money-counting tools, 
+                and storybook-themed layouts. Implemented JavaScript interactions such as collapsible sections, 
+                counters, and tabbed views.
+            </li>
+        </ul>
+    </div>
+
+    <h2>Technical Skills</h2>
+    <div class="skills-grid">
+        <div class="skill-box">HTML5</div>
+        <div class="skill-box">CSS3</div>
+        <div class="skill-box">JavaScript (ES6)</div>
+        <div class="skill-box">Responsive Layouts</div>
+        <div class="skill-box">Single-Page Architecture</div>
+        <div class="skill-box">Figma</div>
+        <div class="skill-box">Adobe XD</div>
+        <div class="skill-box">Wireframing</div>
+        <div class="skill-box">Prototyping</div>
+        <div class="skill-box">Information Architecture</div>
+    </div>
+
+    <h2>Creative Identity</h2>
+    <button class="toggle-btn" onclick="toggleCreative()">Show / Hide Creative Bio</button>
+
+    <div id="creative" class="hidden">
+        <p>
+            Sanctuary-builder, poetic technologist, and ceremonial archivist weaving code, story, and ritual 
+            into living sanctuaries for healing, advocacy, and celebration. Designs modular overlays, 
+            affirmation engines, timelines, and ritual templates that honor community, memory, and inclusion.
+        </p>
+    </div>
+
+    <h2>Education</h2>
+    <ul>
+        <li><strong>BYU–Idaho</strong> — Website Design & Development (2014–2022)</li>
+        <li><strong>Basic High School</strong> — Class of 2009</li>
+    </ul>
+
+    <h2>Contact</h2>
+    <ul>
+        <li>Email: <strong>Rissaodandiego@gmail.com</strong></li>
+        <li>Phone: <strong>702-422-8875</strong></li>
+    </ul>
+
+</div>
+
+<script>
+function toggleCreative() {
+    const section = document.getElementById("creative");
+    section.classList.toggle("hidden");
+}
+</script>
+
+</body>
+</html>
