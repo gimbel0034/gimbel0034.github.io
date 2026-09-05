@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Whispering Woods</title>
+  <link rel="stylesheet" href="woods.css" />
+</head>
+<body>
+  <header class="woods-header">
+    <h1>Whispering Woods</h1>
+    <p>Where trees remember, and the wind carries stories.</p>
+    <button id="enterWoodsBtn">Enter the Woods</button>
+  </header>
+
+  <main class="woods">
+    <!-- Hero Forest Scene -->
+    <section class="forest-scene">
+      <div class="layer layer-back"></div>
+      <div class="layer layer-mid"></div>
+      <div class="layer layer-front"></div>
+
+      <div class="fireflies"></div>
+      <div class="fog"></div>
+
+      <div class="forest-message">
+        <h2>The Forest Breathes</h2>
+        <p id="whisperText">Listen closely… the woods have something to say.</p>
+      </div>
+    </section>
+
+    <!-- Trees & Paths -->
+    <section class="woods-section">
+      <h2>Trees & Paths</h2>
+      <div class="cards">
+        <article class="card tree-card">
+          <h3>Ancient Oak</h3>
+          <p>Its roots run deep, holding centuries of memories.</p>
+        </article>
+
+        <article class="card tree-card">
+          <h3>Silver Birch</h3>
+          <p>Light dances on its bark, guiding wanderers at dusk.</p>
+        </article>
+
+        <article class="card path-card">
+          <h3>Mossy Path</h3>
+          <p>Soft steps, quiet thoughts, and a trail of fallen leaves.</p>
+        </article>
+
+        <article class="card path-card">
+          <h3>Hidden Trail</h3>
+          <p>Only those who trust their instincts will find this way.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Woods Learnings -->
+    <section class="woods-section learnings">
+      <h2>What the Woods Teach Us</h2>
+      <p>The forest is a patient teacher. Every branch, leaf, and shadow holds a lesson.</p>
+      <ul>
+        <li><strong>Patience:</strong> Trees grow slowly, but they never stop reaching for the light.</li>
+        <li><strong>Resilience:</strong> Storms bend branches, but roots hold firm.</li>
+        <li><strong>Cycles:</strong> Leaves fall, snow melts, and life returns.</li>
+        <li><strong>Stillness:</strong> Silence is not emptiness—it’s space to listen.</li>
+      </ul>
+    </section>
+
+    <!-- Woods Movements Controls -->
+    <section class="woods-section controls">
+      <h2>Woods Movements</h2>
+      <p>Play with the forest’s energy.</p>
+      <div class="control-buttons">
+        <button class="control-btn" data-action="fireflies">Toggle Fireflies</button>
+        <button class="control-btn" data-action="fog">Toggle Fog</button>
+        <button class="control-btn" data-action="breeze">Call the Breeze</button>
+        <button class="control-btn" data-action="calm">Return to Stillness</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="woods-footer">
+    <p>&copy; Whispering Woods — Lessons in stillness, growth, and mystery.</p>
+  </footer>
+
+  <script src="woods.js"></script>
+</body>
+</html>
