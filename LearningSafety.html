@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Learning, Safety, and Awareness Hub</title>
+  <style>
+    :root {
+      --blue: #1e3a8a;
+      --red: #dc2626;
+      --white: #f9fafb;
+      --bg: #0f172a;
+      --accent: #22c55e;
+      --text: #e5e7eb;
+      --card: #111827;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1f2937 0, #020617 55%, #000 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      padding: 2.5rem 5vw 1.5rem;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    header .title-block {
+      max-width: 640px;
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+
+    h1 span.flag-accent {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.9rem;
+      text-transform: none;
+      letter-spacing: normal;
+      background: rgba(15, 23, 42, 0.8);
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+    }
+
+    header p {
+      margin-top: 0.75rem;
+      font-size: 0.98rem;
+      color: #cbd5f5;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+
+    .pill {
+      font-size: 0.8rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.8);
+      color: #e5e7eb;
+    }
+
+    .flag-wrapper {
+      width: 220px;
+      max-width: 100%;
+      border-radius: 0.75rem;
+      overflow: hidden;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: #020617;
+    }
+
+    main {
+      padding: 2rem 5vw 3rem;
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.4fr);
+      gap: 2rem;
+    }
+
+    @media (max-width: 960px) {
+      main {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    section {
+      margin-bottom: 1.5rem;
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      margin-bottom: 0.75rem;
+      color: var(--white);
+    }
+
+    h3 {
+      font-size: 1.05rem;
+      margin-bottom: 0.4rem;
+      color: #e5e7eb;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 0.9rem;
+      padding: 1rem 1.1rem;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      margin-bottom: 1rem;
+    }
+
+    .card.highlight {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.3);
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+    }
+
+    ul {
+      list-style: none;
+      margin-top: 0.4rem;
+    }
+
+    li {
+      margin-bottom: 0.35rem;
+      font-size: 0.93rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.4rem;
+    }
+
+    li::before {
+      content: "•";
+      color: var(--accent);
+      font-size: 1.1rem;
+      line-height: 1;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+      background: rgba(34, 197, 94, 0.12);
+      color: #bbf7d0;
+      border: 1px solid rgba(34, 197, 94, 0.5);
+      margin-bottom: 0.4rem;
+    }
+
+    .baby-card {
+      display: grid;
+      grid-template-columns: 140px minmax(0, 1fr);
+      gap: 1rem;
+      align-items: center;
+    }
+
+    @media (max-width: 640px) {
+      .baby-card {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .baby-svg-wrapper {
+      background: radial-gradient(circle at top, #1f2937 0, #020617 70%);
+      border-radius: 0.75rem;
+      padding: 0.75rem;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+    }
+
+    .history-timeline {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.6rem;
+    }
+
+    .history-item {
+      position: relative;
+      padding-left: 1.4rem;
+    }
+
+    .history-item::before {
+      content: "";
+      position: absolute;
+      left: 0.4rem;
+      top: 0.2rem;
+      width: 0.55rem;
+      height: 0.55rem;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.15);
+    }
+
+    .history-year {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #9ca3af;
+    }
+
+    .history-text {
+      font-size: 0.93rem;
+      color: #e5e7eb;
+    }
+
+    .book-list {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.5rem;
+    }
+
+    .book-item {
+      padding: 0.5rem 0.6rem;
+      border-radius: 0.6rem;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      font-size: 0.9rem;
+    }
+
+    .book-title {
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .book-note {
+      font-size: 0.82rem;
+      color: #9ca3af;
+    }
+
+    .safety-steps {
+      counter-reset: step;
+    }
+
+    .safety-steps li {
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .safety-steps li::before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      top: 0.05rem;
+      width: 1.4rem;
+      height: 1.4rem;
+      border-radius: 999px;
+      background: rgba(34, 197, 94, 0.12);
+      border: 1px solid rgba(34, 197, 94, 0.7);
+      color: #bbf7d0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .mental-note {
+      font-size: 0.9rem;
+      color: #cbd5f5;
+      margin-top: 0.4rem;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .tool-btn {
+      font-size: 0.8rem;
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.9);
+      color: #e5e7eb;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+    }
+
+    .tool-btn.active {
+      background: rgba(34, 197, 94, 0.18);
+      border-color: rgba(34, 197, 94, 0.8);
+      color: #bbf7d0;
+    }
+
+    .tool-btn:active {
+      transform: scale(0.97);
+    }
+
+    .helper-text {
+      font-size: 0.9rem;
+      color: #e5e7eb;
+      min-height: 2.2rem;
+    }
+
+    footer {
+      padding: 1.5rem 5vw 2rem;
+      border-top: 1px solid rgba(148, 163, 184, 0.3);
+      font-size: 0.85rem;
+      color: #9ca3af;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    footer span {
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="title-block">
+      <h1>
+        Learning, Safety, and Awareness
+        <br />
+        <span class="flag-accent">
+          🇺🇸 American Flag • History • Mental Health
+        </span>
+      </h1>
+      <p>
+        This page weaves together communication skills, learning new topics, safety planning,
+        gentle education about diapers and baby care, history, and mental health awareness—
+        all in clear, full-length sentence structure.
+      </p>
+      <div class="pill-row">
+        <span class="pill">Communication Skills</span>
+        <span class="pill">Learning New Skills</span>
+        <span class="pill">Safety Plans</span>
+        <span class="pill">History & Books</span>
+        <span class="pill">SVG Art</span>
+        <span class="pill">Mental Health Awareness</span>
+      </div>
+    </div>
+
+    <!-- SVG: Stylized American Flag -->
+    <div class="flag-wrapper" aria-label="Stylized American flag illustration">
+      <svg viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg">
+        <!-- Background -->
+        <rect x="0" y="0" width="300" height="180" fill="#020617" />
+        <!-- Flag body -->
+        <rect x="20" y="20" width="260" height="140" rx="8" fill="#0b1120" stroke="#e5e7eb" stroke-width="2" />
+
+        <!-- Blue canton -->
+        <rect x="28" y="28" width="110" height="70" rx="4" fill="#1e3a8a" />
+
+        <!-- Stars -->
+        <g fill="#f9fafb">
+          <!-- 5x4 grid of small stars -->
+          <!-- rows -->
+          <circle cx="38" cy="38" r="2.2" />
+          <circle cx="52" cy="38" r="2.2" />
+          <circle cx="66" cy="38" r="2.2" />
+          <circle cx="80" cy="38" r="2.2" />
+          <circle cx="94" cy="38" r="2.2" />
+
+          <circle cx="45" cy="48" r="2.2" />
+          <circle cx="59" cy="48" r="2.2" />
+          <circle cx="73" cy="48" r="2.2" />
+          <circle cx="87" cy="48" r="2.2" />
+          <circle cx="101" cy="48" r="2.2" />
+
+          <circle cx="38" cy="58" r="2.2" />
+          <circle cx="52" cy="58" r="2.2" />
+          <circle cx="66" cy="58" r="2.2" />
+          <circle cx="80" cy="58" r="2.2" />
+          <circle cx="94" cy="58" r="2.2" />
+
+          <circle cx="45" cy="68" r="2.2" />
+          <circle cx="59" cy="68" r="2.2" />
+          <circle cx="73" cy="68" r="2.2" />
+          <circle cx="87" cy="68" r="2.2" />
+          <circle cx="101" cy="68" r="2.2" />
+        </g>
+
+        <!-- Stripes -->
+        <g>
+          <!-- Red stripes -->
+          <rect x="28" y="28" width="252" height="10" fill="#dc2626" opacity="0.9" />
+          <rect x="28" y="48" width="252" height="10" fill="#dc2626" opacity="0.9" />
+          <rect x="28" y="68" width="252" height="10" fill="#dc2626" opacity="0.9" />
+          <rect x="28" y="88" width="252" height="10" fill="#dc2626" opacity="0.9" />
+          <rect x="28" y="108" width="252" height="10" fill="#dc2626" opacity="0.9" />
+          <rect x="28" y="128" width="252" height="10" fill="#dc2626" opacity="0.9" />
+          <rect x="28" y="148" width="252" height="10" fill="#dc2626" opacity="0.9" />
+
+          <!-- White stripes (using gaps and subtle overlay) -->
+          <rect x="28" y="38" width="252" height="10" fill="#f9fafb" opacity="0.9" />
+          <rect x="28" y="58" width="252" height="10" fill="#f9fafb" opacity="0.9" />
+          <rect x="28" y="78" width="252" height="10" fill="#f9fafb" opacity="0.9" />
+          <rect x="28" y="98" width="252" height="10" fill="#f9fafb" opacity="0.9" />
+          <rect x="28" y="118" width="252" height="10" fill="#f9fafb" opacity="0.9" />
+          <rect x="28" y="138" width="252" height="10" fill="#f9fafb" opacity="0.9" />
+        </g>
+
+        <!-- Subtle glow -->
+        <rect x="20" y="20" width="260" height="140" rx="8"
+              fill="none" stroke="#22c55e" stroke-width="1" opacity="0.25" />
+      </svg>
+    </div>
+  </header>
+
+  <main>
+    <!-- LEFT COLUMN: Learning, History, Books, Diapers -->
+    <div>
+      <section>
+        <h2>Learning New Skills and Communication</h2>
+        <div class="card">
+          <h3>Building clear, full-length sentence structure</h3>
+          <p>
+            When you learn a new skill, it helps to describe each step in complete sentences.
+            This makes your thinking visible and easier to follow, both for yourself and for anyone
+            you are communicating with.
+          </p>
+          <ul>
+            <li>
+              <strong>Describe actions:</strong> Instead of saying “diaper change,” say
+              “I gently place the baby on a safe surface and begin the diaper change.”
+            </li>
+            <li>
+              <strong>Include reasons:</strong> “I check the diaper regularly because it keeps the baby
+              comfortable and prevents skin irritation.”
+            </li>
+            <li>
+              <strong>Connect steps:</strong> “After I fasten the diaper, I make sure the baby’s clothing
+              is smooth and not too tight.”
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Communication as a learning tool</h3>
+          <p>
+            Communication is not only about talking; it is about listening, asking questions,
+            and checking that everyone feels respected and safe. When you learn something new,
+            explaining it to another person in simple language can deepen your understanding.
+          </p>
+          <ul>
+            <li>
+              <strong>Ask for clarity:</strong> “Can you show me that step again so I can practice it safely?”
+            </li>
+            <li>
+              <strong>Reflect back:</strong> “I heard you say that safety comes first. I will remember that.”
+            </li>
+            <li>
+              <strong>Use kind tone:</strong> “I appreciate your help while I learn this.”
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2>Learning About History</h2>
+        <div class="card">
+          <span class="badge">American history snapshot</span>
+          <p>
+            History is a long story of people, choices, and changes. You do not need to know everything
+            at once; you can start with a few key moments and build from there.
+          </p>
+          <div class="history-timeline">
+            <div class="history-item">
+              <div class="history-year">1776 – Independence</div>
+              <div class="history-text">
+                The Declaration of Independence was adopted, and the United States began its journey
+                as a new nation.
+              </div>
+            </div>
+            <div class="history-item">
+              <div class="history-year">1865 – End of the Civil War</div>
+              <div class="history-text">
+                The Civil War ended, and slavery was abolished, though the struggle for equality continued.
+              </div>
+            </div>
+            <div class="history-item">
+              <div class="history-year">1964 – Civil Rights Act</div>
+              <div class="history-text">
+                The Civil Rights Act became law, aiming to protect people from discrimination and
+                expand equal rights.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Book lists for gaining education</h3>
+          <p>
+            Books can be gentle guides into complex topics. Here are some types of books that support
+            learning, communication, and awareness.
+          </p>
+          <div class="book-list">
+            <div class="book-item">
+              <div class="book-title">Introductory History Books</div>
+              <div class="book-note">
+                Focus on clear timelines and stories about everyday people, not just famous leaders.
+              </div>
+            </div>
+            <div class="book-item">
+              <div class="book-title">Communication Skills Guides</div>
+              <div class="book-note">
+                Teach how to listen, speak respectfully, and resolve conflicts without harm.
+              </div>
+            </div>
+            <div class="book-item">
+              <div class="book-title">Mental Health Awareness Books</div>
+              <div class="book-note">
+                Explain emotions, coping strategies, and when to reach out for professional support.
+              </div>
+            </div>
+            <div class="book-item">
+              <div class="book-title">Gentle Parenting and Baby Care Guides</div>
+              <div class="book-note">
+                Offer step-by-step explanations of diaper changes, safety, and nurturing routines.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>SVG: Baby in Diapers and Learning About Diaper Care</h2>
+        <div class="card highlight baby-card">
+          <div class="baby-svg-wrapper" aria-label="Cute SVG illustration of a baby wearing a diaper">
+            <!-- SVG: Baby in Diapers (cute, neutral, non-sexual, child-safe) -->
+            <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+              <!-- Background circle -->
+              <circle cx="80" cy="80" r="72" fill="#0f172a" stroke="#22c55e" stroke-width="2" opacity="0.4" />
+              <!-- Baby body -->
+              <circle cx="80" cy="55" r="22" fill="#fed7aa" />
+              <!-- Face details -->
+              <circle cx="72" cy="52" r="3" fill="#1f2933" />
+              <circle cx="88" cy="52" r="3" fill="#1f2933" />
+              <path d="M72 62 Q80 68 88 62" stroke="#1f2933" stroke-width="2" fill="none" />
+              <!-- Hair curl -->
+              <path d="M80 40 Q76 36 80 32 Q84 36 80 40" stroke="#1f2933" stroke-width="2" fill="none" />
+
+              <!-- Torso -->
+              <ellipse cx="80" cy="95" rx="26" ry="20" fill="#fed7aa" />
+
+              <!-- Diaper -->
+              <path d="M60 90 Q80 110 100 90 L100 110 Q80 125 60 110 Z"
+                    fill="#e5e7eb" stroke="#cbd5f5" stroke-width="2" />
+              <!-- Diaper details -->
+              <path d="M60 110 Q80 120 100 110" stroke="#cbd5f5" stroke-width="1.5" />
+              <circle cx="68" cy="98" r="3" fill="#cbd5f5" />
+              <circle cx="92" cy="98" r="3" fill="#cbd5f5" />
+
+              <!-- Arms -->
+              <path d="M56 82 Q48 88 50 96" stroke="#fed7aa" stroke-width="6" stroke-linecap="round" />
+              <path d="M104 82 Q112 88 110 96" stroke="#fed7aa" stroke-width="6" stroke-linecap="round" />
+
+              <!-- Legs -->
+              <path d="M70 112 Q64 128 68 138" stroke="#fed7aa" stroke-width="7" stroke-linecap="round" />
+              <path d="M90 112 Q96 128 92 138" stroke="#fed7aa" stroke-width="7" stroke-linecap="round" />
+
+              <!-- Soft floor shadow -->
+              <ellipse cx="80" cy="142" rx="32" ry="6" fill="#020617" opacity="0.6" />
+            </svg>
+          </div>
+          <div>
+            <h3>Learning about diaper care in a safe, respectful way</h3>
+            <p>
+              Diaper care is a practical skill focused on keeping a baby clean, comfortable, and safe.
+              It should always be approached with gentleness, respect, and attention to hygiene.
+            </p>
+            <ul>
+              <li>
+                <strong>Safety first:</strong> Always place the baby on a stable, secure surface and
+                keep one hand near the baby to prevent falls.
+              </li>
+              <li>
+                <strong>Cleanliness:</strong> Use wipes or warm water to clean the baby’s skin carefully,
+                and allow the area to dry before putting on a fresh diaper.
+              </li>
+              <li>
+                <strong>Comfort:</strong> Fasten the diaper snugly but not too tight, and check for any
+                signs of redness or irritation.
+              </li>
+              <li>
+                <strong>Respect:</strong> Talk to the baby in a calm voice, explain what you are doing,
+                and treat this routine as a caring moment, not a joke or a game.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- RIGHT COLUMN: Safety Plan, Mental Health, Interactive Helper -->
+    <div>
+      <section>
+        <h2>Safety Plan and Mental Health Awareness</h2>
+        <div class="card highlight">
+          <h3>Personal safety plan (including escape from unsafe situations)</h3>
+          <p>
+            A safety plan is a simple, written guide you create for yourself. It helps you know
+            what to do if you ever feel unsafe, overwhelmed, or trapped—physically or emotionally.
+          </p>
+          <ul class="safety-steps">
+            <li>
+              <strong>Step 1 – Notice the signs:</strong>
+              “When I feel my heart racing, my thoughts getting confused, or my body feeling trapped,
+              I will recognize that I may be in an unsafe or high-stress situation.”
+            </li>
+            <li>
+              <strong>Step 2 – Reach out:</strong>
+              “I will contact a trusted person, such as a friend, family member, or professional,
+              and tell them clearly that I need help.”
+            </li>
+            <li>
+              <strong>Step 3 – Move toward safety:</strong>
+              “If I can, I will move to a place where I feel physically safe and emotionally calmer,
+              such as a public area or a room with a door I can open freely.”
+            </li>
+            <li>
+              <strong>Step 4 – Use coping tools:</strong>
+              “I will use breathing exercises, grounding techniques, or calming activities to reduce
+              panic while I seek support.”
+            </li>
+            <li>
+              <strong>Step 5 – Professional support:</strong>
+              “I will consider talking with a mental health professional to create a long-term plan
+              that keeps me safe and respected.”
+            </li>
+          </ul>
+          <p class="mental-note">
+            If you ever feel in immediate danger, contacting local emergency services or a crisis line
+            is important. Professional help is designed to protect you and support your wellbeing.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Mental health awareness</h3>
+          <p>
+            Mental health is about how you think, feel, and cope with life. It is normal to experience
+            stress, sadness, or anxiety, and it is also okay to ask for help. Awareness means noticing
+            your own feelings and respecting the feelings of others.
+          </p>
+          <ul>
+            <li>
+              <strong>Emotions are valid:</strong> You are allowed to feel what you feel, even if it is
+              complicated or hard to explain.
+            </li>
+            <li>
+              <strong>Support is a strength:</strong> Reaching out to a counselor, therapist, or doctor
+              is a sign of courage, not weakness.
+            </li>
+            <li>
+              <strong>Boundaries matter:</strong> You deserve to be treated with dignity and to have
+              your physical and emotional boundaries respected.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2>Helper Aids and Interactive Learning</h2>
+        <div class="card">
+          <h3>Quick helper aids</h3>
+          <p>
+            Use these buttons to switch between short helper messages about communication, history,
+            diaper care, and mental health. They are simple reminders you can revisit while learning.
+          </p>
+          <div class="toolbar">
+            <button class="tool-btn active" data-topic="communication">Communication</button>
+            <button class="tool-btn" data-topic="history">History</button>
+            <button class="tool-btn" data-topic="diaper">Diaper Care</button>
+            <button class="tool-btn" data-topic="mental">Mental Health</button>
+          </div>
+          <div id="helperText" class="helper-text">
+            Clear communication uses kind words, full sentences, and listening. It helps everyone feel
+            safer and more understood.
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Gentle reminder about safety and respect</h3>
+          <p>
+            Any topic that involves bodies, restraints, or vulnerability—such as diapers, straight jackets,
+            or escape scenarios—should always be approached with safety, consent, and respect. If a situation
+            feels unsafe or harmful, it is important to step back and seek help from trusted people or
+            professionals.
+          </p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <span>
+      Learning, communication, and awareness grow stronger when they are grounded in safety, respect,
+      and kindness.
+    </span>
+    <span>
+      You can expand this page with more sections, book lists, or SVG art as your skills grow.
+    </span>
+  </footer>
+
+  <script>
+    // Simple interactive helper aid
+    const helperText = document.getElementById("helperText");
+    const buttons = document.querySelectorAll(".tool-btn");
+
+    const messages = {
+      communication:
+        "Clear communication uses kind words, full sentences, and listening. It helps everyone feel safer and more understood.",
+      history:
+        "When you study history, start with a few key events and ask how they affected everyday people.",
+      diaper:
+        "Diaper care is about hygiene, comfort, and safety for the baby. Approach it gently and respectfully.",
+      mental:
+        "Mental health matters. Noticing your feelings and reaching out for support are strong, healthy choices."
+    };
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        buttons.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        const topic = btn.getAttribute("data-topic");
+        helperText.textContent = messages[topic] || "";
+      });
+    });
+  </script>
+</body>
+</html>
