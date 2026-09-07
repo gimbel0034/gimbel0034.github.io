@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Nevada Sports, Art & Learning Lab</title>
+  <style>
+    :root {
+      --nv-blue: #003366;
+      --nv-gold: #ffcc00;
+      --nv-silver: #c0c0c0;
+      --nv-desert: #c58b55;
+      --bg: #050814;
+      --card: #111628;
+      --text: #e9ecff;
+      --soft: #cfd8ff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1b2550 0%, #050814 55%, #000000 100%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      padding: 1.5rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(10px);
+      background: linear-gradient(
+        to right,
+        rgba(0, 51, 102, 0.7),
+        rgba(197, 139, 85, 0.4)
+      );
+    }
+
+    .title-block {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .nv-flag {
+      width: 70px;
+      height: 50px;
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.7);
+      background: var(--nv-blue);
+    }
+
+    .nv-star {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #ffffff 0%, #ffffff 45%, transparent 46%);
+    }
+
+    .nv-banner {
+      position: absolute;
+      top: 6px;
+      left: 26px;
+      width: 32px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--nv-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.55rem;
+      font-weight: 700;
+      color: #003366;
+      letter-spacing: 0.06em;
+    }
+
+    .nv-wreath {
+      position: absolute;
+      top: 22px;
+      left: 10px;
+      width: 40px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid #00a651;
+      border-top-color: transparent;
+      border-right-color: transparent;
+      border-left-color: transparent;
+      opacity: 0.9;
+    }
+
+    h1 {
+      font-size: 1.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      color: var(--soft);
+    }
+
+    nav {
+      display: flex;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+    }
+
+    nav button {
+      border: none;
+      padding: 0.5rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text);
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    nav button:hover {
+      background: rgba(255, 255, 255, 0.18);
+      transform: translateY(-1px);
+    }
+
+    main {
+      flex: 1;
+      padding: 1.5rem 3rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.8fr) minmax(0, 1.6fr);
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 1rem;
+      padding: 1.2rem 1.3rem;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card h2 {
+      font-size: 1.1rem;
+      margin-bottom: 0.4rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--soft);
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: #dbe2ff;
+      margin-bottom: 0.6rem;
+    }
+
+    /* Nevada sports & activities */
+    .sports-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 0.7rem;
+      margin-top: 0.6rem;
+    }
+
+    .sport-card {
+      border-radius: 0.9rem;
+      padding: 0.8rem;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.85rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sport-card h3 {
+      font-size: 0.95rem;
+      margin-bottom: 0.3rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .sport-tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      margin-top: 0.3rem;
+    }
+
+    .sport-tag {
+      font-size: 0.75rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--soft);
+    }
+
+    .sport-highlight {
+      position: absolute;
+      right: -20px;
+      bottom: -20px;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      opacity: 0.3;
+    }
+
+    /* Art & crafts concepts */
+    .art-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 0.8rem;
+      margin-top: 0.6rem;
+    }
+
+    .canvas-board {
+      background: #0b0f1f;
+      border-radius: 0.8rem;
+      padding: 0.8rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      position: relative;
+    }
+
+    .shape-row {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.6rem;
+    }
+
+    .shape {
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .shape.desert-square {
+      background: linear-gradient(135deg, #c58b55, #f1c27d);
+    }
+
+    .shape.night-circle {
+      border-radius: 50%;
+      background: radial-gradient(circle, #4f8fd8 0%, #111628 60%, #000000 100%);
+    }
+
+    .shape.striped-rect {
+      width: 90px;
+      background: repeating-linear-gradient(
+        135deg,
+        #ffcc00,
+        #ffcc00 10px,
+        #003366 10px,
+        #003366 20px
+      );
+    }
+
+    .shape.flex-box {
+      width: 110px;
+      border-radius: 0.6rem;
+      background: linear-gradient(135deg, #26c6da, #00acc1);
+      display: flex;
+      gap: 0.15rem;
+    }
+
+    .flex-cell {
+      flex: 1;
+      height: 70%;
+      margin-top: 10%;
+      border-radius: 0.3rem;
+      background: rgba(255, 255, 255, 0.35);
+    }
+
+    .css-notes {
+      font-size: 0.8rem;
+      color: #cfd8ff;
+      line-height: 1.4;
+    }
+
+    .css-notes code {
+      font-family: "Consolas", "Fira Code", monospace;
+      font-size: 0.8rem;
+      background: rgba(255, 255, 255, 0.06);
+      padding: 0.1rem 0.25rem;
+      border-radius: 0.3rem;
+    }
+
+    /* Nevada animals & learning objectives */
+    .animals-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 0.7rem;
+      margin-top: 0.6rem;
+    }
+
+    .animal-card {
+      border-radius: 0.9rem;
+      padding: 0.8rem;
+      background: linear-gradient(135deg, rgba(197, 139, 85, 0.35), rgba(0, 51, 102, 0.35));
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      font-size: 0.85rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .animal-card h3 {
+      font-size: 0.95rem;
+      margin-bottom: 0.3rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .animal-tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      margin-top: 0.3rem;
+    }
+
+    .animal-tag {
+      font-size: 0.75rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.25);
+      color: #fff7e9;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .objective-list {
+      margin-top: 0.6rem;
+      list-style: none;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 0.4rem 0.8rem;
+      font-size: 0.85rem;
+    }
+
+    .objective-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .objective-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: var(--nv-gold);
+      box-shadow: 0 0 0 2px rgba(255, 204, 0, 0.35);
+    }
+
+    /* JS fun ideas panel */
+    .js-panel {
+      margin-top: 0.7rem;
+      padding: 0.8rem;
+      border-radius: 0.9rem;
+      background: radial-gradient(circle at top left, #003366 0%, #111628 55%);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+
+    .js-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      align-items: baseline;
+    }
+
+    .js-label {
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+
+    .js-value {
+      font-weight: 700;
+    }
+
+    .idea-list {
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      color: #e9ecff;
+    }
+
+    .idea-list span {
+      display: inline-block;
+      margin-right: 0.4rem;
+      margin-bottom: 0.25rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .idea-button {
+      margin-top: 0.6rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 999px;
+      border: none;
+      background: var(--nv-gold);
+      color: #003366;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .idea-button:hover {
+      filter: brightness(1.05);
+    }
+
+    footer {
+      padding: 0.9rem 3rem 1.2rem;
+      font-size: 0.8rem;
+      color: #9fa8da;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    @media (max-width: 960px) {
+      main {
+        padding: 1.2rem 1.4rem 2rem;
+      }
+      header {
+        padding: 1.1rem 1.4rem;
+        flex-direction: column;
+        gap: 0.8rem;
+        align-items: flex-start;
+      }
+      .grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .sports-grid,
+      .art-layout,
+      .animals-grid,
+      .objective-list {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="title-block">
+      <div class="nv-flag" aria-label="Stylized Nevada flag">
+        <div class="nv-star"></div>
+        <div class="nv-banner">NEVADA</div>
+        <div class="nv-wreath"></div>
+      </div>
+      <div>
+        <h1>Nevada Sports, Art & Learning Lab</h1>
+        <div class="subtitle">
+          HTML • CSS • JavaScript • Sports • Activities • Art & Crafts • Animals • Nevada Flag
+        </div>
+      </div>
+    </div>
+    <nav>
+      <button type="button">Sports & Activities</button>
+      <button type="button">Art Concepts</button>
+      <button type="button">Nevada Animals</button>
+      <button type="button">Learning Objectives</button>
+      <button type="button">Fun Ideas Generator</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="grid">
+      <!-- Left: Sports & Activities -->
+      <article class="card">
+        <h2>Nevada Sports & Activities</h2>
+        <p>
+          Nevada is more than bright lights—it's desert trails, community parks, and creative spaces.
+          Use sports and activities to learn teamwork, focus, and healthy habits.
+        </p>
+
+        <div class="sports-grid">
+          <div class="sport-card">
+            <h3>Basketball & Court Games</h3>
+            <p>
+              Neighborhood courts and school gyms are perfect for learning passing, shooting, and
+              communication with teammates.
+            </p>
+            <div class="sport-tag-row">
+              <span class="sport-tag">Teamwork</span>
+              <span class="sport-tag">Strategy</span>
+              <span class="sport-tag">Indoor & Outdoor</span>
+            </div>
+            <div class="sport-highlight"></div>
+          </div>
+
+          <div class="sport-card">
+            <h3>Desert Hiking & Trail Walks</h3>
+            <p>
+              Safe desert hikes teach respect for nature, hydration, and pacing yourself under the
+              Nevada sun.
+            </p>
+            <div class="sport-tag-row">
+              <span class="sport-tag">Safety first</span>
+              <span class="sport-tag">Endurance</span>
+              <span class="sport-tag">Nature</span>
+            </div>
+            <div class="sport-highlight"></div>
+          </div>
+
+          <div class="sport-card">
+            <h3>Soccer & Field Activities</h3>
+            <p>
+              Open fields for running, passing, and learning fair play—great for families and
+              friends.
+            </p>
+            <div class="sport-tag-row">
+              <span class="sport-tag">Outdoor</span>
+              <span class="sport-tag">Cardio</span>
+              <span class="sport-tag">Community</span>
+            </div>
+            <div class="sport-highlight"></div>
+          </div>
+
+          <div class="sport-card">
+            <h3>Skate & Bike Parks</h3>
+            <p>
+              Controlled skate and bike areas help practice balance, safety gear, and creative
+              movement.
+            </p>
+            <div class="sport-tag-row">
+              <span class="sport-tag">Balance</span>
+              <span class="sport-tag">Helmets & pads</span>
+              <span class="sport-tag">Creative tricks</span>
+            </div>
+            <div class="sport-highlight"></div>
+          </div>
+        </div>
+
+        <div class="js-panel" id="jsPanel">
+          <div class="js-row">
+            <span class="js-label">Today in Nevada (local date):</span>
+            <span class="js-value" id="nvDate">Loading…</span>
+          </div>
+          <div class="idea-list">
+            Suggested activity slots:
+            <br />
+            <span id="morningSlot">Morning: Loading…</span>
+            <span id="afternoonSlot">Afternoon: Loading…</span>
+            <span id="eveningSlot">Evening: Loading…</span>
+          </div>
+          <button class="idea-button" id="newIdeaBtn">New Fun Idea</button>
+          <div class="idea-list" style="margin-top:0.4rem;">
+            Current fun idea:
+            <span id="currentIdea">Click the button to generate a Nevada‑themed activity.</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Right: Art, Animals & Objectives -->
+      <article class="card">
+        <h2>Art & Crafts Concepts in Nevada Colors</h2>
+        <p>
+          Use Nevada’s blue, gold, silver, and desert tones as your art palette. Turn simple shapes
+          into flags, landscapes, and creative posters.
+        </p>
+
+        <div class="art-layout">
+          <div class="canvas-board">
+            <div class="shape-row">
+              <div class="shape desert-square">Desert</div>
+              <div class="shape night-circle">Night</div>
+              <div class="shape striped-rect">Flag</div>
+              <div class="shape flex-box">
+                <div class="flex-cell"></div>
+                <div class="flex-cell"></div>
+                <div class="flex-cell"></div>
+              </div>
+            </div>
+            <div class="css-notes">
+              Try combining shapes and colors:
+              <br />
+              <code>background: linear-gradient(...)</code>,
+              <code>border-radius: 50%;</code>,
+              <code>display: flex;</code>,
+              <code>gap: 0.5rem;</code>
+              to build your own Nevada‑style posters and digital art boards.
+            </div>
+          </div>
+          <div class="css-notes">
+            Art & crafts ideas:
+            <br /><br />
+            • Draw a Nevada flag using rectangles and circles.<br />
+            • Paint a desert sunset with warm gradients.<br />
+            • Create animal silhouettes (bighorn sheep, lizards) with simple shapes.<br />
+            • Use HTML/CSS to turn your PC into a digital canvas and animate colors with JavaScript.
+          </div>
+        </div>
+
+        <h2 style="margin-top:1rem;">Nevada Animals & Learning Objectives</h2>
+        <p>
+          Animals teach us about habitats, adaptation, and respect for wildlife. Use them as
+          characters in your stories, games, and art.
+        </p>
+
+        <div class="animals-grid">
+          <div class="animal-card">
+            <h3>Desert Bighorn Sheep</h3>
+            <p>
+              Strong climbers that live in rocky areas. They teach balance, patience, and staying
+              aware of your surroundings.
+            </p>
+            <div class="animal-tag-row">
+              <span class="animal-tag">State animal</span>
+              <span class="animal-tag">Mountains</span>
+              <span class="animal-tag">Balance</span>
+            </div>
+          </div>
+
+          <div class="animal-card">
+            <h3>Lizards & Reptiles</h3>
+            <p>
+              Quick, sun‑loving animals that show how to adapt to heat and find shade when needed.
+            </p>
+            <div class="animal-tag-row">
+              <span class="animal-tag">Desert</span>
+              <span class="animal-tag">Adaptation</span>
+              <span class="animal-tag">Observation</span>
+            </div>
+          </div>
+
+          <div class="animal-card">
+            <h3>Birds of the Desert Sky</h3>
+            <p>
+              Hawks and other birds teach us about perspective—seeing the big picture from above.
+            </p>
+            <div class="animal-tag-row">
+              <span class="animal-tag">Sky</span>
+              <span class="animal-tag">Focus</span>
+              <span class="animal-tag">Respect</span>
+            </div>
+          </div>
+
+          <div class="animal-card">
+            <h3>Small Mammals</h3>
+            <p>
+              Rabbits and other small mammals remind us to move carefully and stay alert in open
+              spaces.
+            </p>
+            <div class="animal-tag-row">
+              <span class="animal-tag">Habitats</span>
+              <span class="animal-tag">Curiosity</span>
+              <span class="animal-tag">Gentle care</span>
+            </div>
+          </div>
+        </div>
+
+        <ul class="objective-list">
+          <li>
+            <span class="objective-dot"></span>
+            <span>Identify Nevada’s colors and use them in art projects.</span>
+          </li>
+          <li>
+            <span class="objective-dot"></span>
+            <span>Describe at least three Nevada sports or activities.</span>
+          </li>
+          <li>
+            <span class="objective-dot"></span>
+            <span>Recognize key desert animals and their habitats.</span>
+          </li>
+          <li>
+            <span class="objective-dot"></span>
+            <span>Create one digital art piece inspired by Nevada’s landscapes.</span>
+          </li>
+        </ul>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <div>HTML • CSS • JavaScript • Nevada Sports • Activities • Art & Crafts • Animals • Learning Concepts</div>
+    <div>Use your PC as a Nevada learning board—sports, art, animals, and fun ideas all in one place.</div>
+  </footer>
+
+  <script>
+    // JavaScript: Nevada date, simple activity schedule, and fun idea generator
+    (function () {
+      const nvDateEl = document.getElementById("nvDate");
+      const morningSlotEl = document.getElementById("morningSlot");
+      const afternoonSlotEl = document.getElementById("afternoonSlot");
+      const eveningSlotEl = document.getElementById("eveningSlot");
+      const newIdeaBtn = document.getElementById("newIdeaBtn");
+      const currentIdeaEl = document.getElementById("currentIdea");
+
+      const now = new Date();
+
+      const formatted = now.toLocaleDateString(undefined, {
+        weekday: "long",
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+      });
+      nvDateEl.textContent = formatted;
+
+      const day = now.getDay(); // 0=Sun ... 6=Sat
+
+      let morning, afternoon, evening;
+
+      switch (day) {
+        case 0: // Sunday
+          morning = "Gentle walk in a nearby park";
+          afternoon = "Family art time: paint a Nevada sunset";
+          evening = "Storytime about desert animals";
+          break;
+        case 1: // Monday
+          morning = "Stretching and light exercise indoors";
+          afternoon = "Basketball practice or simple dribbling drills";
+          evening = "Draw the Nevada flag with markers or digital tools";
+          break;
+        case 2: // Tuesday
+          morning = "Short neighborhood walk (hydration focus)";
+          afternoon = "Soccer or field games with friends";
+          evening = "Create a lizard or bighorn sheep art piece";
+          break;
+        case 3: // Wednesday
+          morning = "Balance practice (yoga or simple poses)";
+          afternoon = "Bike or scooter time with safety gear";
+          evening = "Write a mini story about a Nevada animal";
+          break;
+        case 4: // Thursday
+          morning = "Easy warm‑up walk";
+          afternoon = "Court games: passing, shooting, or simple drills";
+          evening = "Digital art: use CSS colors for a Nevada poster";
+          break;
+        case 5: // Friday
+          morning = "Light stretching and breathing exercises";
+          afternoon = "Outdoor play in a safe, shaded area";
+          evening = "Game night with Nevada‑themed trivia";
+          break;
+        case 6: // Saturday
+          morning = "Desert‑style hike (or simulated indoor walk) with water breaks";
+          afternoon = "Creative crafts: build a paper or digital Nevada map";
+          evening = "Relax and reflect on the week’s activities";
+          break;
+      }
+
+      morningSlotEl.textContent = "Morning: " + morning;
+      afternoonSlotEl.textContent = "Afternoon: " + afternoon;
+      eveningSlotEl.textContent = "Evening: " + evening;
+
+      const funIdeas = [
+        "Draw a comic strip about a desert bighorn sheep playing basketball.",
+        "Create a digital poster using Nevada blue and gold with your favorite sport.",
+        "Design a simple game where a lizard collects water drops in the desert.",
+        "Paint or code a sunset gradient inspired by Nevada skies.",
+        "Make a mini book about three Nevada animals and their homes.",
+        "Use CSS flex boxes to arrange ‘sports cards’ on a web page.",
+        "Build a paper or HTML map marking parks and activity spots in Nevada.",
+        "Write a short poem about the desert at night and illustrate it.",
+      ];
+
+      function newIdea() {
+        const index = Math.floor(Math.random() * funIdeas.length);
+        currentIdeaEl.textContent = funIdeas[index];
+      }
+
+      newIdeaBtn.addEventListener("click", newIdea);
+    })();
+  </script>
+</body>
+</html>
