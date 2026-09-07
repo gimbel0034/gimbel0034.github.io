@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Maps, Math & Art Learning Lab</title>
+  <style>
+    :root {
+      --nv-blue: #003366;
+      --utah-red: #c1440e;
+      --us-blue: #1b3b6f;
+      --accent: #ffcc00;
+      --bg: #050814;
+      --card: #111628;
+      --text: #e9ecff;
+      --soft: #cfd8ff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, sans-serif;
+      background: radial-gradient(circle at top, #1b2550, #050814 60%, #000);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      padding: 1.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(
+        to right,
+        rgba(0, 51, 102, 0.7),
+        rgba(193, 68, 14, 0.7)
+      );
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .title-block {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    h1 {
+      font-size: 1.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      color: var(--soft);
+    }
+
+    nav {
+      display: flex;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+    }
+
+    nav button {
+      padding: 0.5rem 0.9rem;
+      border-radius: 999px;
+      border: none;
+      background: rgba(255,255,255,0.1);
+      color: var(--text);
+      cursor: pointer;
+      font-size: 0.85rem;
+    }
+
+    nav button:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    main {
+      flex: 1;
+      padding: 1.5rem 3rem 2.5rem;
+      display: grid;
+      grid-template-columns: 2fr 1.7fr;
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--card);
+      padding: 1.2rem;
+      border-radius: 1rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.45);
+    }
+
+    .card h2 {
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.4rem;
+      color: var(--soft);
+      font-size: 1.1rem;
+    }
+
+    .card p {
+      margin-bottom: 0.6rem;
+      color: #dbe2ff;
+      font-size: 0.9rem;
+    }
+
+    /* Map section */
+    .map-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.7rem;
+      margin-top: 0.6rem;
+    }
+
+    .map-card {
+      border-radius: 0.8rem;
+      padding: 0.7rem;
+      background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.85rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .map-box {
+      width: 100%;
+      height: 90px;
+      border-radius: 0.6rem;
+      margin-bottom: 0.4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .map-utah {
+      background: linear-gradient(135deg, var(--utah-red), #e07a3f);
+      clip-path: polygon(0% 0%, 55% 0%, 55% 25%, 100% 25%, 100% 100%, 0% 100%);
+    }
+
+    .map-nevada {
+      background: linear-gradient(135deg, var(--nv-blue), #4f8fd8);
+      clip-path: polygon(30% 0%, 70% 0%, 100% 40%, 80% 100%, 20% 100%, 0% 40%);
+    }
+
+    .map-us {
+      background: linear-gradient(135deg, var(--us-blue), #b22234);
+    }
+
+    .map-label {
+      position: absolute;
+      bottom: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* Music & art concept */
+    .music-art-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 0.8rem;
+      margin-top: 0.6rem;
+    }
+
+    .canvas-board {
+      background: #0b0f1f;
+      border-radius: 0.8rem;
+      padding: 0.8rem;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .shape-row {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.6rem;
+    }
+
+    .shape {
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      color: #fff;
+      text-transform: uppercase;
+    }
+
+    .shape.circle {
+      border-radius: 50%;
+      background: radial-gradient(circle, #4f8fd8, #111628);
+    }
+
+    .shape.frame {
+      border: 3px solid var(--accent);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .shape.note {
+      background: linear-gradient(135deg, #ff7043, #ffcc80);
+    }
+
+    .shape.flex-box {
+      width: 110px;
+      border-radius: 0.6rem;
+      background: linear-gradient(135deg, #26c6da, #00acc1);
+      display: flex;
+      gap: 0.15rem;
+    }
+
+    .flex-cell {
+      flex: 1;
+      height: 70%;
+      margin-top: 10%;
+      border-radius: 0.3rem;
+      background: rgba(255,255,255,0.35);
+    }
+
+    .small-text {
+      font-size: 0.8rem;
+      color: var(--soft);
+      line-height: 1.4;
+    }
+
+    /* Math tools */
+    .math-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 0.7rem;
+      margin-top: 0.6rem;
+    }
+
+    .math-card {
+      border-radius: 0.8rem;
+      padding: 0.7rem;
+      background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.85rem;
+    }
+
+    .math-card label {
+      display: block;
+      margin-top: 0.4rem;
+      font-size: 0.8rem;
+    }
+
+    .math-card input {
+      width: 100%;
+      margin-top: 0.2rem;
+      padding: 0.25rem 0.4rem;
+      border-radius: 0.4rem;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: #0b0f1f;
+      color: var(--text);
+      font-size: 0.85rem;
+    }
+
+    .math-card button {
+      margin-top: 0.4rem;
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      border: none;
+      background: var(--accent);
+      color: #003366;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .math-result {
+      margin-top: 0.4rem;
+      font-size: 0.85rem;
+      color: #e9ecff;
+    }
+
+    /* Life & safety */
+    .life-list {
+      list-style: none;
+      margin-top: 0.6rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 0.4rem 0.8rem;
+      font-size: 0.85rem;
+    }
+
+    .life-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    footer {
+      padding: 1rem 3rem 1.2rem;
+      font-size: 0.8rem;
+      color: #9fa8da;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    @media (max-width: 960px) {
+      main {
+        padding: 1.2rem 1.4rem 2rem;
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .map-grid,
+      .music-art-grid,
+      .math-grid,
+      .life-list {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="title-block">
+      <div>
+        <h1>Maps, Math & Art Learning Lab</h1>
+        <div class="subtitle">
+          Utah Map • Nevada Map • United States Map • Music • Art • Math • Safety
+        </div>
+      </div>
+    </div>
+    <nav>
+      <button>Maps</button>
+      <button>Music & Art</button>
+      <button>Math Tools</button>
+      <button>Life & Safety</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Left column: Maps + Music/Art -->
+    <article class="card">
+      <h2>Utah, Nevada & United States Maps</h2>
+      <p>
+        Simple, stylized maps help you imagine places as shapes. You can turn these into games,
+        art boards, or learning activities.
+      </p>
+
+      <div class="map-grid">
+        <div class="map-card">
+          <div class="map-box map-utah">
+            <div class="map-label">Utah Map</div>
+          </div>
+          <p>Mountains, canyons, and courts—great for sports and art concepts.</p>
+        </div>
+        <div class="map-card">
+          <div class="map-box map-nevada">
+            <div class="map-label">Nevada Map</div>
+          </div>
+          <p>Desert trails, parks, and bright lights—perfect for life‑situation stories.</p>
+        </div>
+        <div class="map-card">
+          <div class="map-box map-us">
+            <div class="map-label">United States Map</div>
+          </div>
+          <p>Connect all states into one big learning map: music, art, math, and safety.</p>
+        </div>
+      </div>
+
+      <h2 style="margin-top:1rem;">Music Map & Art Concept Ideas</h2>
+      <p>
+        Think of music as a map of feelings and art as a map of colors and shapes. You can “travel”
+        through songs and paintings.
+      </p>
+
+      <div class="music-art-grid">
+        <div class="canvas-board">
+          <div class="shape-row">
+            <div class="shape circle">Circle</div>
+            <div class="shape frame">Frame</div>
+            <div class="shape note">Music</div>
+            <div class="shape flex-box">
+              <div class="flex-cell"></div>
+              <div class="flex-cell"></div>
+              <div class="flex-cell"></div>
+            </div>
+          </div>
+          <div class="small-text">
+            Use circles for drums, frames for picture art, and gradients for mood.  
+            Try mapping songs to colors: calm = blue, energy = red, hope = gold.
+          </div>
+        </div>
+        <div class="small-text">
+          Art concept ideas:
+          <br /><br />
+          • Paint a “music map” where each song is a color circle.<br />
+          • Create picture frames for Utah and Nevada landscapes.<br />
+          • Use circles, rectangles, and lines to draw math shapes and art at the same time.<br />
+          • Build a digital gallery with HTML, CSS, and JavaScript.
+        </div>
+      </div>
+    </article>
+
+    <!-- Right column: Math tools + Life/Safety -->
+    <article class="card">
+      <h2>Math Counter, Cash Count & Mapped Math</h2>
+      <p>
+        Math can live inside your art: circles for area, frames for rectangles, pyramids for
+        3D thinking, and simple counters for money and numbers.
+      </p>
+
+      <div class="math-grid">
+        <!-- Basic counter -->
+        <div class="math-card">
+          <h3>Math Counter</h3>
+          <p>Click to count up and down—great for basic number practice.</p>
+          <div class="math-result" id="counterDisplay">Count: 0</div>
+          <button id="counterUp">+1</button>
+          <button id="counterDown">-1</button>
+        </div>
+
+        <!-- Cash count -->
+        <div class="math-card">
+          <h3>Basic Cash Count</h3>
+          <p>Enter number of dollars and coins to see total.</p>
+          <label>Dollar bills ($1 each): <input type="number" id="cashDollars" value="0" /></label>
+          <label>Quarters (25¢): <input type="number" id="cashQuarters" value="0" /></label>
+          <label>Dimes (10¢): <input type="number" id="cashDimes" value="0" /></label>
+          <button id="cashCalc">Calculate Total</button>
+          <div class="math-result" id="cashResult">Total: $0.00</div>
+        </div>
+
+        <!-- Area of pyramid (base rectangle + height) -->
+        <div class="math-card">
+          <h3>Area of a Pyramid Base</h3>
+          <p>Use a rectangle base: length × width. (Volume uses height too.)</p>
+          <label>Base length: <input type="number" id="pyrLength" value="0" /></label>
+          <label>Base width: <input type="number" id="pyrWidth" value="0" /></label>
+          <button id="pyrCalc">Calculate Base Area</button>
+          <div class="math-result" id="pyrResult">Base area: 0</div>
+        </div>
+
+        <!-- Circle area -->
+        <div class="math-card">
+          <h3>Circle Area</h3>
+          <p>Use the formula: π × radius².</p>
+          <label>Radius: <input type="number" id="circleRadius" value="0" /></label>
+          <button id="circleCalc">Calculate Area</button>
+          <div class="math-result" id="circleResult">Circle area: 0</div>
+        </div>
+      </div>
+
+      <h2 style="margin-top:1rem;">Learning About Life & Safety Plan</h2>
+      <p>
+        Life, art, maps, and math all connect. You can use them to plan safe, creative days and
+        understand the world step by step.
+      </p>
+
+      <ul class="life-list">
+        <li><span class="dot"></span><span>Plan activities with safety first: water, gear, rest.</span></li>
+        <li><span class="dot"></span><span>Use maps to understand where you are and where you’re going.</span></li>
+        <li><span class="dot"></span><span>Use math to count time, money, and distances.</span></li>
+        <li><span class="dot"></span><span>Use art to express feelings about life situations.</span></li>
+        <li><span class="dot"></span><span>Use circles and frames to organize ideas visually.</span></li>
+        <li><span class="dot"></span><span>Write a simple safety plan for sports, trips, and games.</span></li>
+      </ul>
+    </article>
+  </main>
+
+  <footer>
+    <div>Maps • Music • Art • Math • Life • Safety</div>
+    <div>HTML • CSS • JavaScript Learning Canvas</div>
+  </footer>
+
+  <script>
+    // Math Counter
+    (function () {
+      let count = 0;
+      const display = document.getElementById("counterDisplay");
+      document.getElementById("counterUp").addEventListener("click", () => {
+        count++;
+        display.textContent = "Count: " + count;
+      });
+      document.getElementById("counterDown").addEventListener("click", () => {
+        count--;
+        display.textContent = "Count: " + count;
+      });
+    })();
+
+    // Basic Cash Count
+    (function () {
+      const dollarsEl = document.getElementById("cashDollars");
+      const quartersEl = document.getElementById("cashQuarters");
+      const dimesEl = document.getElementById("cashDimes");
+      const resultEl = document.getElementById("cashResult");
+
+      document.getElementById("cashCalc").addEventListener("click", () => {
+        const d = Number(dollarsEl.value) || 0;
+        const q = Number(quartersEl.value) || 0;
+        const dm = Number(dimesEl.value) || 0;
+        const total = d + q * 0.25 + dm * 0.1;
+        resultEl.textContent = "Total: $" + total.toFixed(2);
+      });
+    })();
+
+    // Pyramid base area
+    (function () {
+      const lengthEl = document.getElementById("pyrLength");
+      const widthEl = document.getElementById("pyrWidth");
+      const resultEl = document.getElementById("pyrResult");
+
+      document.getElementById("pyrCalc").addEventListener("click", () => {
+        const L = Number(lengthEl.value) || 0;
+        const W = Number(widthEl.value) || 0;
+        const area = L * W;
+        resultEl.textContent = "Base area: " + area;
+      });
+    })();
+
+    // Circle area
+    (function () {
+      const radiusEl = document.getElementById("circleRadius");
+      const resultEl = document.getElementById("circleResult");
+
+      document.getElementById("circleCalc").addEventListener("click", () => {
+        const r = Number(radiusEl.value) || 0;
+        const area = Math.PI * r * r;
+        resultEl.textContent = "Circle area: " + area.toFixed(2);
+      });
+    })();
+  </script>
+</body>
+</html>
