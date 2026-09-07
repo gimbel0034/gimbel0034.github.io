@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Utah Sports & Map Lab</title>
+  <style>
+    :root {
+      --utah-red: #c1440e;
+      --utah-clay: #e07a3f;
+      --utah-sky: #4f8fd8;
+      --utah-snow: #f5f7ff;
+      --bg: #050814;
+      --card: #111628;
+      --accent: #ffcc00;
+      --text: #e9ecff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1b2550 0%, #050814 55%, #000000 100%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      padding: 1.5rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(10px);
+      background: linear-gradient(
+        to right,
+        rgba(193, 68, 14, 0.45),
+        rgba(79, 143, 216, 0.35)
+      );
+    }
+
+    .title-block {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .utah-badge {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 3px solid var(--utah-snow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle, var(--utah-red), var(--utah-clay));
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--utah-snow);
+    }
+
+    h1 {
+      font-size: 1.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      color: #cfd8ff;
+    }
+
+    nav {
+      display: flex;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+    }
+
+    nav button {
+      border: none;
+      padding: 0.5rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text);
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    nav button:hover {
+      background: rgba(255, 255, 255, 0.18);
+      transform: translateY(-1px);
+    }
+
+    main {
+      flex: 1;
+      padding: 1.5rem 3rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.8fr) minmax(0, 1.6fr);
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 1rem;
+      padding: 1.2rem 1.3rem;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card h2 {
+      font-size: 1.1rem;
+      margin-bottom: 0.4rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #cfd8ff;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: #dbe2ff;
+      margin-bottom: 0.6rem;
+    }
+
+    /* Stylized Utah map */
+    .map-wrapper {
+      display: flex;
+      gap: 1rem;
+      margin-top: 0.6rem;
+      align-items: flex-start;
+    }
+
+    .utah-map {
+      width: 220px;
+      height: 260px;
+      border-radius: 1rem;
+      background: radial-gradient(circle at top, var(--utah-sky), #0b1020);
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .utah-shape {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 140px;
+      height: 190px;
+      transform: translate(-50%, -50%);
+      background: linear-gradient(135deg, var(--utah-clay), var(--utah-red));
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+      clip-path: polygon(
+        0% 0%,
+        55% 0%,
+        55% 25%,
+        100% 25%,
+        100% 100%,
+        0% 100%
+      );
+    }
+
+    .map-label {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--utah-snow);
+    }
+
+    .map-notes {
+      font-size: 0.85rem;
+      color: #cfd8ff;
+      line-height: 1.5;
+    }
+
+    .map-notes strong {
+      color: var(--utah-snow);
+    }
+
+    .map-points {
+      margin-top: 0.6rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 0.4rem 0.8rem;
+      list-style: none;
+    }
+
+    .map-points li {
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .point-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 2px rgba(255, 204, 0, 0.35);
+    }
+
+    /* Utah sports section */
+    .sports-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 0.7rem;
+      margin-top: 0.6rem;
+    }
+
+    .sport-card {
+      border-radius: 0.9rem;
+      padding: 0.8rem;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.85rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sport-card h3 {
+      font-size: 0.95rem;
+      margin-bottom: 0.3rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .sport-tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      margin-top: 0.3rem;
+    }
+
+    .sport-tag {
+      font-size: 0.75rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #cfd8ff;
+    }
+
+    .sport-highlight {
+      position: absolute;
+      right: -20px;
+      bottom: -20px;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      opacity: 0.3;
+    }
+
+    /* Utah x3 playful block */
+    .utah-chant {
+      margin-top: 0.9rem;
+      padding: 0.7rem 0.8rem;
+      border-radius: 0.8rem;
+      background: linear-gradient(90deg, rgba(193, 68, 14, 0.25), rgba(79, 143, 216, 0.25));
+      border: 1px dashed rgba(255, 255, 255, 0.35);
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.6rem;
+    }
+
+    .chant-text {
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .chant-bubbles {
+      display: flex;
+      gap: 0.3rem;
+    }
+
+    .chant-bubble {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--utah-clay), var(--utah-red));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--utah-snow);
+    }
+
+    /* JS panel: Utah day & simple schedule */
+    .js-panel {
+      margin-top: 0.7rem;
+      padding: 0.8rem;
+      border-radius: 0.9rem;
+      background: radial-gradient(circle at top left, #4f8fd8 0%, #111628 55%);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      font-size: 0.9rem;
+      color: var(--utah-snow);
+    }
+
+    .js-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      align-items: baseline;
+    }
+
+    .js-label {
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+
+    .js-value {
+      font-weight: 700;
+    }
+
+    .js-schedule {
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      color: #e9ecff;
+    }
+
+    .js-schedule span {
+      display: inline-block;
+      margin-right: 0.4rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    footer {
+      padding: 0.9rem 3rem 1.2rem;
+      font-size: 0.8rem;
+      color: #9fa8da;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    @media (max-width: 960px) {
+      main {
+        padding: 1.2rem 1.4rem 2rem;
+      }
+      header {
+        padding: 1.1rem 1.4rem;
+        flex-direction: column;
+        gap: 0.8rem;
+        align-items: flex-start;
+      }
+      .grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .map-points,
+      .sports-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="title-block">
+      <div class="utah-badge">UT</div>
+      <div>
+        <h1>Utah Sports & Map Lab</h1>
+        <div class="subtitle">HTML • CSS • JavaScript • Utah Utah Utah</div>
+      </div>
+    </div>
+    <nav>
+      <button type="button">Utah Map</button>
+      <button type="button">Utah Sports</button>
+      <button type="button">Utah x3</button>
+      <button type="button">Today in Utah</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="grid">
+      <!-- Left: Map of Utah -->
+      <article class="card">
+        <h2>Stylized Map of Utah</h2>
+        <p>
+          This is a simple, stylized Utah shape built with CSS and a clip‑path—perfect for learning
+          how to draw maps using code.
+        </p>
+
+        <div class="map-wrapper">
+          <div class="utah-map" aria-label="Stylized map of Utah">
+            <div class="utah-shape"></div>
+            <div class="map-label">UTAH</div>
+          </div>
+          <div class="map-notes">
+            <strong>Idea:</strong> Use HTML, CSS and a little imagination to turn rectangles into
+            states and regions.
+            <br /><br />
+            • The outer box is the “sky” and background.<br />
+            • The inner shape uses <code>clip-path</code> to mimic Utah’s outline.<br />
+            • You can add cities, mountains, and sports icons on top with more elements.
+          </div>
+        </div>
+
+        <ul class="map-points">
+          <li>
+            <span class="point-dot"></span>
+            <span>Mountains in the north—great for winter sports and hiking.</span>
+          </li>
+          <li>
+            <span class="point-dot"></span>
+            <span>Red rock deserts in the south—perfect for trail runs and biking.</span>
+          </li>
+          <li>
+            <span class="point-dot"></span>
+            <span>Salt Lake area—basketball, soccer, and big arenas.</span>
+          </li>
+          <li>
+            <span class="point-dot"></span>
+            <span>Every region can be a “level” in your own Utah game map.</span>
+          </li>
+        </ul>
+      </article>
+
+      <!-- Right: Utah sports & JS -->
+      <article class="card">
+        <h2>Sports of Utah</h2>
+        <p>
+          Think of Utah as a giant sports playground: courts, fields, slopes, and tracks. Each sport
+          teaches a different skill—focus, teamwork, balance, and courage.
+        </p>
+
+        <div class="sports-grid">
+          <div class="sport-card">
+            <h3>Basketball</h3>
+            <p>
+              Fast passes, quick decisions, and learning to trust your teammates. Great for indoor
+              and outdoor courts.
+            </p>
+            <div class="sport-tag-row">
+              <span class="sport-tag">Teamwork</span>
+              <span class="sport-tag">Strategy</span>
+              <span class="sport-tag">Utah courts</span>
+            </div>
+            <div class="sport-highlight"></div>
+          </div>
+
+          <div class="sport-card">
+            <h3>Winter Sports</h3>
+            <p>
+              Skiing, snowboarding, and sledding in the mountains—learning balance, safety, and
+              respect for nature.
+            </p>
+            <div class="sport-tag-row">
+              <span class="sport-tag">Mountains</span>
+              <span class="sport-tag">Safety gear</span>
+              <span class="sport-tag">Snow days</span>
+            </div>
+            <div class="sport-highlight"></div>
+          </div>
+
+          <div class="sport-card">
+            <h3>Soccer & Field Games</h3>
+            <p>
+              Big open fields for running, passing, and learning how to pace yourself and play fair.
+            </p>
+            <div class="sport-tag-row">
+              <span class="sport-tag">Outdoor</span>
+              <span class="sport-tag">Cardio</span>
+              <span class="sport-tag">Team spirit</span>
+            </div>
+            <div class="sport-highlight"></div>
+          </div>
+
+          <div class="sport-card">
+            <h3>Trail Running & Biking</h3>
+            <p>
+              Desert trails and canyon paths—great for endurance, focus, and exploring Utah’s
+              landscapes.
+            </p>
+            <div class="sport-tag-row">
+              <span class="sport-tag">Desert</span>
+              <span class="sport-tag">Endurance</span>
+              <span class="sport-tag">Adventure</span>
+            </div>
+            <div class="sport-highlight"></div>
+          </div>
+        </div>
+
+        <div class="utah-chant">
+          <div class="chant-text">UTAH • UTAH • UTAH</div>
+          <div class="chant-bubbles">
+            <div class="chant-bubble">U</div>
+            <div class="chant-bubble">T</div>
+            <div class="chant-bubble">H</div>
+          </div>
+        </div>
+
+        <div class="js-panel" id="jsPanel">
+          <div class="js-row">
+            <span class="js-label">Today in Utah (local date):</span>
+            <span class="js-value" id="utahDate">Loading…</span>
+          </div>
+          <div class="js-schedule">
+            Simple Utah sports day schedule:
+            <br />
+            <span id="morningSlot">Morning: Loading…</span>
+            <span id="afternoonSlot">Afternoon: Loading…</span>
+            <span id="eveningSlot">Evening: Loading…</span>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <div>HTML • CSS • JavaScript • Maps of Utah • Sports of Utah • Utah Utah Utah</div>
+    <div>Use your PC as a canvas to draw states, build games, and design your own Utah world.</div>
+  </footer>
+
+  <script>
+    // JavaScript: show today's date and a simple Utah sports schedule
+    (function () {
+      const utahDateEl = document.getElementById("utahDate");
+      const morningSlotEl = document.getElementById("morningSlot");
+      const afternoonSlotEl = document.getElementById("afternoonSlot");
+      const eveningSlotEl = document.getElementById("eveningSlot");
+
+      const now = new Date();
+
+      // Format date nicely
+      const formatted = now.toLocaleDateString(undefined, {
+        weekday: "long",
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+      });
+      utahDateEl.textContent = formatted;
+
+      // Simple “sports of Utah” schedule based on day of week
+      const day = now.getDay(); // 0=Sun ... 6=Sat
+
+      let morning, afternoon, evening;
+
+      switch (day) {
+        case 0: // Sunday
+          morning = "Basketball shoot‑around";
+          afternoon = "Family hike in the foothills";
+          evening = "Stretching & recovery";
+          break;
+        case 1: // Monday
+          morning = "Light jog around the neighborhood";
+          afternoon = "Indoor basketball practice";
+          evening = "Reading about Utah teams";
+          break;
+        case 2: // Tuesday
+          morning = "Soccer drills on a local field";
+          afternoon = "Bike ride on a safe trail";
+          evening = "Strength exercises at home";
+          break;
+        case 3: // Wednesday
+          morning = "Balance training (yoga or stretching)";
+          afternoon = "Pickup basketball game";
+          evening = "Cool‑down walk";
+          break;
+        case 4: // Thursday
+          morning = "Short run with music";
+          afternoon = "Practice passes and shots";
+          evening = "Plan weekend mountain trip";
+          break;
+        case 5: // Friday
+          morning = "Easy warm‑up walk";
+          afternoon = "Friendly soccer match";
+          evening = "Movie or game night (Utah theme!)";
+          break;
+        case 6: // Saturday
+          morning = "Trail run or hike";
+          afternoon = "Outdoor sports with friends";
+          evening = "Relax and reflect on the week";
+          break;
+      }
+
+      morningSlotEl.textContent = "Morning: " + morning;
+      afternoonSlotEl.textContent = "Afternoon: " + afternoon;
+      eveningSlotEl.textContent = "Evening: " + evening;
+    })();
+  </script>
+</body>
+</html>
