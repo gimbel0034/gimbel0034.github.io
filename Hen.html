@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Henderson Nevada & Utah Maps • Art & Safety Lab</title>
+  <style>
+    :root {
+      --nv-blue: #003366;
+      --nv-desert: #c58b55;
+      --utah-red: #c1440e;
+      --utah-sky: #4f8fd8;
+      --google-green: #34a853;
+      --google-blue: #4285f4;
+      --google-red: #ea4335;
+      --google-yellow: #fbbc05;
+      --bg: #050814;
+      --card: #111628;
+      --text: #e9ecff;
+      --soft: #cfd8ff;
+      --accent: #ffcc00;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, sans-serif;
+      background: radial-gradient(circle at top, #1b2550, #050814 60%, #000);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      padding: 1.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(
+        to right,
+        rgba(0, 51, 102, 0.7),
+        rgba(193, 68, 14, 0.7)
+      );
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .title-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    h1 {
+      font-size: 1.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      color: var(--soft);
+    }
+
+    nav {
+      display: flex;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+    }
+
+    nav button {
+      padding: 0.5rem 0.9rem;
+      border-radius: 999px;
+      border: none;
+      background: rgba(255,255,255,0.1);
+      color: var(--text);
+      cursor: pointer;
+      font-size: 0.85rem;
+    }
+
+    nav button:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    main {
+      flex: 1;
+      padding: 1.5rem 3rem 2.5rem;
+      display: grid;
+      grid-template-columns: 2fr 1.7fr;
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--card);
+      padding: 1.2rem;
+      border-radius: 1rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.45);
+    }
+
+    .card h2 {
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.4rem;
+      color: var(--soft);
+      font-size: 1.1rem;
+    }
+
+    .card p {
+      margin-bottom: 0.6rem;
+      color: #dbe2ff;
+      font-size: 0.9rem;
+    }
+
+    /* Map grid */
+    .map-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.7rem;
+      margin-top: 0.6rem;
+    }
+
+    .map-card {
+      border-radius: 0.8rem;
+      padding: 0.7rem;
+      background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.85rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .map-box {
+      width: 100%;
+      height: 90px;
+      border-radius: 0.6rem;
+      margin-bottom: 0.4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .map-henderson {
+      background: linear-gradient(135deg, var(--nv-desert), #f1c27d);
+    }
+
+    .map-utah {
+      background: linear-gradient(135deg, var(--utah-red), var(--utah-sky));
+      clip-path: polygon(0% 0%, 55% 0%, 55% 25%, 100% 25%, 100% 100%, 0% 100%);
+    }
+
+    .map-google {
+      background:
+        linear-gradient(135deg, #222, #111),
+        repeating-linear-gradient(
+          0deg,
+          rgba(255,255,255,0.08),
+          rgba(255,255,255,0.08) 1px,
+          transparent 1px,
+          transparent 8px
+        );
+    }
+
+    .google-pin {
+      position: absolute;
+      left: 50%;
+      top: 20%;
+      transform: translateX(-50%);
+      width: 20px;
+      height: 32px;
+      border-radius: 999px 999px 999px 999px;
+      background: radial-gradient(circle at 30% 30%, #fff, #fff 40%, #ea4335 41%);
+      box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    }
+
+    .map-label {
+      position: absolute;
+      bottom: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* Activities list */
+    .activity-list {
+      list-style: none;
+      margin-top: 0.6rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 0.4rem 0.8rem;
+      font-size: 0.85rem;
+    }
+
+    .activity-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    /* Art concepts */
+    .art-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 0.8rem;
+      margin-top: 0.6rem;
+    }
+
+    .canvas-board {
+      background: #0b0f1f;
+      border-radius: 0.8rem;
+      padding: 0.8rem;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .shape-row {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.6rem;
+    }
+
+    .shape {
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      color: #fff;
+      text-transform: uppercase;
+    }
+
+    .shape.circle {
+      border-radius: 50%;
+      background: radial-gradient(circle, #4f8fd8, #111628);
+    }
+
+    .shape.frame {
+      border: 3px solid var(--accent);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .shape.desert {
+      background: linear-gradient(135deg, var(--nv-desert), #f1c27d);
+    }
+
+    .shape.mountain {
+      background: linear-gradient(135deg, var(--utah-sky), #c1440e);
+    }
+
+    .small-text {
+      font-size: 0.8rem;
+      color: var(--soft);
+      line-height: 1.4;
+    }
+
+    /* Safety plan */
+    .safety-list {
+      list-style: none;
+      margin-top: 0.6rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 0.4rem 0.8rem;
+      font-size: 0.85rem;
+    }
+
+    .safety-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .safety-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: var(--google-green);
+    }
+
+    .idea-panel {
+      margin-top: 0.7rem;
+      padding: 0.8rem;
+      border-radius: 0.9rem;
+      background: radial-gradient(circle at top left, var(--nv-blue), #111628);
+      border: 1px solid rgba(255,255,255,0.18);
+      font-size: 0.85rem;
+    }
+
+    .idea-button {
+      margin-top: 0.6rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 999px;
+      border: none;
+      background: var(--accent);
+      color: #003366;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+
+    footer {
+      padding: 1rem 3rem 1.2rem;
+      font-size: 0.8rem;
+      color: #9fa8da;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    @media (max-width: 960px) {
+      main {
+        padding: 1.2rem 1.4rem 2rem;
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .map-grid,
+      .activity-list,
+      .art-grid,
+      .safety-list {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="title-block">
+      <h1>Henderson Nevada & Utah Map Lab</h1>
+      <div class="subtitle">
+        Map of Henderson • Utah Map • Google‑Style Map • Art Concepts • Safety Plans
+      </div>
+    </div>
+    <nav>
+      <button>Henderson Map</button>
+      <button>Utah Map</button>
+      <button>Google Map Style</button>
+      <button>Art Concepts</button>
+      <button>Safety Plan</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Left: Maps & activities -->
+    <article class="card">
+      <h2>Maps of Henderson, Utah & Google‑Style View</h2>
+      <p>
+        These stylized maps are like mini posters: Henderson Nevada, the state of Utah, and a
+        Google‑style map box with a pin. You can use them as starting points for games, art, and
+        learning.
+      </p>
+
+      <div class="map-grid">
+        <div class="map-card">
+          <div class="map-box map-henderson">
+            <div class="map-label">Henderson, Nevada</div>
+          </div>
+          <p>City parks, walking trails, sports fields, shopping areas, and community centers.</p>
+        </div>
+        <div class="map-card">
+          <div class="map-box map-utah">
+            <div class="map-label">Utah Map</div>
+          </div>
+          <p>Mountains, canyons, lakes, ski resorts, and outdoor adventure spots.</p>
+        </div>
+        <div class="map-card">
+          <div class="map-box map-google">
+            <div class="google-pin"></div>
+            <div class="map-label">Google‑Style Map Box</div>
+          </div>
+          <p>Imagine zooming in on streets, parks, and places you want to visit or draw.</p>
+        </div>
+      </div>
+
+      <h2 style="margin-top:1rem;">What There Is to Do</h2>
+      <p>Use this list as inspiration for your own “things to do” map and art board.</p>
+
+      <ul class="activity-list">
+        <li><span class="dot"></span><span>Henderson: park walks, playgrounds, basketball courts.</span></li>
+        <li><span class="dot"></span><span>Henderson: community pools and splash pads.</span></li>
+        <li><span class="dot"></span><span>Henderson: shopping centers and movie nights.</span></li>
+        <li><span class="dot"></span><span>Utah: hiking in canyons and mountain trails.</span></li>
+        <li><span class="dot"></span><span>Utah: skiing and snowboarding in winter.</span></li>
+        <li><span class="dot"></span><span>Utah: lakeside picnics and outdoor sports.</span></li>
+      </ul>
+    </article>
+
+    <!-- Right: Art concepts & safety plan -->
+    <article class="card">
+      <h2>Map‑Formatted Art Concepts</h2>
+      <p>
+        Turn maps into art: circles for parks, frames for city blocks, desert colors for Nevada,
+        mountain gradients for Utah.
+      </p>
+
+      <div class="art-grid">
+        <div class="canvas-board">
+          <div class="shape-row">
+            <div class="shape circle">Park</div>
+            <div class="shape frame">Block</div>
+            <div class="shape desert">NV</div>
+            <div class="shape mountain">UT</div>
+          </div>
+          <div class="small-text">
+            • Use circles to mark parks and safe meeting spots.<br />
+            • Use frames to show neighborhoods or picture frames of memories.<br />
+            • Use desert tones for Henderson and mountain blues/reds for Utah.<br />
+            • Build a “life map” where each shape is a place or idea.
+          </div>
+        </div>
+        <div class="small-text">
+          Art concept ideas:
+          <br /><br />
+          • Draw a Henderson map with icons for “fun”, “quiet”, and “safe” places.<br />
+          • Create a Utah adventure poster with mountains, rivers, and activity symbols.<br />
+          • Make a Google‑style map with your own custom pins and labels.<br />
+          • Use HTML/CSS to design digital maps and animate pins with JavaScript.
+        </div>
+      </div>
+
+      <h2 style="margin-top:1rem;">Safety Plans with Maps</h2>
+      <p>
+        A safety plan can live on a map: where to meet, what to bring, and how to stay safe during
+        activities.
+      </p>
+
+      <ul class="safety-list">
+        <li><span class="safety-dot"></span><span>Choose a safe meeting spot in Henderson (park, community center).</span></li>
+        <li><span class="safety-dot"></span><span>Mark “water stations” and shaded areas on your map.</span></li>
+        <li><span class="safety-dot"></span><span>Plan routes for walks or bike rides with safe crossings.</span></li>
+        <li><span class="safety-dot"></span><span>For Utah trips, mark trailheads and rest points.</span></li>
+        <li><span class="safety-dot"></span><span>Use a Google‑style map to visualize emergency contacts and locations.</span></li>
+        <li><span class="safety-dot"></span><span>Write a simple checklist: water, sun protection, phone, buddy system.</span></li>
+      </ul>
+
+      <div class="idea-panel">
+        <div id="ideaText">
+          Click the button to generate a new map + art concept idea.
+        </div>
+        <button class="idea-button" id="ideaBtn">New Map Art Idea</button>
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <div>Henderson Nevada • Utah • Google‑Style Maps • Art Concepts • Safety Plans</div>
+    <div>HTML • CSS • JavaScript Learning Canvas</div>
+  </footer>
+
+  <script>
+    const ideas = [
+      "Draw a Henderson map where each park is a green circle and each store is a small square.",
+      "Create a Utah adventure map with mountains as triangles and lakes as blue circles.",
+      "Design a Google‑style map with custom pins for ‘fun’, ‘quiet’, and ‘learning’ spots.",
+      "Make a safety map showing meeting points, water stations, and shaded rest areas.",
+      "Paint a split poster: left side Henderson desert, right side Utah mountains.",
+      "Build a digital map in HTML/CSS and animate a pin moving along a safe route.",
+      "Create a ‘life map’ where each shape represents a goal, habit, or favorite place.",
+      "Use circles, frames, and colors to show your perfect safe day in Henderson or Utah."
+    ];
+
+    document.getElementById("ideaBtn").addEventListener("click", () => {
+      const random = ideas[Math.floor(Math.random() * ideas.length)];
+      document.getElementById("ideaText").textContent = random;
+    });
+  </script>
+</body>
+</html>
