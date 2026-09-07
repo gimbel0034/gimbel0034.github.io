@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sports, Art & Life Learning Hub</title>
+  <style>
+    :root {
+      --utah: #c1440e;
+      --nevada: #003366;
+      --california: #00695c;
+      --accent: #ffcc00;
+      --bg: #0b1020;
+      --card: #141a33;
+      --text: #f5f7ff;
+      --soft: #cfd8ff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1b2550 0%, #050814 55%, #000000 100%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      padding: 1.5rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(10px);
+      background: linear-gradient(
+        to right,
+        rgba(193, 68, 14, 0.35),
+        rgba(0, 51, 102, 0.35),
+        rgba(0, 105, 92, 0.35)
+      );
+    }
+
+    .logo-title {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .flag-icon {
+      width: 60px;
+      height: 40px;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
+      position: relative;
+    }
+
+    .flag-stripe {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 33.33%;
+    }
+
+    .flag-stripe.red {
+      top: 0;
+      background: #b22234;
+    }
+
+    .flag-stripe.white {
+      top: 33.33%;
+      background: #ffffff;
+    }
+
+    .flag-stripe.blue {
+      top: 66.66%;
+      background: #3c3b6e;
+    }
+
+    .flag-star {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 18px;
+      height: 18px;
+      transform: translate(-50%, -50%) rotate(18deg);
+      background: radial-gradient(circle, #ffffff 0%, #ffffff 40%, transparent 41%);
+      opacity: 0.9;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      letter-spacing: 0.04em;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      color: var(--soft);
+    }
+
+    nav {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    nav button {
+      border: none;
+      padding: 0.5rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text);
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    nav button:hover {
+      background: rgba(255, 255, 255, 0.18);
+      transform: translateY(-1px);
+    }
+
+    main {
+      flex: 1;
+      padding: 1.5rem 3rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.8fr);
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 1rem;
+      padding: 1.2rem 1.3rem;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card h2 {
+      font-size: 1.1rem;
+      margin-bottom: 0.4rem;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: var(--soft);
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: #dbe2ff;
+      margin-bottom: 0.6rem;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--soft);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    /* Sports region strip */
+    .sports-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.7rem;
+      margin-top: 0.6rem;
+    }
+
+    .region-card {
+      border-radius: 0.8rem;
+      padding: 0.7rem;
+      position: relative;
+      overflow: hidden;
+      color: #fdfdfd;
+      font-size: 0.8rem;
+    }
+
+    .region-card h3 {
+      font-size: 0.9rem;
+      margin-bottom: 0.2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .region-card.utah {
+      background: linear-gradient(135deg, var(--utah), #ff8a50);
+    }
+
+    .region-card.nevada {
+      background: linear-gradient(135deg, var(--nevada), #4f6fbf);
+    }
+
+    .region-card.california {
+      background: linear-gradient(135deg, var(--california), #26a69a);
+    }
+
+    .region-icon {
+      position: absolute;
+      right: -10px;
+      bottom: -10px;
+      width: 60px;
+      height: 60px;
+      opacity: 0.25;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.5);
+    }
+
+    /* Life lessons & safety */
+    .lesson-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 0.4rem 0.8rem;
+      margin-top: 0.4rem;
+    }
+
+    .lesson-list li {
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .lesson-pill {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 2px rgba(255, 204, 0, 0.35);
+    }
+
+    .safety-banner {
+      margin-top: 0.7rem;
+      padding: 0.6rem 0.7rem;
+      border-radius: 0.7rem;
+      background: linear-gradient(90deg, rgba(255, 204, 0, 0.15), rgba(255, 255, 255, 0.04));
+      border: 1px dashed rgba(255, 204, 0, 0.6);
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .safety-icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    /* Art & design board */
+    .art-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 0.8rem;
+      margin-top: 0.5rem;
+    }
+
+    .canvas-board {
+      background: #0b0f1f;
+      border-radius: 0.8rem;
+      padding: 0.8rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      position: relative;
+    }
+
+    .shape-row {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.6rem;
+    }
+
+    .shape {
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .shape.square {
+      background: linear-gradient(135deg, #ff7043, #ffcc80);
+    }
+
+    .shape.rectangle {
+      width: 90px;
+      background: linear-gradient(135deg, #42a5f5, #90caf9);
+    }
+
+    .shape.circle {
+      border-radius: 50%;
+      background: radial-gradient(circle, #ab47bc 0%, #7e57c2 60%, #311b92 100%);
+    }
+
+    .shape.flex-box {
+      width: 110px;
+      border-radius: 0.6rem;
+      background: linear-gradient(135deg, #26c6da, #00acc1);
+      display: flex;
+      gap: 0.15rem;
+    }
+
+    .flex-cell {
+      flex: 1;
+      height: 70%;
+      margin-top: 10%;
+      border-radius: 0.3rem;
+      background: rgba(255, 255, 255, 0.35);
+    }
+
+    .css-notes {
+      font-size: 0.8rem;
+      color: #cfd8ff;
+      line-height: 1.4;
+    }
+
+    .css-notes code {
+      font-family: "Consolas", "Fira Code", monospace;
+      font-size: 0.8rem;
+      background: rgba(255, 255, 255, 0.06);
+      padding: 0.1rem 0.25rem;
+      border-radius: 0.3rem;
+    }
+
+    /* Two-player games */
+    .games-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 0.7rem;
+      margin-top: 0.6rem;
+    }
+
+    .game-card {
+      border-radius: 0.8rem;
+      padding: 0.7rem;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 0.85rem;
+    }
+
+    .game-card h3 {
+      font-size: 0.9rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .game-tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      margin-top: 0.3rem;
+    }
+
+    .game-tag {
+      font-size: 0.75rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--soft);
+    }
+
+    /* Holiday & countdown panel */
+    .holiday-panel {
+      margin-top: 0.6rem;
+      padding: 0.8rem;
+      border-radius: 0.9rem;
+      background: radial-gradient(circle at top left, #ffcc80 0%, #ff7043 35%, #3c3b6e 100%);
+      color: #fff7e9;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .holiday-panel h3 {
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.3rem;
+    }
+
+    .holiday-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      font-size: 0.85rem;
+    }
+
+    .holiday-pill {
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+
+    .countdown {
+      margin-top: 0.6rem;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: baseline;
+      gap: 0.4rem;
+    }
+
+    .countdown-number {
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+
+    .holiday-panel::after {
+      content: "";
+      position: absolute;
+      right: -40px;
+      bottom: -40px;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.2);
+    }
+
+    /* Footer */
+    footer {
+      padding: 0.9rem 3rem 1.2rem;
+      font-size: 0.8rem;
+      color: #9fa8da;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .footer-flag {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.8rem;
+    }
+
+    .mini-flag {
+      width: 32px;
+      height: 20px;
+      border-radius: 3px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.7);
+    }
+
+    .mini-stripe {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 33.33%;
+    }
+
+    .mini-stripe.red {
+      top: 0;
+      background: #b22234;
+    }
+
+    .mini-stripe.white {
+      top: 33.33%;
+      background: #ffffff;
+    }
+
+    .mini-stripe.blue {
+      top: 66.66%;
+      background: #3c3b6e;
+    }
+
+    .mini-star {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 10px;
+      height: 10px;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, #ffffff 0%, #ffffff 40%, transparent 41%);
+    }
+
+    @media (max-width: 960px) {
+      main {
+        padding: 1.2rem 1.4rem 2rem;
+      }
+      header {
+        padding: 1.1rem 1.4rem;
+        flex-direction: column;
+        gap: 0.8rem;
+        align-items: flex-start;
+      }
+      .grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .sports-strip,
+      .lesson-list,
+      .games-grid,
+      .art-layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-title">
+      <div class="flag-icon" aria-hidden="true">
+        <div class="flag-stripe red"></div>
+        <div class="flag-stripe white"></div>
+        <div class="flag-stripe blue"></div>
+        <div class="flag-star"></div>
+      </div>
+      <div>
+        <h1>Sports, Art & Life Lab</h1>
+        <div class="subtitle">
+          Utah • Nevada • California • Learning about life through games, design & safety
+        </div>
+      </div>
+    </div>
+    <nav>
+      <button type="button">Sports Regions</button>
+      <button type="button">Life Lessons</button>
+      <button type="button">Safety First</button>
+      <button type="button">Art & Design</button>
+      <button type="button">Two Player Games</button>
+      <button type="button">Holiday Countdown</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="grid">
+      <!-- Left column: Sports & Life -->
+      <article class="card">
+        <h2>Utah, Nevada & California Sports</h2>
+        <p>
+          Use sports to learn teamwork, resilience, and creativity. Each region brings its own style:
+          mountains, desert, and coast—all teaching different ways to play and grow.
+        </p>
+
+        <div class="tag-row">
+          <span class="tag">Basketball</span>
+          <span class="tag">Football</span>
+          <span class="tag">Baseball</span>
+          <span class="tag">Soccer</span>
+          <span class="tag">Skate & Surf</span>
+        </div>
+
+        <div class="sports-strip">
+          <div class="region-card utah">
+            <h3>Utah</h3>
+            <p>Courts in the mountains, focus, discipline, and learning to breathe through the climb.</p>
+            <div class="region-icon"></div>
+          </div>
+          <div class="region-card nevada">
+            <h3>Nevada</h3>
+            <p>Desert fields, bright lights, and learning balance between fun and responsibility.</p>
+            <div class="region-icon"></div>
+          </div>
+          <div class="region-card california">
+            <h3>California</h3>
+            <p>Coastal games, waves, and creativity—trying new sports and new ideas.</p>
+            <div class="region-icon"></div>
+          </div>
+        </div>
+
+        <h2 style="margin-top: 1rem;">Learning about life through sports</h2>
+        <p>
+          Every game is a tiny classroom. Wins teach celebration; losses teach reflection. Teammates
+          teach communication, and rules teach respect.
+        </p>
+
+        <ul class="lesson-list">
+          <li>
+            <span class="lesson-pill"></span>
+            <span>Respect the rules—on the field and in life.</span>
+          </li>
+          <li>
+            <span class="lesson-pill"></span>
+            <span>Practice builds confidence, not perfection.</span>
+          </li>
+          <li>
+            <span class="lesson-pill"></span>
+            <span>Listen to teammates; speak with kindness.</span>
+          </li>
+          <li>
+            <span class="lesson-pill"></span>
+            <span>Celebrate effort, not just the scoreboard.</span>
+          </li>
+        </ul>
+
+        <div class="safety-banner">
+          <div class="safety-icon">S</div>
+          <div>
+            <strong>Safety first:</strong>
+            Warm up, hydrate, wear the right gear, and know when to rest. A safe player is a long‑term
+            player.
+          </div>
+        </div>
+      </article>
+
+      <!-- Right column: Art, Games & Holidays -->
+      <article class="card">
+        <h2>Art boards, canvas & CSS design</h2>
+        <p>
+          Design is like a sport for your imagination. Squares, rectangles, circles and flex boxes
+          become your team, and you coach them with CSS.
+        </p>
+
+        <div class="art-layout">
+          <div class="canvas-board">
+            <div class="shape-row">
+              <div class="shape square">Square</div>
+              <div class="shape rectangle">Rectangle</div>
+              <div class="shape circle">Circle</div>
+              <div class="shape flex-box">
+                <div class="flex-cell"></div>
+                <div class="flex-cell"></div>
+                <div class="flex-cell"></div>
+              </div>
+            </div>
+            <div class="css-notes">
+              Try ideas like:
+              <br />
+              <code>display: flex;</code>,
+              <code>justify-content: space-between;</code>,
+              <code>align-items: center;</code>,
+              <code>border-radius: 50%;</code>
+              to move and shape your “team” of boxes.
+            </div>
+          </div>
+          <div class="css-notes">
+            Use your PC as a creative field:
+            <br /><br />
+            • Build art boards with HTML &amp; CSS.<br />
+            • Use JavaScript to animate shapes and dates.<br />
+            • Mix colors like coaches mix strategies—red, white and blue for an American theme, or
+            desert and ocean tones for Nevada and California.
+          </div>
+        </div>
+
+        <h2 style="margin-top: 1rem;">Two‑player games on your PC</h2>
+        <p>
+          Turn your computer into a game system: keyboard vs. mouse, turn‑based challenges, or
+          browser‑based sports mini‑games.
+        </p>
+
+        <div class="games-grid">
+          <div class="game-card">
+            <h3>Keyboard vs. Keyboard</h3>
+            <p>
+              Create simple two‑player games: racing to press keys, guessing numbers, or mini sports
+              scoreboards.
+            </p>
+            <div class="game-tag-row">
+              <span class="game-tag">Turn‑based</span>
+              <span class="game-tag">Local multiplayer</span>
+              <span class="game-tag">HTML/JS</span>
+            </div>
+          </div>
+          <div class="game-card">
+            <h3>Mouse vs. Keyboard</h3>
+            <p>
+              One player clicks targets, the other uses keys to move shapes. Great for reaction time
+              and coordination.
+            </p>
+            <div class="game-tag-row">
+              <span class="game-tag">Reflex training</span>
+              <span class="game-tag">Canvas art</span>
+              <span class="game-tag">Safety breaks</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="holiday-panel" id="holidayPanel">
+          <h3>Holiday timeline</h3>
+          <div class="holiday-row">
+            <span class="holiday-pill" id="halloweenInfo">Halloween: loading…</span>
+            <span class="holiday-pill" id="thanksgivingInfo">Thanksgiving: loading…</span>
+            <span class="holiday-pill" id="christmasInfo">Christmas: loading…</span>
+          </div>
+          <div class="countdown">
+            <span>Days until Christmas:</span>
+            <span class="countdown-number" id="christmasCountdown">--</span>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <div>Learning about life through sports, games, art, and design—one day at a time.</div>
+    <div class="footer-flag">
+      <div class="mini-flag" aria-hidden="true">
+        <div class="mini-stripe red"></div>
+        <div class="mini-stripe white"></div>
+        <div class="mini-stripe blue"></div>
+        <div class="mini-star"></div>
+      </div>
+      <span>Red, white &amp; blue • American representation</span>
+    </div>
+  </footer>
+
+  <script>
+    // JavaScript: Dates of month with holidays and countdown to Christmas
+    (function () {
+      const halloweenInfo = document.getElementById("halloweenInfo");
+      const thanksgivingInfo = document.getElementById("thanksgivingInfo");
+      const christmasInfo = document.getElementById("christmasInfo");
+      const christmasCountdown = document.getElementById("christmasCountdown");
+
+      const now = new Date();
+      const year = now.getFullYear();
+
+      // Halloween: October 31
+      const halloween = new Date(year, 9, 31);
+      // Thanksgiving (USA): fourth Thursday of November
+      function getThanksgiving(year) {
+        const novemberFirst = new Date(year, 10, 1);
+        const dayOfWeek = novemberFirst.getDay(); // 0=Sun ... 4=Thu
+        const firstThursdayOffset = (4 - dayOfWeek + 7) % 7;
+        const thanksgivingDate = 1 + firstThursdayOffset + 3 * 7; // fourth Thursday
+        return new Date(year, 10, thanksgivingDate);
+      }
+      const thanksgiving = getThanksgiving(year);
+      // Christmas: December 25
+      const christmas = new Date(year, 11, 25);
+
+      function formatDate(date) {
+        return date.toLocaleDateString(undefined, {
+          month: "long",
+          day: "numeric",
+          year: "numeric",
+        });
+      }
+
+      halloweenInfo.textContent = "Halloween: " + formatDate(halloween);
+      thanksgivingInfo.textContent = "Thanksgiving: " + formatDate(thanksgiving);
+      christmasInfo.textContent = "Christmas: " + formatDate(christmas);
+
+      function updateCountdown() {
+        const now = new Date();
+        let target = christmas;
+
+        // If Christmas has passed this year, count down to next year's Christmas
+        if (now > christmas) {
+          target = new Date(year + 1, 11, 25);
+        }
+
+        const diffMs = target.getTime() - now.getTime();
+        const diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+        christmasCountdown.textContent = diffDays;
+      }
+
+      updateCountdown();
+      // Optional: update once per day
+      setInterval(updateCountdown, 1000 * 60 * 60 * 24);
+    })();
+  </script>
+</body>
+</html>
