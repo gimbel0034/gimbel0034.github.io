@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Lana Lang Safety Plan – Smallville Style</title>
+  <style>
+    :root {
+      --smallville-red: #b30000;
+      --smallville-gold: #f4c542;
+      --smallville-dark: #1b1b1f;
+      --smallville-light: #f7f7fa;
+      --accent-green: #3c8d5a;
+      --accent-blue: #2b6cb0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      background: radial-gradient(circle at top, #3b4b6b 0%, #0c1018 55%, #050608 100%);
+      color: #f7f7fa;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--smallville-red), var(--smallville-gold));
+      padding: 18px 32px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+    }
+
+    header p {
+      margin-top: 6px;
+      font-size: 0.95rem;
+    }
+
+    main {
+      flex: 1;
+      padding: 24px 5vw 40px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1.3fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: rgba(12, 14, 22, 0.9);
+      border-radius: 14px;
+      padding: 18px 20px;
+      border: 1px solid rgba(244, 197, 66, 0.25);
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.55);
+      margin-bottom: 18px;
+    }
+
+    .card h2 {
+      font-size: 1.25rem;
+      margin-bottom: 10px;
+      color: var(--smallville-gold);
+    }
+
+    .card h3 {
+      font-size: 1.05rem;
+      margin-top: 12px;
+      margin-bottom: 6px;
+      color: var(--accent-blue);
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+
+    .tagline {
+      font-style: italic;
+      color: #dcdcf5;
+      margin-bottom: 10px;
+    }
+
+    .lana-profile {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 10px;
+    }
+
+    .lana-avatar {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 20%, #f9e0c7 0%, #c27a4a 35%, #5b2c1f 100%);
+      border: 2px solid var(--smallville-gold);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .lana-avatar::before {
+      content: "";
+      position: absolute;
+      inset: 12px 10px 18px;
+      border-radius: 50%;
+      background: linear-gradient(160deg, #f9e0c7 0%, #e3b28a 40%, #c27a4a 100%);
+    }
+
+    .lana-avatar::after {
+      content: "";
+      position: absolute;
+      bottom: -4px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      height: 40%;
+      background: linear-gradient(180deg, #5b2c1f 0%, #2b1a14 100%);
+      border-radius: 50%;
+    }
+
+    .lana-text strong {
+      color: var(--smallville-gold);
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+      margin-bottom: 6px;
+    }
+
+    .pill {
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      border: 1px solid rgba(244, 197, 66, 0.6);
+      background: rgba(244, 197, 66, 0.08);
+      color: #f7f7fa;
+    }
+
+    ul {
+      list-style: none;
+      margin-left: 0;
+      margin-top: 4px;
+      margin-bottom: 6px;
+    }
+
+    li {
+      position: relative;
+      padding-left: 18px;
+      margin-bottom: 4px;
+      font-size: 0.95rem;
+      line-height: 1.45;
+    }
+
+    li::before {
+      content: "●";
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-size: 0.6rem;
+      color: var(--accent-green);
+      transform: translateY(4px);
+    }
+
+    .highlight {
+      color: var(--accent-green);
+      font-weight: 600;
+    }
+
+    .danger {
+      color: #ff6b6b;
+      font-weight: 600;
+    }
+
+    .safe {
+      color: #4fd1c5;
+      font-weight: 600;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    button {
+      cursor: pointer;
+      border-radius: 999px;
+      border: none;
+      padding: 8px 16px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    }
+
+    button span.icon {
+      font-size: 1.1rem;
+    }
+
+    .btn-calm {
+      background: linear-gradient(135deg, #3c8d5a, #2f6f47);
+      color: #f7f7fa;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.45);
+    }
+
+    .btn-support {
+      background: linear-gradient(135deg, #2b6cb0, #1f4f82);
+      color: #f7f7fa;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.45);
+    }
+
+    .btn-reset {
+      background: linear-gradient(135deg, #4a5568, #2d3748);
+      color: #e2e8f0;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.45);
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.6);
+    }
+
+    button:active {
+      transform: translateY(0);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    .status-bar {
+      margin-top: 12px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: rgba(44, 82, 130, 0.35);
+      border: 1px solid rgba(111, 178, 255, 0.4);
+      font-size: 0.9rem;
+    }
+
+    .status-label {
+      font-weight: 600;
+      color: var(--smallville-gold);
+      margin-right: 6px;
+    }
+
+    .status-text {
+      color: #e2e8f0;
+    }
+
+    .status-text.safe {
+      color: #9ae6b4;
+    }
+
+    .status-text.warning {
+      color: #fbd38d;
+    }
+
+    .status-text.danger {
+      color: #feb2b2;
+    }
+
+    .emergency-box {
+      border-radius: 12px;
+      padding: 12px 14px;
+      background: rgba(179, 0, 0, 0.18);
+      border: 1px solid rgba(255, 99, 99, 0.7);
+      margin-top: 10px;
+    }
+
+    .emergency-box p {
+      font-size: 0.9rem;
+    }
+
+    .emergency-box strong {
+      color: #fed7d7;
+    }
+
+    footer {
+      padding: 12px 5vw 18px;
+      font-size: 0.8rem;
+      color: #a0aec0;
+      text-align: center;
+      border-top: 1px solid rgba(75, 85, 99, 0.6);
+      background: rgba(5, 6, 8, 0.95);
+    }
+
+    footer span {
+      color: var(--smallville-gold);
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Smallville Safety Plan – Lana Lang Edition</h1>
+    <p>
+      A calm, structured plan inspired by Lana Lang’s strength, created in full sentences for real-life safety and support.
+    </p>
+  </header>
+
+  <main>
+    <section class="layout">
+      <!-- LEFT COLUMN: PLAN CONTENT -->
+      <div>
+        <div class="card">
+          <div class="lana-profile">
+            <div class="lana-avatar" aria-hidden="true"></div>
+            <div class="lana-text">
+              <p class="tagline">
+                “Even in Smallville, storms pass. This plan helps you stay grounded until the sky clears.”
+              </p>
+              <p>
+                This safety plan is written as if Lana Lang is standing beside you and speaking calmly.
+                It uses complete sentences and clear steps so that you can follow it even when you feel overwhelmed.
+              </p>
+            </div>
+          </div>
+
+          <h2>1. My current situation and early warning signs</h2>
+          <p>
+            I begin by noticing what is happening around me and inside me. I pay attention to my thoughts,
+            my emotions, and my body. I remind myself that noticing these signs early is a strength, not a weakness.
+          </p>
+          <h3>Early warning signs I want to watch for</h3>
+          <ul>
+            <li>
+              I notice that my thoughts become very fast, very negative, or very hopeless, and I feel as if
+              everything is too much.
+            </li>
+            <li>
+              I feel tightness in my chest or stomach, and I notice that my breathing becomes shallow or rushed.
+            </li>
+            <li>
+              I start to withdraw from people who care about me, and I ignore messages or calls even when I want support.
+            </li>
+            <li>
+              I feel an urge to act impulsively, to run away, or to hurt myself, and I recognize that this is a sign
+              that I need help and calm, not judgment.
+            </li>
+          </ul>
+          <p>
+            When I notice these signs, I say to myself in a clear sentence:
+            <span class="highlight">
+              “I am noticing warning signs, and I choose to follow my safety plan now.”
+            </span>
+          </p>
+        </div>
+
+        <div class="card">
+          <h2>2. My immediate calming steps (Smallville-style grounding)</h2>
+          <p>
+            I use simple, concrete actions to help my mind and body slow down. I choose at least one step and
+            I describe it to myself in full sentences so that I stay focused.
+          </p>
+          <h3>Calming actions I can take right away</h3>
+          <ul>
+            <li>
+              I take ten slow breaths, and with each breath I imagine standing in a quiet Smallville field,
+              feeling the wind move gently through the corn.
+            </li>
+            <li>
+              I look around the room and name five things I can see, four things I can touch, three things I can hear,
+              two things I can smell, and one thing I can taste, and I say each item out loud or in my mind.
+            </li>
+            <li>
+              I drink a glass of water slowly, and I remind myself that I am caring for my body in this moment.
+            </li>
+            <li>
+              I sit or lie down in a safe place, and I tell myself:
+              <span class="safe">
+                “Right now I am choosing safety, and I will stay here until I feel more stable.”
+              </span>
+            </li>
+          </ul>
+          <p>
+            I do not need to fix everything at once. I only need to take the next small step toward calm.
+          </p>
+        </div>
+
+        <div class="card">
+          <h2>3. My safe people and safe places</h2>
+          <p>
+            I remind myself that I do not have to face difficult moments alone. I think of the people and places
+            that feel most like the Talon café or the Kent farm—steady, warm, and safe.
+          </p>
+
+          <h3>People I can contact for support</h3>
+          <ul>
+            <li>
+              I can call or message a trusted friend or family member and say in a full sentence:
+              “I am having a hard time right now, and I would really appreciate it if you could stay on the line
+              or chat with me for a while.”
+            </li>
+            <li>
+              I can reach out to a professional helper, such as a therapist, counselor, or support worker,
+              and I can say:
+              “I am following my safety plan, and I need some guidance and reassurance.”
+            </li>
+            <li>
+              If I feel that I might be in immediate danger, I can contact emergency services and clearly say:
+              “I am not feeling safe right now, and I need urgent help.”
+            </li>
+          </ul>
+
+          <h3>Places that feel safer to me</h3>
+          <ul>
+            <li>
+              I can move to a room or area in my home where I feel most calm, and I stay there with my phone nearby.
+            </li>
+            <li>
+              If it is safe to do so, I can go outside to a familiar place, such as a park, a quiet street,
+              or a favorite café, and I stay aware of my surroundings.
+            </li>
+            <li>
+              I avoid places where I feel trapped, judged, or at risk, and I remind myself that choosing a safer
+              location is an act of courage.
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h2>4. My safety rules for myself</h2>
+          <p>
+            I create clear rules in full sentences that protect me when my emotions feel intense.
+            These rules are promises I make to myself, and I treat them as seriously as Lana would treat a promise
+            to someone she loves.
+          </p>
+          <ul>
+            <li>
+              I will not act on any urge to harm myself or others. Instead, I will tell someone I trust about the urge
+              and ask for help staying safe.
+            </li>
+            <li>
+              I will remove or move away from any objects that I could use to hurt myself, and I will place them
+              out of reach or in another room.
+            </li>
+            <li>
+              I will not use alcohol or drugs to cope with intense feelings, because they can make my situation
+              more dangerous and more confusing.
+            </li>
+            <li>
+              I will keep my phone charged and nearby so that I can contact support quickly if I need it.
+            </li>
+          </ul>
+          <p>
+            If I break one of these rules or come close to breaking one, I will not shame myself.
+            Instead, I will say:
+            <span class="highlight">
+              “I still deserve safety and care, and I am returning to my plan right now.”
+            </span>
+          </p>
+        </div>
+
+        <div class="card">
+          <h2>5. My reasons to stay and my Smallville-style hope</h2>
+          <p>
+            I remind myself why my life matters, even when my mind tries to convince me otherwise.
+            I think of the way Lana keeps going despite loss and fear, and I connect that strength to my own story.
+          </p>
+          <h3>Reasons I choose to stay alive and stay safe</h3>
+          <ul>
+            <li>
+              I have people, pets, or future relationships that I care about, and I want to give myself the chance
+              to experience more moments with them.
+            </li>
+            <li>
+              There are things I still want to see, learn, and create, and I know that my story is not finished yet.
+            </li>
+            <li>
+              I have survived difficult days before, and that proves that I have strength, even when I do not feel it.
+            </li>
+            <li>
+              I deserve the possibility of feeling better, and I will not take that possibility away from myself.
+            </li>
+          </ul>
+          <p>
+            I can write or say a sentence of hope, such as:
+            <span class="safe">
+              “This moment is painful, but it is not the end of my story.”
+            </span>
+          </p>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN: INTERACTIVE STATUS + QUICK ACTIONS -->
+      <div>
+        <div class="card">
+          <h2>Safety status check</h2>
+          <p>
+            I can use this panel to check in with myself, just as Lana would gently ask,
+            “How are you really doing right now?”
+          </p>
+
+          <div class="pill-row">
+            <span class="pill">Calm</span>
+            <span class="pill">Stressed</span>
+            <span class="pill">Overwhelmed</span>
+            <span class="pill">In danger</span>
+          </div>
+
+          <p>
+            I choose the button below that best matches how I feel, and I let it guide my next step.
+          </p>
+
+          <div class="button-row">
+            <button class="btn-calm" id="btnCalm">
+              <span class="icon">🌾</span>
+              <span>I feel mostly safe</span>
+            </button>
+            <button class="btn-support" id="btnSupport">
+              <span class="icon">📞</span>
+              <span>I need support</span>
+            </button>
+            <button class="btn-support" id="btnDanger">
+              <span class="icon">⚠️</span>
+              <span>I feel at risk</span>
+            </button>
+            <button class="btn-reset" id="btnReset">
+              <span class="icon">🔁</span>
+              <span>Reset status</span>
+            </button>
+          </div>
+
+          <div class="status-bar" id="statusBar">
+            <span class="status-label">Current safety status:</span>
+            <span class="status-text safe" id="statusText">
+              I feel mostly safe, and I am using my plan to stay grounded.
+            </span>
+          </div>
+
+          <div class="emergency-box">
+            <p>
+              <strong>If I ever feel that I might act on thoughts of harming myself or others,</strong>
+              I will treat that as an emergency. I will contact local emergency services or a crisis line immediately,
+              and I will say clearly:
+              “I am not feeling safe, and I need urgent help right now.”
+            </p>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Smallville-style self-talk</h2>
+          <p>
+            I can use these example sentences as if Lana is speaking to me, or as if I am speaking to myself
+            with the same kindness she would offer.
+          </p>
+          <ul>
+            <li>
+              “I am allowed to feel what I feel, and I am still worthy of safety and care.”
+            </li>
+            <li>
+              “I do not have to be perfect to deserve help. I only have to be honest about how I feel.”
+            </li>
+            <li>
+              “I am not alone in this. There are people and resources that can stand with me.”
+            </li>
+            <li>
+              “My pain is real, but it is not the only truth about me.”
+            </li>
+          </ul>
+          <p>
+            I can choose one sentence that feels most comforting and repeat it slowly until my body begins
+            to relax even a little.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>
+      This page is inspired by <span>Lana Lang</span> from Smallville and is meant as a gentle, fictional frame
+      for a real-life safety plan. For urgent or personal crises, I always reach out to real-world professionals
+      and emergency services in my area.
+    </p>
+  </footer>
+
+  <script>
+    // Simple interactive safety status logic
+    const statusText = document.getElementById("statusText");
+    const statusBar = document.getElementById("statusBar");
+
+    function setStatus(message, level) {
+      statusText.textContent = message;
+      statusText.classList.remove("safe", "warning", "danger");
+
+      if (level === "safe") {
+        statusText.classList.add("safe");
+      } else if (level === "warning") {
+        statusText.classList.add("warning");
+      } else if (level === "danger") {
+        statusText.classList.add("danger");
+      }
+    }
+
+    document.getElementById("btnCalm").addEventListener("click", () => {
+      setStatus(
+        "I feel mostly safe, and I am using my plan to stay grounded.",
+        "safe"
+      );
+    });
+
+    document.getElementById("btnSupport").addEventListener("click", () => {
+      setStatus(
+        "I need support, and I will contact a trusted person or professional to talk with me.",
+        "warning"
+      );
+    });
+
+    document.getElementById("btnDanger").addEventListener("click", () => {
+      setStatus(
+        "I feel at risk, and I will treat this as serious. I will reach out for urgent help right now.",
+        "danger"
+      );
+    });
+
+    document.getElementById("btnReset").addEventListener("click", () => {
+      setStatus(
+        "I am checking in again. I will notice how I feel and choose the next safest step.",
+        "safe"
+      );
+    });
+  </script>
+</body>
+</html>
