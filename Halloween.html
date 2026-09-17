@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Halloween Trick or Treat Fun Lab</title>
+  <style>
+    :root {
+      --orange: #ff7a1a;
+      --yellow: #ffd93b;
+      --red: #ff3b3b;G
+      --blue: #2b6cff;
+      --white: #ffffff;
+      --purple: #7b2cff;
+      --pink: #ff7bbf;
+      --dark: #0b0b1a;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Trebuchet MS", system-ui, sans-serif;
+      background: radial-gradient(circle at top, #2b003b 0%, #050509 55%, #000000 100%);
+      color: var(--white);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+      background: linear-gradient(90deg, #1a001f, #1a002f);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .jack-face {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--orange);
+      position: relative;
+      box-shadow: 0 0 12px rgba(255, 122, 26, 0.9);
+    }
+
+    .jack-face::before,
+    .jack-face::after {
+      content: "";
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: #000;
+      top: 11px;
+      border-radius: 50% 50% 10% 10%;
+    }
+
+    .jack-face::before {
+      left: 9px;
+      transform: rotate(-10deg);
+    }
+
+    .jack-face::after {
+      right: 9px;
+      transform: rotate(10deg);
+    }
+
+    .jack-mouth {
+      position: absolute;
+      bottom: 7px;
+      left: 7px;
+      right: 7px;
+      height: 12px;
+      background: #000;
+      clip-path: polygon(0% 100%, 15% 40%, 30% 100%, 45% 40%, 60% 100%, 75% 40%, 90% 100%, 100% 60%, 100% 100%);
+    }
+
+    .title-block h1 {
+      font-size: 1.6rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .title-block span {
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    nav {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    nav button {
+      border: none;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--white);
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    nav button:hover {
+      background: rgba(255, 255, 255, 0.18);
+      transform: translateY(-1px);
+    }
+
+    main {
+      flex: 1;
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.4fr);
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 960px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .panel {
+      background: rgba(10, 10, 25, 0.9);
+      border-radius: 1.2rem;
+      padding: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .panel h2 {
+      font-size: 1.2rem;
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .panel-tagline {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 1rem;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .chip {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .chip.orange { color: var(--orange); border-color: var(--orange); }
+    .chip.yellow { color: var(--yellow); border-color: var(--yellow); }
+    .chip.red { color: var(--red); border-color: var(--red); }
+    .chip.blue { color: var(--blue); border-color: var(--blue); }
+    .chip.white { color: var(--white); border-color: var(--white); }
+    .chip.purple { color: var(--purple); border-color: var(--purple); }
+    .chip.pink { color: var(--pink); border-color: var(--pink); }
+
+    /* Left panel: Recipes + Learning + USA */
+    .recipes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .recipe-card {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 0.9rem;
+      padding: 0.9rem;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .recipe-card h3 {
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .recipe-meta {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 0.4rem;
+    }
+
+    .recipe-list {
+      font-size: 0.8rem;
+      margin-left: 1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .recipe-list li {
+      margin-bottom: 0.15rem;
+    }
+
+    .recipe-steps {
+      font-size: 0.8rem;
+      opacity: 0.9;
+    }
+
+    .usa-banner {
+      margin-top: 1rem;
+      padding: 0.8rem;
+      border-radius: 0.9rem;
+      background: linear-gradient(90deg, var(--blue), var(--white), var(--red));
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .usa-banner span.flag {
+      width: 46px;
+      height: 30px;
+      border-radius: 0.3rem;
+      background:
+        linear-gradient(90deg, var(--blue) 0 40%, transparent 40% 100%),
+        repeating-linear-gradient(180deg, var(--red) 0 20%, var(--white) 20% 40%);
+      position: relative;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+    }
+
+    .usa-banner span.flag::before {
+      content: "★ ★ ★";
+      position: absolute;
+      font-size: 0.45rem;
+      color: var(--white);
+      top: 4px;
+      left: 4px;
+    }
+
+    .usa-banner p {
+      font-size: 0.85rem;
+      color: #000;
+      font-weight: 600;
+    }
+
+    .learning-block {
+      margin-top: 1.2rem;
+      padding-top: 1rem;
+      border-top: 1px dashed rgba(255, 255, 255, 0.2);
+    }
+
+    .learning-block h3 {
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .learning-block p {
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    /* Right panel: Jokes + Characters */
+    .jokes-section {
+      margin-bottom: 1.5rem;
+    }
+
+    .jokes-section h3 {
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .joke-display {
+      margin-top: 0.5rem;
+      padding: 0.9rem;
+      border-radius: 0.9rem;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px dashed rgba(255, 255, 255, 0.2);
+      font-size: 0.9rem;
+      min-height: 3.2rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .joke-btn {
+      margin-top: 0.6rem;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      background: var(--purple);
+      color: var(--white);
+      box-shadow: 0 0 12px rgba(123, 44, 255, 0.8);
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .joke-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 0 18px rgba(123, 44, 255, 1);
+    }
+
+    .characters {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+    }
+
+    .character-card {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 0.9rem;
+      padding: 0.9rem;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .character-card h3 {
+      font-size: 0.95rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .character-card p {
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    /* Simple SVG-style characters using CSS */
+    .dino,
+    .puppy,
+    .brew {
+      margin-top: 0.6rem;
+      width: 100%;
+      height: 120px;
+      position: relative;
+    }
+
+    .dino-body {
+      position: absolute;
+      left: 10%;
+      bottom: 10%;
+      width: 60%;
+      height: 55%;
+      background: var(--purple);
+      border-radius: 50% 50% 40% 40%;
+      box-shadow: 0 0 12px rgba(123, 44, 255, 0.9);
+      animation: dino-bounce 1.6s infinite ease-in-out;
+    }
+
+    .dino-neck {
+      position: absolute;
+      left: 55%;
+      bottom: 40%;
+      width: 12%;
+      height: 35%;
+      background: var(--purple);
+      border-radius: 40% 40% 10% 10%;
+    }
+
+    .dino-head {
+      position: absolute;
+      left: 55%;
+      bottom: 70%;
+      width: 22%;
+      height: 26%;
+      background: var(--purple);
+      border-radius: 50%;
+    }
+
+    .dino-eye {
+      position: absolute;
+      top: 20%;
+      left: 20%;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--white);
+    }
+
+    .dino-eye::after {
+      content: "";
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #000;
+      top: 2px;
+      left: 2px;
+    }
+
+    .dino-tail {
+      position: absolute;
+      left: 5%;
+      bottom: 40%;
+      width: 20%;
+      height: 10%;
+      background: var(--purple);
+      border-radius: 50% 0 0 50%;
+      transform-origin: right center;
+      animation: tail-wag 0.9s infinite alternate;
+    }
+
+    @keyframes dino-bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    @keyframes tail-wag {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(-12deg); }
+    }
+
+    .puppy-body {
+      position: absolute;
+      left: 15%;
+      bottom: 10%;
+      width: 55%;
+      height: 50%;
+      background: var(--pink);
+      border-radius: 50% 50% 40% 40%;
+      box-shadow: 0 0 12px rgba(255, 123, 191, 0.9);
+      animation: puppy-jump 1.4s infinite ease-in-out;
+    }
+
+    .puppy-head {
+      position: absolute;
+      left: 50%;
+      bottom: 55%;
+      width: 30%;
+      height: 32%;
+      background: var(--pink);
+      border-radius: 50%;
+    }
+
+    .puppy-ear {
+      position: absolute;
+      width: 12%;
+      height: 20%;
+      background: var(--pink);
+      border-radius: 50%;
+      top: 5%;
+    }
+
+    .puppy-ear.left { left: 50%; transform: rotate(-18deg); }
+    .puppy-ear.right { left: 65%; transform: rotate(18deg); }
+
+    .puppy-eye {
+      position: absolute;
+      top: 30%;
+      left: 58%;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--white);
+    }
+
+    .puppy-eye::after {
+      content: "";
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #000;
+      top: 2px;
+      left: 2px;
+    }
+
+    .puppy-mouth {
+      position: absolute;
+      bottom: 20%;
+      left: 60%;
+      width: 18px;
+      height: 10px;
+      border-radius: 0 0 18px 18px;
+      border: 2px solid #000;
+      border-top: none;
+    }
+
+    @keyframes puppy-jump {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .brew-cauldron {
+      position: absolute;
+      left: 20%;
+      bottom: 10%;
+      width: 60%;
+      height: 45%;
+      background: #1a1a1a;
+      border-radius: 50% 50% 40% 40%;
+      box-shadow: 0 0 14px rgba(0, 0, 0, 0.9);
+    }
+
+    .brew-liquid {
+      position: absolute;
+      left: 22%;
+      bottom: 45%;
+      width: 56%;
+      height: 18%;
+      background: var(--purple);
+      border-radius: 50%;
+      box-shadow: 0 0 12px rgba(123, 44, 255, 0.9);
+      animation: brew-bubble 1.8s infinite ease-in-out;
+    }
+
+    .brew-bubble {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--purple);
+      box-shadow: 0 0 8px rgba(123, 44, 255, 0.9);
+      animation: bubble-rise 1.6s infinite ease-out;
+    }
+
+    .brew-bubble.b1 { left: 40%; bottom: 60%; }
+    .brew-bubble.b2 { left: 55%; bottom: 70%; animation-delay: 0.4s; }
+    .brew-bubble.b3 { left: 30%; bottom: 75%; animation-delay: 0.8s; }
+
+    @keyframes brew-bubble {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+
+    @keyframes bubble-rise {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-18px); opacity: 0; }
+    }
+
+    footer {
+      padding: 1rem 2rem;
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.6);
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      background: #050509;
+    }
+
+    .highlight-word {
+      color: var(--orange);
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <div class="jack-face">
+        <div class="jack-mouth"></div>
+      </div>
+      <div class="title-block">
+        <h1>Halloween Trick or Treat Fun Lab</h1>
+        <span>Jack‑o’‑lantern vibes • Color play • Recipes • Jokes • Art concepts</span>
+      </div>
+    </div>
+    <nav>
+      <button onclick="scrollToSection('recipes')">Recipes</button>
+      <button onclick="scrollToSection('learning')">Learning</button>
+      <button onclick="scrollToSection('usa')">USA Colors</button>
+      <button onclick="scrollToSection('jokes')">LOL Jokes</button>
+      <button onclick="scrollToSection('characters')">Characters</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- LEFT PANEL -->
+    <section class="panel" id="recipes">
+      <h2>Colorful Cauldron Recipes</h2>
+      <p class="panel-tagline">
+        Non‑alcoholic fun for trick‑or‑treat night: orange juice potion and purple witches’ brew.
+      </p>
+
+      <div class="chips">
+        <span class="chip orange">Orange Juice</span>
+        <span class="chip purple">Purple Witches Brew</span>
+        <span class="chip yellow">Yellow</span>
+        <span class="chip red">Red</span>
+        <span class="chip blue">Blue</span>
+        <span class="chip white">White</span>
+      </div>
+
+      <div class="recipes-grid">
+        <!-- Orange Juice Potion -->
+        <article class="recipe-card">
+          <h3>Jack‑O’‑Lantern Orange Juice Potion</h3>
+          <p class="recipe-meta">Bright, citrusy, kid‑friendly, and perfect with candy.</p>
+          <ul class="recipe-list">
+            <li>2 cups chilled orange juice</li>
+            <li>1/2 cup sparkling water or lemon‑lime soda</li>
+            <li>1 tbsp honey or simple syrup (optional)</li>
+            <li>Ice cubes shaped like tiny pumpkins (or regular ice)</li>
+            <li>Orange slice + cinnamon stick for garnish</li>
+          </ul>
+          <p class="recipe-steps">
+            Stir orange juice with honey until smooth. Fill a glass with pumpkin ice cubes,
+            pour in the juice, then top with sparkling water. Garnish with an orange slice
+            and cinnamon stick. Serve in a clear cup with a drawn‑on jack‑o’‑lantern face
+            for extra Halloween charm.
+          </p>
+        </article>
+
+        <!-- Purple Witches Brew -->
+        <article class="recipe-card">
+          <h3>Purple Witches’ Brew (Non‑Alcoholic)</h3>
+          <p class="recipe-meta">Magical, fruity, and glowing under blacklight.</p>
+          <ul class="recipe-list">
+            <li>1 cup grape juice (100% juice)</li>
+            <li>1/2 cup blueberry juice or puree</li>
+            <li>1/2 cup lemon‑lime soda or sparkling water</li>
+            <li>Handful of frozen blueberries (“floating eyeballs”)</li>
+            <li>Optional: edible glitter or shimmer dust</li>
+          </ul>
+          <p class="recipe-steps">
+            In a cauldron‑style bowl or large glass, mix grape and blueberry juice.
+            Add frozen blueberries so they bob like spooky eyes. Top with soda for fizz,
+            then sprinkle a tiny pinch of edible glitter. Serve with a striped straw and
+            call it your <span class="highlight-word">Purple Witches Brew</span>.
+          </p>
+        </article>
+      </div>
+
+      <div class="usa-banner" id="usa">
+        <span class="flag"></span>
+        <p>
+          United States of America color study: <strong>Red</strong>, <strong>White</strong>, and <strong>Blue</strong>
+          meet Halloween oranges and purples for a playful design mash‑up.
+        </p>
+      </div>
+
+      <div class="learning-block" id="learning">
+        <h3>Learning Concept Art with Color</h3>
+        <p>
+          Try a mini concept‑art exercise: design a Halloween scene that mixes
+          <strong>jack‑o’‑lantern orange</strong>, <strong>flag red‑white‑blue</strong>, and
+          <strong>witchy purple</strong>. Add a <strong>pink puppy</strong> and a
+          <strong>purple dinosaur</strong> as characters. Ask yourself:
+          “Which color feels spooky, which feels silly, and which feels safe?”
+          That’s the start of learning color psychology in art.
+        </p>
+      </div>
+    </section>
+
+    <!-- RIGHT PANEL -->
+    <section class="panel" id="jokes">
+      <div class="jokes-section">
+        <h2>Laughing Out Loud Jokes</h2>
+        <p class="panel-tagline">
+          Tap for a random Halloween joke—perfect for trick‑or‑treat giggles.
+        </p>
+
+        <h3>Tap for a Trick or Treat Joke</h3>
+        <div class="joke-display" id="jokeDisplay">
+          Click “Summon Joke” to start the cackling.
+        </div>
+        <button class="joke-btn" onclick="showRandomJoke()">Summon Joke</button>
+      </div>
+
+      <div class="characters" id="characters">
+        <!-- Purple Dinosaur -->
+        <article class="character-card">
+          <h3>Purple Dinosaur of Giggles</h3>
+          <p>
+            A friendly purple dinosaur who guards the candy bowl and tells
+            the silliest jokes. Great for teaching kids that “scary” can
+            also be soft, colorful, and kind.
+          </p>
+          <div class="dino">
+            <div class="dino-body"></div>
+            <div class="dino-neck"></div>
+            <div class="dino-head">
+              <div class="dino-eye"></div>
+            </div>
+            <div class="dino-tail"></div>
+          </div>
+        </article>
+
+        <!-- Pink Puppy -->
+        <article class="character-card">
+          <h3>White & Pink Puppy Jumping</h3>
+          <p>
+            A bouncing pink puppy with white highlights, jumping for joy
+            every time someone says “Trick or Treat!” Use this character
+            to explore motion and gesture in concept art.
+          </p>
+          <div class="puppy">
+            <div class="puppy-body"></div>
+            <div class="puppy-head"></div>
+            <div class="puppy-ear left"></div>
+            <div class="puppy-ear right"></div>
+            <div class="puppy-eye"></div>
+            <div class="puppy-mouth"></div>
+          </div>
+        </article>
+
+        <!-- Witches Brew Visual -->
+        <article class="character-card">
+          <h3>Cauldron of Purple Witches Brew</h3>
+          <p>
+            A glowing cauldron of non‑alcoholic purple brew, bubbling with
+            ideas: jokes, art prompts, and color experiments. Imagine each
+            bubble as a new fun project.
+          </p>
+          <div class="brew">
+            <div class="brew-cauldron"></div>
+            <div class="brew-liquid"></div>
+            <div class="brew-bubble b1"></div>
+            <div class="brew-bubble b2"></div>
+            <div class="brew-bubble b3"></div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Trick or Treat • Jack‑o’‑lantern • Orange Juice • Purple Witches Brew • Jokes • Fun Ideas • Concept Art • USA Colors
+  </footer>
+
+  <script>
+    const jokes = [
+      "Why did the jack‑o’‑lantern drink orange juice? It wanted to be a little more a‑peel‑ing.",
+      "What do you call a purple dinosaur who loves Halloween candy? A dino‑s’more!",
+      "Why did the pink puppy jump over the candy bowl? It heard the treats were on the ‘other side’.",
+      "What’s a witch’s favorite non‑alcoholic drink? Broom‑berry purple punch!",
+      "Why did the American flag visit the haunted house? It wanted to see the stars and frights.",
+      "What do you get when you mix orange juice and a joke? A punch line!"
+    ];
+
+    function showRandomJoke() {
+      const display = document.getElementById("jokeDisplay");
+      const randomIndex = Math.floor(Math.random() * jokes.length);
+      display.textContent = jokes[randomIndex];
+    }
+
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+  </script>
+</body>
+</html>
