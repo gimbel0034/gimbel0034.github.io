@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Holiday Safety, Homework & Happiness Planner</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg: #0b1020;
+      --card: #141a33;
+      --accent: #ffb347;
+      --accent2: #6cf0c2;
+      --accent3: #ff6f61;
+      --text: #f7f7ff;
+      --muted: #c7c9e0;
+      --border: #252a4a;
+      --shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+      --font-main: "Segoe UI", system-ui, -apple-system, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background: radial-gradient(circle at top, #283e51 0, #0b1020 55%, #05060c 100%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(10px);
+      background: linear-gradient(
+        120deg,
+        rgba(255, 179, 71, 0.12),
+        rgba(108, 240, 194, 0.08),
+        rgba(255, 111, 97, 0.12)
+      );
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 20%, #ffe082, #ffb347 40%, #ff6f61 75%, #0b1020 100%);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .logo-icon::before {
+      content: "";
+      position: absolute;
+      inset: 8px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.35);
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-text h1 {
+      font-size: 1.2rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .logo-text span {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    nav {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    nav button {
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(10, 15, 35, 0.7);
+      color: var(--text);
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    nav button:hover {
+      background: rgba(255, 179, 71, 0.18);
+      border-color: rgba(255, 179, 71, 0.7);
+      transform: translateY(-1px);
+    }
+
+    main {
+      flex: 1;
+      padding: 1.5rem 2rem 2.5rem;
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.4fr);
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 960px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: linear-gradient(145deg, #10152b, #0b1020);
+      border-radius: 1rem;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      padding: 1.25rem 1.4rem;
+      margin-bottom: 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(255, 179, 71, 0.12), transparent 55%),
+        radial-gradient(circle at 90% 100%, rgba(108, 240, 194, 0.12), transparent 55%);
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.75rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card-title {
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+
+    .card-tag {
+      font-size: 0.75rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(5, 8, 20, 0.7);
+      color: var(--accent2);
+    }
+
+    .card-body {
+      position: relative;
+      z-index: 1;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+
+    h2.section-heading {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.4rem;
+    }
+
+    .pill {
+      font-size: 0.75rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(8, 12, 25, 0.8);
+      color: var(--muted);
+    }
+
+    ul {
+      list-style: none;
+      margin-top: 0.4rem;
+    }
+
+    ul li {
+      margin: 0.25rem 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.4rem;
+    }
+
+    ul li::before {
+      content: "•";
+      color: var(--accent2);
+      margin-top: 0.05rem;
+    }
+
+    .highlight {
+      color: var(--accent2);
+    }
+
+    .danger {
+      color: var(--accent3);
+    }
+
+    .success {
+      color: var(--accent);
+    }
+
+    .grid-two {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    @media (max-width: 720px) {
+      .grid-two {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-top: 0.4rem;
+    }
+
+    .badge {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .badge.halloween {
+      border-color: #ff6f61;
+      color: #ff6f61;
+    }
+
+    .badge.christmas {
+      border-color: #6cf0c2;
+      color: #6cf0c2;
+    }
+
+    .badge.sunshine {
+      border-color: #ffb347;
+      color: #ffb347;
+    }
+
+    .badge.recycling {
+      border-color: #8bc34a;
+      color: #8bc34a;
+    }
+
+    .badge.psychology {
+      border-color: #b39ddb;
+      color: #b39ddb;
+    }
+
+    .city-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.4rem;
+      font-size: 0.8rem;
+    }
+
+    .city-chip {
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .city-chip span {
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .air-balloon {
+      position: relative;
+      width: 120px;
+      height: 160px;
+      margin: 0.5rem auto 0;
+    }
+
+    .air-balloon .balloon {
+      position: absolute;
+      inset: 0;
+      border-radius: 60% 60% 50% 50%;
+      background: radial-gradient(circle at 30% 20%, #ffe082, #ffb347 40%, #ff6f61 75%, #0b1020 100%);
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
+    }
+
+    .air-balloon .stripe {
+      position: absolute;
+      inset: 10px;
+      border-radius: 60% 60% 50% 50%;
+      border: 2px dashed rgba(255, 255, 255, 0.35);
+    }
+
+    .air-balloon .basket {
+      position: absolute;
+      bottom: -18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 22px;
+      border-radius: 6px;
+      background: linear-gradient(145deg, #3e2723, #4e342e);
+      border: 2px solid rgba(255, 255, 255, 0.35);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
+    }
+
+    .air-balloon .rope {
+      position: absolute;
+      bottom: 6px;
+      width: 2px;
+      height: 18px;
+      background: rgba(255, 255, 255, 0.6);
+    }
+
+    .air-balloon .rope.left {
+      left: 45%;
+    }
+
+    .air-balloon .rope.right {
+      left: 55%;
+    }
+
+    .flower-row {
+      display: flex;
+      gap: 0.6rem;
+      margin-top: 0.6rem;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .flower {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      position: relative;
+      background: radial-gradient(circle at 30% 20%, #ffeb3b, #ff9800 45%, #f44336 80%);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    .flower::before,
+    .flower::after {
+      content: "";
+      position: absolute;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 20%, #ffccbc, #ff7043 60%, #bf360c 100%);
+    }
+
+    .flower::before {
+      top: -6px;
+      left: 7px;
+    }
+
+    .flower::after {
+      bottom: -6px;
+      right: 7px;
+    }
+
+    .flower-center {
+      position: absolute;
+      inset: 10px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #fffde7, #fbc02d 60%, #f57f17 100%);
+      border: 2px solid rgba(255, 255, 255, 0.7);
+    }
+
+    .pumpkin-row {
+      display: flex;
+      gap: 0.6rem;
+      margin-top: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .pumpkin {
+      width: 50px;
+      height: 40px;
+      border-radius: 50% / 60%;
+      background: radial-gradient(circle at 30% 20%, #ffe082, #ff9800 40%, #e65100 80%);
+      position: relative;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+    }
+
+    .pumpkin::before,
+    .pumpkin::after {
+      content: "";
+      position: absolute;
+      top: 2px;
+      bottom: 2px;
+      width: 14px;
+      border-radius: 50% / 60%;
+      background: radial-gradient(circle at 30% 20%, #ffcc80, #fb8c00 50%, #e65100 90%);
+    }
+
+    .pumpkin::before {
+      left: 2px;
+    }
+
+    .pumpkin::after {
+      right: 2px;
+    }
+
+    .pumpkin-stem {
+      position: absolute;
+      top: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 8px;
+      height: 10px;
+      border-radius: 3px;
+      background: linear-gradient(145deg, #4caf50, #2e7d32);
+    }
+
+    .checklist {
+      margin-top: 0.4rem;
+    }
+
+    .checklist-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin: 0.25rem 0;
+      font-size: 0.85rem;
+    }
+
+    .checklist-item input[type="checkbox"] {
+      accent-color: #ffb347;
+      width: 14px;
+      height: 14px;
+    }
+
+    .checklist-item span {
+      color: var(--muted);
+    }
+
+    .recipe-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 0.6rem;
+      margin-top: 0.5rem;
+    }
+
+    @media (max-width: 720px) {
+      .recipe-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .recipe-card {
+      border-radius: 0.75rem;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 0.6rem 0.7rem;
+      background: rgba(5, 8, 20, 0.8);
+    }
+
+    .recipe-title {
+      font-size: 0.9rem;
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+    }
+
+    .recipe-meta {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .recipe-meta span {
+      color: var(--accent2);
+    }
+
+    .citation-block {
+      margin-top: 0.6rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+      border-top: 1px dashed rgba(255, 255, 255, 0.18);
+      padding-top: 0.4rem;
+    }
+
+    .citation-label {
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.7rem;
+      color: var(--accent2);
+    }
+
+    .citation-text {
+      margin-top: 0.2rem;
+    }
+
+    .footer {
+      padding: 0.9rem 2rem 1.2rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.8rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .footer span.highlight {
+      color: var(--accent);
+    }
+
+    .sun-strip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .sun-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #fff59d, #ffeb3b 50%, #ffb300 100%);
+      box-shadow: 0 0 12px rgba(255, 235, 59, 0.7);
+      position: relative;
+    }
+
+    .sun-icon::before,
+    .sun-icon::after {
+      content: "";
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 1px dashed rgba(255, 255, 255, 0.6);
+    }
+
+    .sun-icon::after {
+      inset: -8px;
+      border-style: dotted;
+      opacity: 0.7;
+    }
+
+    .sentence-block {
+      margin-top: 0.4rem;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    .sentence-block strong {
+      color: var(--accent2);
+      font-weight: 600;
+    }
+
+    .sentence-block em {
+      color: var(--accent3);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <div class="logo-icon"></div>
+      <div class="logo-text">
+        <h1>Holiday Safety & Study Planner</h1>
+        <span>Utah • Salt Lake City • Nevada • Henderson • Sunshine & Seasons</span>
+      </div>
+    </div>
+    <nav>
+      <button data-scroll="safety">Safety Plan</button>
+      <button data-scroll="homework">Homework & Assignments</button>
+      <button data-scroll="psychology">Psychology Notes</button>
+      <button data-scroll="recipes">Recipes</button>
+      <button data-scroll="holidays">Holidays</button>
+      <button data-scroll="citations">Citation</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- LEFT COLUMN: Safety, Homework, Psychology -->
+    <section>
+      <!-- SAFETY PLAN -->
+      <article class="card" id="safety">
+        <div class="card-header">
+          <div class="card-title">Personal & Holiday Safety Plan</div>
+          <div class="card-tag">Structured Sentences • Practical Steps</div>
+        </div>
+        <div class="card-body">
+          <h2 class="section-heading">Core safety goals</h2>
+          <p class="sentence-block">
+            I create a <strong>clear safety plan</strong> so that stressful moments feel more manageable and predictable.
+            When holidays arrive—whether it is <em>Halloween in Henderson</em> or <em>Christmas lights in Salt Lake City</em>—
+            I want my environment to feel safe, supportive, and grounded.
+          </p>
+
+          <div class="pill-row">
+            <span class="pill">Emotional safety</span>
+            <span class="pill">Physical safety</span>
+            <span class="pill">Digital boundaries</span>
+            <span class="pill">Community support</span>
+          </div>
+
+          <div class="grid-two" style="margin-top:0.6rem;">
+            <div>
+              <h2 class="section-heading">Step‑by‑step safety actions</h2>
+              <ul>
+                <li>
+                  I identify <span class="highlight">three safe people</span> I can contact in Utah or Nevada when I feel overwhelmed.
+                </li>
+                <li>
+                  I keep a short list of <span class="highlight">calming places</span>, such as a quiet park in Salt Lake City or a sunny corner in Henderson.
+                </li>
+                <li>
+                  I set a <span class="danger">limit on social media</span> during holidays so I do not compare my life to unrealistic images.
+                </li>
+                <li>
+                  I prepare a <span class="success">grounding routine</span>: slow breathing, naming five things I can see, and stepping outside for sunshine.
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h2 class="section-heading">Emergency & support plan</h2>
+              <ul>
+                <li>
+                  I store local emergency numbers and crisis hotlines in my phone and on paper in my home.
+                </li>
+                <li>
+                  I plan safe transportation for holiday events, avoiding driving when I feel exhausted or distracted.
+                </li>
+                <li>
+                  I choose one trusted friend or family member to check in with me after major events like Halloween parties or Christmas gatherings.
+                </li>
+                <li>
+                  I keep a small “comfort kit” nearby: water, a warm blanket, a favorite flower image, and a short list of reassuring sentences.
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="badge-row">
+            <span class="badge halloween">Halloween safety</span>
+            <span class="badge christmas">Christmas calm</span>
+            <span class="badge sunshine">Sunshine breaks</span>
+            <span class="badge recycling">Eco‑friendly choices</span>
+          </div>
+
+          <div class="city-strip">
+            <div class="city-chip">
+              <span>Salt Lake City</span> — snowy sidewalks, bright lights, and mindful walking routes.
+            </div>
+            <div class="city-chip">
+              <span>Henderson</span> — desert sunshine, neighborhood pumpkins, and quiet evening strolls.
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- HOMEWORK & ASSIGNMENT LIST -->
+      <article class="card" id="homework">
+        <div class="card-header">
+          <div class="card-title">Homework & Assignment Organizer</div>
+          <div class="card-tag">Study Plan • Task Checklist</div>
+        </div>
+        <div class="card-body">
+          <h2 class="section-heading">Weekly homework overview</h2>
+          <p class="sentence-block">
+            I organize my homework into <strong>clear, short sentences</strong> so each task feels realistic and achievable.
+            This planner connects schoolwork with seasonal themes—pumpkins, flowers, and sunshine—to keep my motivation alive.
+          </p>
+
+          <div class="checklist">
+            <div class="checklist-item">
+              <input type="checkbox" />
+              <span>Write a one‑page reflection on how holiday traditions influence community psychology in Utah and Nevada.</span>
+            </div>
+            <div class="checklist-item">
+              <input type="checkbox" />
+              <span>Complete reading on recycling and environmental responsibility, then summarize it in three sentences.</span>
+            </div>
+            <div class="checklist-item">
+              <input type="checkbox" />
+              <span>Prepare a short presentation about air balloons and how they symbolize hope and perspective.</span>
+            </div>
+            <div class="checklist-item">
+              <input type="checkbox" />
+              <span>Draft a recipe card for a pumpkin‑based dish and explain why cooking can be calming.</span>
+            </div>
+            <div class="checklist-item">
+              <input type="checkbox" />
+              <span>Review class notes on basic psychology concepts and highlight ideas that help with holiday stress.</span>
+            </div>
+          </div>
+
+          <h2 class="section-heading" style="margin-top:0.7rem;">Assignment categories</h2>
+          <div class="pill-row">
+            <span class="pill">Psychology reflection</span>
+            <span class="pill">Recycling project</span>
+            <span class="pill">Holiday essay</span>
+            <span class="pill">Recipe writing</span>
+            <span class="pill">Creative sentence practice</span>
+          </div>
+
+          <p class="sentence-block" style="margin-top:0.6rem;">
+            Each assignment is written as a <strong>complete sentence</strong> with a clear verb, subject, and purpose.
+            This structure helps me understand exactly what I need to do and why it matters.
+          </p>
+        </div>
+      </article>
+
+      <!-- PSYCHOLOGY & EMOTIONAL NOTES -->
+      <article class="card" id="psychology">
+        <div class="card-header">
+          <div class="card-title">Psychology & Emotional Well‑Being Notes</div>
+          <div class="card-tag">Reflection • Coping Skills</div>
+        </div>
+        <div class="card-body">
+          <h2 class="section-heading">Holiday emotions in simple sentences</h2>
+          <p class="sentence-block">
+            I notice that holidays can bring <strong>mixed emotions</strong>. Sometimes I feel excited about pumpkins, lights,
+            and sunshine; other times I feel lonely or overwhelmed. I remind myself that both experiences are valid.
+          </p>
+
+          <ul>
+            <li>
+              I describe my feelings in one sentence: “Right now I feel anxious because there are many expectations around the holidays.”
+            </li>
+            <li>
+              I add a second sentence that offers kindness: “It makes sense that I feel this way, and I can take one small step to care for myself.”
+            </li>
+            <li>
+              I use a third sentence to plan an action: “I will step outside, notice the sun, and take three slow breaths.”
+            </li>
+          </ul>
+
+          <h2 class="section-heading" style="margin-top:0.6rem;">Psychology tools I can practice</h2>
+          <div class="grid-two">
+            <div>
+              <ul>
+                <li>
+                  I practice <span class="highlight">grounding</span> by naming five things I can see, four things I can touch,
+                  three things I can hear, two things I can smell, and one thing I can taste.
+                </li>
+                <li>
+                  I use <span class="highlight">cognitive reframing</span> to gently challenge thoughts like “I must be perfect”
+                  and replace them with “I can be human and still be worthy.”
+                </li>
+              </ul>
+            </div>
+            <div>
+              <ul>
+                <li>
+                  I schedule <span class="success">small joys</span>, such as arranging flowers, carving pumpkins, or cooking a simple recipe.
+                </li>
+                <li>
+                  I remember that seeking professional help is a strong and responsible choice when my emotions feel too heavy.
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="badge-row">
+            <span class="badge psychology">Emotion awareness</span>
+            <span class="badge halloween">Holiday triggers</span>
+            <span class="badge christmas">Family expectations</span>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- RIGHT COLUMN: Visuals, Recipes, Holidays, Citation -->
+    <section>
+      <!-- AIR BALLOON & FLOWERS -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-title">Air Balloon & Flower Calm Space</div>
+          <div class="card-tag">Visual Grounding • Imagination</div>
+        </div>
+        <div class="card-body">
+          <p class="sentence-block">
+            I imagine an <strong>air balloon</strong> rising gently above Salt Lake City and Henderson.
+            From this higher view, my worries look smaller and my options look wider.
+          </p>
+
+          <div class="air-balloon">
+            <div class="balloon"></div>
+            <div class="stripe"></div>
+            <div class="rope left"></div>
+            <div class="rope right"></div>
+            <div class="basket"></div>
+          </div>
+
+          <p class="sentence-block" style="margin-top:0.6rem;">
+            I picture a small field of <strong>flowers</strong> near my favorite walking path.
+            Each flower represents one supportive habit: sleep, movement, hydration, connection, and creativity.
+          </p>
+
+          <div class="flower-row">
+            <div class="flower"><div class="flower-center"></div></div>
+            <div class="flower"><div class="flower-center"></div></div>
+            <div class="flower"><div class="flower-center"></div></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- RECIPES -->
+      <article class="card" id="recipes">
+        <div class="card-header">
+          <div class="card-title">Comfort Recipes & Holiday Snacks</div>
+          <div class="card-tag">Pumpkins • Christmas • Everyday</div>
+        </div>
+        <div class="card-body">
+          <h2 class="section-heading">Simple recipes in clear sentences</h2>
+          <p class="sentence-block">
+            I write each recipe as a short sequence of <strong>complete sentences</strong>.
+            This helps me follow the steps calmly and safely, especially when I feel distracted.
+          </p>
+
+          <div class="recipe-grid">
+            <div class="recipe-card">
+              <div class="recipe-title">Pumpkin Spice Oat Bowl</div>
+              <div class="recipe-meta">
+                Prep: <span>10 minutes</span> • Mood: cozy morning in Henderson
+              </div>
+              <ul>
+                <li>I cook oats in water or milk until they are soft and creamy.</li>
+                <li>I stir in pumpkin puree, cinnamon, and a small amount of sweetener.</li>
+                <li>I top the bowl with nuts, seeds, or a few dried cranberries.</li>
+                <li>I sit down, breathe slowly, and eat without rushing.</li>
+              </ul>
+            </div>
+            <div class="recipe-card">
+              <div class="recipe-title">Warm Holiday Citrus Water</div>
+              <div class="recipe-meta">
+                Prep: <span>5 minutes</span> • Mood: winter evening in Salt Lake City
+              </div>
+              <ul>
+                <li>I heat water until it is warm but not boiling.</li>
+                <li>I add slices of orange or lemon and a small spoon of honey.</li>
+                <li>I hold the mug with both hands and feel the warmth.</li>
+                <li>I drink slowly while noticing the scent and taste.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="pumpkin-row">
+            <div class="pumpkin">
+              <div class="pumpkin-stem"></div>
+            </div>
+            <div class="pumpkin">
+              <div class="pumpkin-stem"></div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- HOLIDAYS & RECYCLING -->
+      <article class="card" id="holidays">
+        <div class="card-header">
+          <div class="card-title">Holidays, Recycling & Sunshine Habits</div>
+          <div class="card-tag">Halloween • Christmas • Eco‑Friendly</div>
+        </div>
+        <div class="card-body">
+          <h2 class="section-heading">Holiday rhythm</h2>
+          <p class="sentence-block">
+            I move through the year with a gentle rhythm: pumpkins in October, lights in December,
+            flowers in spring, and sunshine in summer. Each season offers a chance to reset my habits.
+          </p>
+
+          <ul>
+            <li>On Halloween, I choose decorations that are reusable or recyclable.</li>
+            <li>On Christmas, I focus on meaningful connection rather than expensive gifts.</li>
+            <li>On sunny days, I step outside for a few minutes to feel the light on my skin.</li>
+            <li>All year, I sort my recycling and reduce waste where I reasonably can.</li>
+          </ul>
+
+          <div class="badge-row">
+            <span class="badge halloween">Pumpkins & costumes</span>
+            <span class="badge christmas">Lights & music</span>
+            <span class="badge recycling">Recycling bins</span>
+            <span class="badge sunshine">Sunshine walks</span>
+          </div>
+
+          <p class="sentence-block" style="margin-top:0.6rem;">
+            I remind myself that small, consistent actions—like recycling, walking in the sun, and checking in with my feelings—
+            can slowly change the way I experience holidays.
+          </p>
+        </div>
+      </article>
+
+      <!-- CITATION / STUDY NOTE -->
+      <article class="card" id="citations">
+        <div class="card-header">
+          <div class="card-title">Citation & Study Reminder</div>
+          <div class="card-tag">Homework Support • Academic Style</div>
+        </div>
+        <div class="card-body">
+          <h2 class="section-heading">Basic citation sentence</h2>
+          <p class="sentence-block">
+            When I write homework or essays, I include a <strong>citation sentence</strong> to show where my information comes from.
+            For example, I might write: “According to a recent article on holiday stress, many people feel pressure to be constantly cheerful.”
+          </p>
+
+          <div class="citation-block">
+            <div class="citation-label">Sample in‑text citation (APA style)</div>
+            <div class="citation-text">
+              In‑text sentence: <br />
+              <em>Holiday stress can increase when expectations are unrealistic (Author, Year).</em>
+            </div>
+          </div>
+
+          <p class="sentence-block" style="margin-top:0.6rem;">
+            I keep my citations organized in a small list at the end of my assignment.
+            This habit supports academic honesty and helps me remember where I learned each idea.
+          </p>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div>
+      Planner for <span class="highlight">Utah & Nevada</span> — Salt Lake City, Henderson, and everywhere my holidays take me.
+    </div>
+    <div class="sun-strip">
+      <div class="sun-icon"></div>
+      <span>One small step, one clear sentence, one moment of sunshine at a time.</span>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scroll navigation
+    document.querySelectorAll("nav button[data-scroll]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const id = btn.getAttribute("data-scroll");
+        const target = document.getElementById(id);
+        if (target) {
+          window.scrollTo({
+            top: target.offsetTop - 80,
+            behavior: "smooth",
+          });
+        }
+      });
+    });
+
+    // Simple interactive checklist feedback
+    const checklistItems = document.querySelectorAll(".checklist-item input[type='checkbox']");
+    checklistItems.forEach((box) => {
+      box.addEventListener("change", () => {
+        const parent = box.parentElement;
+        if (box.checked) {
+          parent.style.color = "#6cf0c2";
+          parent.style.opacity = "0.9";
+        } else {
+          parent.style.color = "#c7c9e0";
+          parent.style.opacity = "1";
+        }
+      });
+    });
+  </script>
+</body>
+</html>
