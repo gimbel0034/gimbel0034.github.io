@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Help Plan for Marissa – Life, Service, and Scripture</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    :root {
+      --navy: #001f3f;
+      --army: #4b5320;
+      --gold: #f1c40f;
+      --sky: #87ceeb;
+      --cream: #fdf6e3;
+      --text-dark: #222;
+      --accent-red: #c0392b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      background: radial-gradient(circle at top, var(--sky), #0b1726 55%);
+      color: var(--cream);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--navy), var(--army));
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 3px solid var(--gold);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-badge {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 2px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      background: rgba(0, 0, 0, 0.35);
+    }
+
+    .logo-text h1 {
+      font-size: 1.3rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .logo-text span {
+      font-size: 0.8rem;
+      color: var(--gold);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: var(--cream);
+      text-decoration: none;
+      font-size: 0.9rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid rgba(241, 196, 15, 0.4);
+      transition: background 0.2s, transform 0.2s, border-color 0.2s;
+    }
+
+    nav a:hover {
+      background: rgba(241, 196, 15, 0.2);
+      transform: translateY(-1px);
+      border-color: var(--gold);
+    }
+
+    main {
+      flex: 1;
+      padding: 2rem 5vw 3rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.8fr);
+      gap: 2rem;
+      align-items: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-text h2 {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-text h2 span {
+      color: var(--gold);
+    }
+
+    .hero-text p {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .tag {
+      font-size: 0.8rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: rgba(0, 0, 0, 0.25);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .btn {
+      border: none;
+      cursor: pointer;
+      padding: 0.6rem 1.2rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--navy);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.45);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--cream);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-1px);
+    }
+
+    .hero-panel {
+      background: rgba(0, 0, 0, 0.35);
+      border-radius: 1rem;
+      padding: 1.2rem 1.4rem;
+      border: 1px solid rgba(241, 196, 15, 0.35);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-panel::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(135, 206, 235, 0.25), transparent 55%),
+        radial-gradient(circle at 90% 100%, rgba(241, 196, 15, 0.25), transparent 55%);
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .hero-panel-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .service-flags {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .flag-card {
+      flex: 1;
+      border-radius: 0.75rem;
+      padding: 0.6rem 0.7rem;
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      font-size: 0.8rem;
+    }
+
+    .flag-title {
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    .flag-title span {
+      color: var(--gold);
+    }
+
+    .flag-body {
+      font-size: 0.75rem;
+      line-height: 1.4;
+    }
+
+    .verse-card {
+      margin-top: 0.5rem;
+      padding: 0.7rem 0.8rem;
+      border-radius: 0.75rem;
+      background: rgba(253, 246, 227, 0.08);
+      border: 1px dashed rgba(241, 196, 15, 0.6);
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+
+    .verse-ref {
+      font-size: 0.75rem;
+      color: var(--gold);
+      margin-top: 0.3rem;
+      text-align: right;
+    }
+
+    section {
+      margin-bottom: 2.5rem;
+    }
+
+    section h3 {
+      font-size: 1.4rem;
+      margin-bottom: 0.75rem;
+      border-left: 4px solid var(--gold);
+      padding-left: 0.6rem;
+    }
+
+    section p {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 0.75rem;
+    }
+
+    .plan-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .plan-card {
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 0.9rem;
+      padding: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .plan-card h4 {
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+      color: var(--gold);
+    }
+
+    .plan-card small {
+      font-size: 0.75rem;
+      opacity: 0.8;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .plan-card ul {
+      list-style: none;
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+
+    .plan-card li {
+      margin-bottom: 0.35rem;
+      position: relative;
+      padding-left: 1rem;
+    }
+
+    .plan-card li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+    }
+
+    .timeline {
+      border-left: 2px solid rgba(241, 196, 15, 0.6);
+      padding-left: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .timeline-step {
+      margin-bottom: 0.7rem;
+    }
+
+    .timeline-step strong {
+      color: var(--gold);
+      font-size: 0.9rem;
+    }
+
+    .timeline-step span {
+      display: block;
+      font-size: 0.85rem;
+      margin-top: 0.15rem;
+    }
+
+    .scripture-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+      margin-top: 0.75rem;
+    }
+
+    .scripture-card {
+      background: rgba(253, 246, 227, 0.08);
+      border-radius: 0.9rem;
+      padding: 0.9rem;
+      border: 1px solid rgba(241, 196, 15, 0.5);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .scripture-card .ref {
+      font-size: 0.8rem;
+      color: var(--gold);
+      margin-top: 0.4rem;
+      text-align: right;
+    }
+
+    .reflection-area {
+      margin-top: 1rem;
+      background: rgba(0, 0, 0, 0.45);
+      border-radius: 0.9rem;
+      padding: 0.9rem;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+
+    .reflection-area label {
+      font-size: 0.85rem;
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 90px;
+      border-radius: 0.6rem;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      padding: 0.6rem;
+      font-family: inherit;
+      font-size: 0.9rem;
+      resize: vertical;
+      background: rgba(0, 0, 0, 0.6);
+      color: var(--cream);
+    }
+
+    .reflection-actions {
+      margin-top: 0.6rem;
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(241, 196, 15, 0.5);
+      margin-top: 0.4rem;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+
+    .military-banner {
+      margin-top: 0.5rem;
+      padding: 0.8rem;
+      border-radius: 0.9rem;
+      background: linear-gradient(135deg, rgba(0, 31, 63, 0.7), rgba(75, 83, 32, 0.7));
+      border: 1px solid rgba(241, 196, 15, 0.6);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      align-items: center;
+      font-size: 0.85rem;
+    }
+
+    .military-banner span.badge {
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      font-size: 0.8rem;
+    }
+
+    .military-banner strong {
+      color: var(--gold);
+    }
+
+    .scripture-toggle {
+      margin-top: 0.6rem;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .toggle-indicator {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      border: 1px solid rgba(241, 196, 15, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    footer {
+      background: #050b12;
+      border-top: 1px solid rgba(241, 196, 15, 0.4);
+      padding: 1rem 5vw 1.4rem;
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    footer .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      fle...all>
+          <ul>
+            <li>Read stories of courage (e.g., David & Goliath, Esther, Paul).</li>
+            <li>Memorize one short verse about strength or peace.</li>
+            <li>When anxious, whisper: “Lord, be my shield and my peace.”</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- REFLECTION -->
+    <section id="reflection">
+      <h3>Reflection – Your Voice Matters</h3>
+      <p>
+        This space is for you to write freely. You can use it to talk to God, to yourself, or simply
+        to get thoughts out of your head and onto “paper.” Nothing here has to be perfect.
+      </p>
+
+      <div class="reflection-area">
+        <label for="reflectionInput">
+          What is one thing you want to remember today about your life, your faith, or your future?
+        </label>
+        <textarea id="reflectionInput" placeholder="Type your reflection, prayer, or thoughts here..."></textarea>
+
+        <div class="reflection-actions">
+          <button class="btn btn-outline" id="saveReflectionBtn">💾 Save Reflection (local)</button>
+          <button class="btn btn-outline" id="clearReflectionBtn">🧹 Clear</button>
+        </div>
+
+        <div class="status-pill" id="reflectionStatus">
+          <span class="status-dot"></span>
+          <span>Status: Not saved yet</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="flags">
+        <span class="flag-pill">Life Matters & Counts</span>
+        <span class="flag-pill">Learning of God</span>
+        <span class="flag-pill">Teaching Scripture</span>
+      </div>
+      <div class="footer-note">
+        This page is a gentle guide, not a rulebook. You are allowed to grow slowly.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Random verses for the hero button
+    const verses = [
+      {
+        text: "“The Lord is my light and my salvation—whom shall I fear?”",
+        ref: "Psalm 27:1"
+      },
+      {
+        text: "“Cast all your anxiety on him because he cares for you.”",
+        ref: "1 Peter 5:7"
+      },
+      {
+        text: "“God is our refuge and strength, an ever-present help in trouble.”",
+        ref: "Psalm 46:1"
+      },
+      {
+        text: "“I can do all this through him who gives me strength.”",
+        ref: "Philippians 4:13"
+      }
+    ];
+
+    const heroVerseEl = document.getElementById("heroVerse");
+    const randomVerseBtn = document.getElementById("randomVerseBtn");
+    const startPlanBtn = document.getElementById("startPlanBtn");
+
+    randomVerseBtn.addEventListener("click", () => {
+      const v = verses[Math.floor(Math.random() * verses.length)];
+      heroVerseEl.innerHTML = `
+        ${v.text}
+        <div class="verse-ref">${v.ref}</div>
+      `;
+    });
+
+    startPlanBtn.addEventListener("click", () => {
+      const lifePlanSection = document.getElementById("life-plan");
+      lifePlanSection.scrollIntoView({ behavior: "smooth" });
+    });
+
+    // Scripture toggle
+    const toggleScripture = document.getElementById("toggleScripture");
+    const toggleIndicator = document.getElementById("toggleIndicator");
+    const scriptureList = document.getElementById("scriptureList");
+    let scriptureExpanded = true;
+
+    toggleScripture.addEventListener("click", () => {
+      scriptureExpanded = !scriptureExpanded;
+      scriptureList.style.display = scriptureExpanded ? "grid" : "none";
+      toggleIndicator.textContent = scriptureExpanded ? "✓" : "✕";
+    });
+
+    // Reflection save (localStorage)
+    const reflectionInput = document.getElementById("reflectionInput");
+    const saveReflectionBtn = document.getElementById("saveReflectionBtn");
+    const clearReflectionBtn = document.getElementById("clearReflectionBtn");
+    const reflectionStatus = document.getElementById("reflectionStatus");
+
+    const REFLECTION_KEY = "marissa_help_plan_reflection";
+
+    function updateStatus(message, isSaved) {
+      reflectionStatus.innerHTML = `
+        <span class="status-dot" style="background:${isSaved ? '#2ecc71' : '#f1c40f'}"></span>
+        <span>Status: ${message}</span>
+      `;
+    }
+
+    // Load saved reflection on page load
+    const savedReflection = localStorage.getItem(REFLECTION_KEY);
+    if (savedReflection) {
+      reflectionInput.value = savedReflection;
+      updateStatus("Loaded saved reflection", true);
+    }
+
+    saveReflectionBtn.addEventListener("click", () => {
+      const text = reflectionInput.value.trim();
+      if (!text) {
+        updateStatus("Nothing to save yet", false);
+        return;
+      }
+      localStorage.setItem(REFLECTION_KEY, text);
+      updateStatus("Reflection saved locally", true);
+    });
+
+    clearReflectionBtn.addEventListener("click", () => {
+      reflectionInput.value = "";
+      localStorage.removeItem(REFLECTION_KEY);
+      updateStatus("Cleared – not saved", false);
+    });
+  </script>
+</body>
+</html>
