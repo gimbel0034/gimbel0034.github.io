@@ -1,73 +1,270 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Website</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Articles of Faith • Celestial Theme</title>
 
-    <!-- Optional: Link to CSS file -->
-    <link rel="stylesheet" href="styles.css">
+<style>
+/* ---------------------------------------------------
+   CELESTIAL BACKGROUND + OVERLAY
+--------------------------------------------------- */
+body {
+    margin: 0;
+    font-family: "Georgia", serif;
+    background: linear-gradient(to bottom right, #fdf8f3, #e8e0d8, #d9cfc2);
+    overflow-x: hidden;
+}
 
-    <!-- Optional: JavaScript file -->
-    <script src="script.js" defer></script>
+.celestial-overlay {
+    position: fixed;
+    inset: 0;
+    background: url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1350&q=80')
+                no-repeat center center fixed;
+    background-size: cover;
+    opacity: 0.25;
+    z-index: -1;
+}
+
+/* ---------------------------------------------------
+   FLOATING SYMBOLS (Faith, Hope, Charity)
+--------------------------------------------------- */
+.symbol {
+    position: absolute;
+    font-size: 40px;
+    opacity: 0.25;
+    animation: float 12s infinite ease-in-out;
+    color: #6b543d;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-40px); }
+    100% { transform: translateY(0px); }
+}
+
+/* ---------------------------------------------------
+   HEADER
+--------------------------------------------------- */
+header {
+    text-align: center;
+    padding: 30px;
+    background: rgba(255,255,255,0.8);
+    backdrop-filter: blur(6px);
+    border-bottom: 3px solid #cbb9a4;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 38px;
+    color: #5a4632;
+    text-shadow: 0 0 10px #fff;
+    animation: glowTitle 4s infinite alternate;
+}
+
+@keyframes glowTitle {
+    from { text-shadow: 0 0 6px #fff; }
+    to { text-shadow: 0 0 18px #e8d9c5; }
+}
+
+header p {
+    margin-top: 8px;
+    font-style: italic;
+    color: #5a4632;
+}
+
+/* ---------------------------------------------------
+   NAVIGATION
+--------------------------------------------------- */
+nav {
+    background: rgba(255,255,255,0.85);
+    border-bottom: 2px solid #cbb9a4;
+}
+
+nav ul {
+    list-style: none;
+    padding: 10px;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+nav li {
+    margin: 6px;
+}
+
+nav a {
+    text-decoration: none;
+    padding: 10px 16px;
+    background: #e8dfd2;
+    border-radius: 8px;
+    color: #5a4632;
+    font-weight: bold;
+    transition: 0.3s;
+    border: 1px solid #cbb9a4;
+}
+
+nav a:hover {
+    background: #d4c9b9;
+    transform: scale(1.05);
+}
+
+/* ---------------------------------------------------
+   MAIN CONTENT
+--------------------------------------------------- */
+main {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+section {
+    display: none;
+    background: rgba(255,255,255,0.92);
+    padding: 25px;
+    border-radius: 12px;
+    border: 2px solid #cbb9a4;
+    box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    animation: fadeIn 0.8s ease;
+}
+
+section.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h2 {
+    color: #5a4632;
+    border-bottom: 2px solid #cbb9a4;
+    padding-bottom: 6px;
+}
+
+/* ---------------------------------------------------
+   ARTICLES OF FAITH PANEL
+--------------------------------------------------- */
+#articles-panel {
+    margin-top: 20px;
+    padding: 20px;
+    background: linear-gradient(to bottom right, #fdf8f3, #f3ece6);
+    border-left: 6px solid #cbb9a4;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.08);
+}
+
+#articles-panel h3 {
+    margin-top: 0;
+    color: #5a4632;
+}
+
+#articles-panel p {
+    margin: 6px 0;
+    color: #6b543d;
+    font-size: 15px;
+}
+
+/* ---------------------------------------------------
+   FOOTER
+--------------------------------------------------- */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: rgba(255,255,255,0.8);
+    border-top: 2px solid #cbb9a4;
+    margin-top: 40px;
+}
+</style>
+
+<script>
+function showSection(id) {
+    document.querySelectorAll("section").forEach(sec => sec.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+}
+
+window.onload = () => showSection("home");
+</script>
 </head>
 
 <body>
-    <header>
-        <h1>Welcome to My Website</h1>
-    </header>
 
-    <nav>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="HendersonPolicedepartment.html">Police</a></li>
-            <li><a href="MentalHealthawareness.html">Mental Health</a></li>
-            <li><a href="ChristmasArtStore.html">Christmas</a></li>
-            <li><a href="Pride_MentalHealthAwareness.html">Pride_Mental Health</a></li>
-            <li><a href="Henderson.html">Henderson</a></li>
-           <li><a href="Woods.html">Woods</a></li>
-            <li><a href="Unitedwestand.html">Unitedstates</a></li>
-            <li><a href="FrostyAmerica.html">Frosty America</a></li>
-            <li><a href="Writing.html">Writings</a></li>        
-            <li><a href="Nightmarebeforechristmas.html">Nightmare before Christmas</a></li>
-            <li><a href="Zero.html">Zero The Dog</a></li>       
-            <li><a href="MyResume.html">Resume</a></li>
-            <li><a href="AmericaHotAir.html">Hot Air Ball</a></li>
-            <li><a href="LearningSafety.html">Learning about safety</a></li>
-            <li><a href="Sports.html">Sports</a></li>
-            <li><a href="Utah.html">Utah</a></li>
-            <li><a href="Nevada.html">Nevada</a></li>
-            <li><a href="Art.html">Art</a></li>
-            <li><a href="Maps.html>Maps</a></li>
-            <li><a href="Hen.html">Henderson</a></li>
-            <li><a href="Lana.html">Lana Lang</a></li>
-            <li><a href="Halloween.html">Halloween</a></li>
-            <li><a href="Coloringpurplecats.html">Safety Plan</a></li>
-            <li><a href="Helpful.html">Health Matters</a></li>
-        </ul>
-    </nav>
-    <main>               
-        <section id="home">
-            <h2>Home Section</h2>
-            <p>About myself I am a child of Heavenly Father and Mother</p>
-        </section>
+<div class="celestial-overlay"></div>
 
-        <section id="about">
-            <h2>About Section</h2>
-            <p>I am a daughter of a mom and a dad.</p> 
-        </section>
+<!-- Floating Faith Symbols -->
+<div class="symbol" style="top: 20%; left: 10%;">✦</div>
+<div class="symbol" style="top: 60%; left: 80%;">✧</div>
+<div class="symbol" style="top: 40%; left: 50%;">❉</div>
 
-        <section id="contact">
-            <h2>Contact Section</h2>
-            <p> Anywhere even the streets.</p>
-        </section>
-    </main>
+<header>
+    <h1>Articles of Faith • Celestial Website</h1>
+    <p>Faith • Hope • Charity • Light</p>
+</header>
 
-    <footer>
-        <p>&copy; 2026 My Website. All rights reserved.</p>
-    </footer>
+<nav>
+    <ul>
+        <li><a href="#" onclick="showSection('home')">Home</a></li>
+        <li><a href="#" onclick="showSection('about')">About</a></li>
+        <li><a href="#" onclick="showSection('contact')">Contact</a></li>
+
+        <!-- Your linked pages -->
+        <li><a href="HendersonPolicedepartment.html">Police</a></li>
+        <li><a href="MentalHealthawareness.html">Mental Health</a></li>
+        <li><a href="ChristmasArtStore.html">Christmas</a></li>
+        <li><a href="Pride_MentalHealthAwareness.html">Pride Mental Health</a></li>
+        <li><a href="Henderson.html">Henderson</a></li>
+        <li><a href="Woods.html">Woods</a></li>
+        <li><a href="Unitedwestand.html">United States</a></li>
+        <li><a href="FrostyAmerica.html">Frosty America</a></li>
+        <li><a href="Writing.html">Writings</a></li>
+        <li><a href="Nightmarebeforechristmas.html">Nightmare Before Christmas</a></li>
+        <li><a href="Zero.html">Zero the Dog</a></li>
+        <li><a href="MyResume.html">Resume</a></li>
+        <li><a href="AmericaHotAir.html">Hot Air Ball</a></li>
+        <li><a href="LearningSafety.html">Learning Safety</a></li>
+        <li><a href="Sports.html">Sports</a></li>
+        <li><a href="Utah.html">Utah</a></li>
+        <li><a href="Nevada.html">Nevada</a></li>
+        <li><a href="Art.html">Art</a></li>
+        <li><a href="Maps.html">Maps</a></li>
+        <li><a href="Hen.html">Henderson</a></li>
+        <li><a href="Lana.html">Lana Lang</a></li>
+        <li><a href="Halloween.html">Halloween</a></li>
+        <li><a href="Coloringpurplecats.html">Safety Plan</a></li>
+        <li><a href="Helpful.html">Health Matters</a></li>
+    </ul>
+</nav>
+
+<main>
+    <section id="home">
+        <h2>Home</h2>
+        <p>I am a child of Heavenly Father and Heavenly Mother, created with divine purpose and eternal worth.</p>
+
+        <div id="articles-panel">
+            <h3>Articles of Faith — Symbolic Overview</h3>
+            <p>• We believe in God the Eternal Father, His Son Jesus Christ, and the Holy Ghost.</p>
+            <p>• We believe in being honest, true, chaste, benevolent, virtuous, and doing good.</p>
+            <p>• We believe in hope, charity, and enduring to the end.</p>
+            <p>• We seek after things that are lovely, praiseworthy, and of good report.</p>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2>About</h2>
+        <p>I am a daughter of a mom and a dad, learning, growing, and becoming who I am meant to be.</p>
+    </section>
+
+    <section id="contact">
+        <h2>Contact</h2>
+        <p>You can find me anywhere — even walking the streets, exploring life with faith and courage.</p>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2026 Celestial Website. All rights reserved.</p>
+</footer>
 
 </body>
 </html>
