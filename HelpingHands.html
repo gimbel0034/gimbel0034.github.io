@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Helping Hands Learning Café</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg: #fdf7ec;
+      --accent: #ff7b54;
+      --accent-dark: #c94b2b;
+      --text: #333;
+      --card: #ffffff;
+      --border: #ffd3b6;
+      --green: #4caf50;
+      --blue: #3f51b5;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top left, #ffe0b2, #fdf7ec 40%, #fff);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* Layout */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.5rem;
+      background: linear-gradient(90deg, #ff7b54, #ffb26b);
+      color: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    header h1 {
+      font-size: 1.4rem;
+      letter-spacing: 0.05em;
+    }
+
+    header span.tagline {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    /* Hamburger menu */
+    .hamburger {
+      width: 32px;
+      height: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      display: block;
+      height: 3px;
+      background: #fff;
+      border-radius: 999px;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+
+    .hamburger.open span:nth-child(1) {
+      transform: translateY(10px) rotate(45deg);
+    }
+
+    .hamburger.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.open span:nth-child(3) {
+      transform: translateY(-10px) rotate(-45deg);
+    }
+
+    nav {
+      background: #fff7f0;
+      border-bottom: 1px solid #ffd3b6;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    nav.open {
+      max-height: 260px;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0.75rem 1.5rem 1rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 0.5rem;
+    }
+
+    nav li a {
+      text-decoration: none;
+      color: var(--text);
+      padding: 0.4rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid #ffd3b6;
+      background: #fff;
+      font-size: 0.9rem;
+      display: inline-block;
+      transition: background 0.2s ease, transform 0.1s ease;
+    }
+
+    nav li a:hover {
+      background: #ffe0b2;
+      transform: translateY(-1px);
+    }
+
+    main {
+      padding: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    section {
+      margin-bottom: 2rem;
+    }
+
+    section h2 {
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+      color: var(--accent-dark);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    section h2 span.emoji {
+      font-size: 1.4rem;
+    }
+
+    section p.lead {
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    /* Cards */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      padding: 1rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card h3 {
+      font-size: 1.05rem;
+      margin-bottom: 0.4rem;
+      color: var(--accent-dark);
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .badge {
+      font-size: 0.75rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 999px;
+      border: 1px solid #ffd3b6;
+      background: #fff7f0;
+    }
+
+    .badge.green {
+      border-color: #c8e6c9;
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+
+    .badge.blue {
+      border-color: #bbdefb;
+      background: #e3f2fd;
+      color: #1a237e;
+    }
+
+    ul {
+      padding-left: 1.1rem;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    li {
+      margin-bottom: 0.25rem;
+    }
+
+    /* Storyboard structure */
+    .storyboard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .story-panel {
+      background: #fff;
+      border-radius: 10px;
+      border: 1px dashed #ffb26b;
+      padding: 0.7rem;
+      font-size: 0.85rem;
+    }
+
+    .story-panel h4 {
+      font-size: 0.9rem;
+      margin-bottom: 0.3rem;
+      color: var(--accent-dark);
+    }
+
+    /* Places to see */
+    .places-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .place-card {
+      background: #fff;
+      border-radius: 10px;
+      border: 1px solid #ffd3b6;
+      padding: 0.8rem;
+      font-size: 0.9rem;
+    }
+
+    .place-card h3 {
+      font-size: 1rem;
+      margin-bottom: 0.3rem;
+      color: var(--blue);
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      margin-top: 0.3rem;
+    }
+
+    .pill {
+      font-size: 0.75rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 999px;
+      background: #e3f2fd;
+      color: #1a237e;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 1rem 1.5rem 1.5rem;
+      font-size: 0.8rem;
+      color: #777;
+    }
+
+    footer span {
+      color: var(--accent-dark);
+      font-weight: 600;
+    }
+
+    @media (min-width: 768px) {
+      header h1 {
+        font-size: 1.6rem;
+      }
+      header span.tagline {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Helping Hands Learning Café</h1>
+      <span class="tagline">Food, stories, and math for young minds.</span>
+    </div>
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </header>
+
+  <nav id="nav">
+    <ul>
+      <li><a href="#food">Hamburger &amp; Hot Dog Lab</a></li>
+      <li><a href="#taco-salad">Taco Salad Station</a></li>
+      <li><a href="#teach-teaching">Teaching How to Teach</a></li>
+      <li><a href="#storyboard">Storyboard Structure</a></li>
+      <li><a href="#math-youth">Math for Youth</a></li>
+      <li><a href="#helping-hands">Helping Hands Groups</a></li>
+      <li><a href="#places">Places to See</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <!-- Food Section -->
+    <section id="food">
+      <h2><span class="emoji">🍔🌭</span>Hamburger &amp; Hot Dog Style Lab</h2>
+      <p class="lead">
+        Use classic cookout favorites to teach planning, sequencing, and even a bit of math.
+        Each card is a mini-lesson plus a simple recipe idea.
+      </p>
+
+      <div class="card-grid">
+        <article class="card">
+          <h3>Build-a-Burger Story</h3>
+          <div class="badge-row">
+            <span class="badge green">Hands-on</span>
+            <span class="badge">Ages 8–14</span>
+          </div>
+          <p>
+            Ask youth to design a “dream burger” and turn the steps into a story:
+            who is eating it, where, and why.
+          </p>
+          <ul>
+            <li><strong>Step 1:</strong> Choose bun, patty, and toppings.</li>
+            <li><strong>Step 2:</strong> Write each step as a sentence.</li>
+            <li><strong>Step 3:</strong> Add a beginning, problem, and fun ending.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Hot Dog Fraction Line</h3>
+          <div class="badge-row">
+            <span class="badge blue">Math Focus</span>
+            <span class="badge">Ages 9–15</span>
+          </div>
+          <p>
+            Use sliced hot dogs (or paper cutouts) to show fractions and division.
+          </p>
+          <ul>
+            <li><strong>Idea:</strong> Cut a hot dog into equal pieces and label each piece as a fraction.</li>
+            <li><strong>Challenge:</strong> “If we share 3 hot dogs among 4 friends, how much does each get?”</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Menu Math</h3>
+          <div class="badge-row">
+            <span class="badge blue">Real-world Math</span>
+            <span class="badge green">Group Work</span>
+          </div>
+          <p>
+            Create a simple burger &amp; hot dog menu with prices. Let youth “order” and
+            calculate totals, change, and discounts.
+          </p>
+          <ul>
+            <li><strong>Skill:</strong> Addition, subtraction, and percent discounts.</li>
+            <li><strong>Extension:</strong> Design a combo meal and compare savings.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- Taco Salad Section -->
+    <section id="taco-salad">
+      <h2><span class="emoji">🥗🌮</span>Taco Salad Learning Station</h2>
+      <p class="lead">
+        Taco salad is perfect for teaching choice, categories, and step-by-step thinking.
+        Use it as a metaphor for building ideas.
+      </p>
+
+      <div class="card-grid">
+        <article class="card">
+          <h3>Taco Salad Recipe Map</h3>
+          <div class="badge-row">
+            <span class="badge green">Creative Thinking</span>
+            <span class="badge">Ages 8–16</span>
+          </div>
+          <p>
+            Draw a “recipe map” where each ingredient is a branch. Youth choose ingredients
+            and then write directions in order.
+          </p>
+          <ul>
+            <li><strong>Base:</strong> Lettuce, chips, or rice.</li>
+            <li><strong>Protein:</strong> Beans, chicken, beef, tofu.</li>
+            <li><strong>Extras:</strong> Cheese, salsa, corn, avocado.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Math Mix-ins</h3>
+          <div class="badge-row">
+            <span class="badge blue">Ratios &amp; Fractions</span>
+          </div>
+          <p>
+            Turn the salad into a ratio lesson: “2 scoops of beans for every 3 scoops of lettuce.”
+          </p>
+          <ul>
+            <li><strong>Prompt:</strong> “If we double the recipe, what happens to each ingredient?”</li>
+            <li><strong>Visual:</strong> Use colored counters to represent each ingredient.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- Teaching How to Teach -->
+    <section id="teach-teaching">
+      <h2><span class="emoji">🧠📚</span>Teaching How to Teach</h2>
+      <p class="lead">
+        This section is for mentors and youth leaders. It outlines a simple structure
+        for planning any lesson: food, math, or storytelling.
+      </p>
+
+      <div class="card-grid">
+        <article class="card">
+          <h3>4-Step Teaching Framework</h3>
+          <ul>
+            <li><strong>1. Hook:</strong> Start with something familiar (a burger, a game, a place they love).</li>
+            <li><strong>2. Explore:</strong> Let youth talk, guess, and try before you explain.</li>
+            <li><strong>3. Explain:</strong> Give clear, short instructions or definitions.</li>
+            <li><strong>4. Reflect:</strong> Ask, “What did we learn?” and “Where could we use this?”</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Teaching Checklist</h3>
+          <ul>
+            <li><strong>Goal:</strong> What should they be able to do at the end?</li>
+            <li><strong>Materials:</strong> What do you need ready?</li>
+            <li><strong>Time:</strong> How long will each part take?</li>
+            <li><strong>Support:</strong> Who can help students who get stuck?</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- Storyboard Structure -->
+    <section id="storyboard">
+      <h2><span class="emoji">🎬📝</span>Storyboard Structure for Youth</h2>
+      <p class="lead">
+        A storyboard is a visual plan for a story, video, or project. Here’s a simple
+        length and structure you can teach.
+      </p>
+
+      <div class="storyboard-grid">
+        <div class="story-panel">
+          <h4>Panel 1 – Setting</h4>
+          <p>
+            Who is in the scene? Where are they? What time of day is it?
+            (Example: friends at a summer cookout.)
+          </p>
+        </div>
+        <div class="story-panel">
+          <h4>Panel 2 – Problem</h4>
+          <p>
+            Something goes wrong or needs to be solved.
+            (Example: they don’t have enough hot dogs for everyone.)
+          </p>
+        </div>
+        <div class="story-panel">
+          <h4>Panel 3 – Plan</h4>
+          <p>
+            Characters come up with a plan.
+            (Example: they create taco salads from extra ingredients.)
+          </p>
+        </div>
+        <div class="story-panel">
+          <h4>Panel 4 – Action</h4>
+          <p>
+            Show the plan in motion—draw or describe the steps.
+          </p>
+        </div>
+        <div class="story-panel">
+          <h4>Panel 5 – Solution</h4>
+          <p>
+            How is the problem solved? What did they learn?
+          </p>
+        </div>
+        <div class="story-panel">
+          <h4>Panel 6 – Reflection</h4>
+          <p>
+            One sentence about the message of the story:
+            sharing, teamwork, or creative problem-solving.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Math for Youth -->
+    <section id="math-youth">
+      <h2><span class="emoji">➗📏</span>Math for Youth – Fun Approaches</h2>
+      <p class="lead">
+        Connect math to everyday things—food, games, and places. Here are quick lesson
+        ideas you can plug into your teaching.
+      </p>
+
+      <div class="card-grid">
+        <article class="card">
+          <h3>Cookout Fractions</h3>
+          <p>
+            Use paper plates and cut-out burgers/hot dogs to show halves, thirds, and quarters.
+          </p>
+          <ul>
+            <li><strong>Activity:</strong> “Shade 1/2 of the toppings” or “Share 3 burgers among 5 friends.”</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Taco Salad Graphs</h3>
+          <p>
+            Let youth vote on favorite ingredients and turn the results into a bar graph or pie chart.
+          </p>
+          <ul>
+            <li><strong>Skill:</strong> Reading and creating graphs.</li>
+            <li><strong>Extension:</strong> Compare two groups’ favorites.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Place-to-See Coordinates</h3>
+          <p>
+            Draw a simple map of a city or park and label spots with coordinates.
+          </p>
+          <ul>
+            <li><strong>Activity:</strong> “Walk” from one place to another using steps on the grid.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- Helping Hands Groups -->
+    <section id="helping-hands">
+      <h2><span class="emoji">🤝💡</span>Helping Hands – Group Names &amp; Roles</h2>
+      <p class="lead">
+        Create small groups with positive names and clear roles so youth feel ownership
+        of the learning space.
+      </p>
+
+      <div class="card-grid">
+        <article class="card">
+          <h3>Group Name Ideas</h3>
+          <ul>
+            <li><strong>Math Chefs</strong> – mix numbers like ingredients.</li>
+            <li><strong>Story Grillers</strong> – cook up new stories.</li>
+            <li><strong>Taco Thinkers</strong> – layer ideas like taco toppings.</li>
+            <li><strong>Helping Hands Crew</strong> – focused on kindness and support.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Roles in Each Group</h3>
+          <ul>
+            <li><strong>Leader:</strong> Keeps the group on task.</li>
+            <li><strong>Recorder:</strong> Writes or draws the group’s ideas.</li>
+            <li><strong>Speaker:</strong> Shares the group’s work with others.</li>
+            <li><strong>Helper:</strong> Checks that everyone understands.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- Places to See -->
+    <section id="places">
+      <h2><span class="emoji">🗺️🚶‍♀️</span>Places to See – Inspiration for Lessons</h2>
+      <p class="lead">
+        Use local or dream destinations as settings for math problems, stories, and group projects.
+      </p>
+
+      <div class="places-list">
+        <article class="place-card">
+          <h3>Local Park Adventure</h3>
+          <p>
+            Plan a “cookout day” in a park. Use distances, time, and supplies as math problems.
+          </p>
+          <div class="pill-row">
+            <span class="pill">Nature</span>
+            <span class="pill">Measurement</span>
+          </div>
+        </article>
+
+        <article class="place-card">
+          <h3>City Food Market</h3>
+          <p>
+            Imagine visiting a market with food stalls. Create menus, budgets, and story scenes.
+          </p>
+          <div class="pill-row">
+            <span class="pill">Money Math</span>
+            <span class="pill">Story Settings</span>
+          </div>
+        </article>
+
+        <article class="place-card">
+          <h3>Dream Travel Map</h3>
+          <p>
+            Let youth choose a place they’d love to visit and build a mini-project:
+            story, budget, and itinerary.
+          </p>
+          <div class="pill-row">
+            <span class="pill">Geography</span>
+            <span class="pill">Planning</span>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>
+      Built for curious minds and kind teachers — <span>Helping Hands Learning Café</span>.
+    </p>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById("hamburger");
+    const nav = document.getElementById("nav");
+
+    hamburger.addEventListener("click", () => {
+      hamburger.classList.toggle("open");
+      nav.classList.toggle("open");
+    });
+
+    // Smooth scroll for nav links
+    document.querySelectorAll("nav a").forEach(link => {
+      link.addEventListener("click", e => {
+        e.preventDefault();
+        const targetId = link.getAttribute("href").substring(1);
+        const target = document.getElementById(targetId);
+        if (target) {
+          window.scrollTo({
+            top: target.offsetTop - 80,
+            behavior: "smooth"
+          });
+        }
+        hamburger.classList.remove("open");
+        nav.classList.remove("open");
+      });
+    });
+  </script>
+</body>
+</html>
