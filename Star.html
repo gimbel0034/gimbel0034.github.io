@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Animated Star</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at top, #1e3a8a, #020617);
+      font-family: system-ui, sans-serif;
+      color: #f9fafb;
+    }
+
+    .star-container {
+      text-align: center;
+    }
+
+    .star {
+      width: 0;
+      height: 0;
+      margin: 0 auto 1rem;
+      position: relative;
+      color: #facc15;
+      filter: drop-shadow(0 0 12px rgba(250, 204, 21, 0.8));
+      animation: spin 6s linear infinite;
+    }
+
+    /* CSS star using borders */
+    .star::before,
+    .star::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -50px;
+      width: 0;
+      height: 0;
+      border-right: 50px solid transparent;
+      border-left: 50px solid transparent;
+      border-bottom: 80px solid currentColor;
+    }
+
+    .star::after {
+      top: 24px;
+      transform: rotate(180deg);
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(180deg) scale(1.1); }
+      to { transform: rotate(360deg) scale(1); }
+    }
+
+    button {
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      border: none;
+      background: #facc15;
+      color: #1f2937;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.4);
+    }
+  </style>
+</head>
+<body>
+  <div class="star-container">
+    <div class="star" id="star"></div>
+    <p id="message">Click the button to make the star twinkle.</p>
+    <button id="twinkle-btn">Twinkle Star ✨</button>
+  </div>
+
+  <script>
+    const star = document.getElementById("star");
+    const message = document.getElementById("message");
+    const btn = document.getElementById("twinkle-btn");
+
+    btn.addEventListener("click", () => {
+      star.style.animation = "spin 1.5s ease-in-out 0s 1, glow 1.5s ease-in-out 0s 1";
+      message.textContent = "The star is twinkling!";
+      setTimeout(() => {
+        star.style.animation = "spin 6s linear infinite";
+        message.textContent = "Click the button to make the star twinkle.";
+      }, 1600);
+    });
+  </script>
+</body>
+</html>
