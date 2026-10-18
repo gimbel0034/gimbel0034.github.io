@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cholla Chapel – Sunday Service & Uplift</title>
+  <style>
+    :root {
+      --primary: #234e70;
+      --accent: #f4a261;
+      --light: #fdfcfb;
+      --bg: #f1f5f9;
+...erson, NV · Pueblo / Fairview / Calico Ridge wards
+      </div>
+
+      <div class="info-grid">
+        <div class="info-item">
+          <h3>What to expect</h3>
+          <p>
+            A main sacrament meeting with hymns, prayers, and talks given by members,
+            followed by classes for children, youth, and adults.
+          </p>
+          <span class="badge">Come as you are · “Sunday best” optional</span>
+        </div>
+        <div class="info-item">
+          <h3>Everyone is welcome</h3>
+          <p>
+            Whether you’re exploring faith, returning after a while, or supporting a friend,
+            you’re invited to sit, listen, and feel the Spirit—no pressure to participate.
+          </p>
+        </div>
+      </div>
+
+      <h2 style="margin-top:1rem;"><span class="icon">🩺</span>Nursing & service</h2>
+      <div class="care-grid">
+        <div class="care-item">
+          <h3>Compassion in healthcare</h3>
+          <p>
+            For nurses and caregivers, James 1:5–6 is a daily anchor: seek wisdom for complex decisions,
+            ask in faith, and trust that God knows every patient and every shift.
+          </p>
+          <p class="coach-note">
+            Consider a brief prayer before each shift: “Lord, help me see each person as Thou seest them.”
+          </p>
+        </div>
+        <div class="care-item">
+          <h3>Serving like the Savior</h3>
+          <p>
+            The Church of Jesus Christ of Latter-day Saints emphasizes Christlike service—feeding the hungry,
+            visiting the lonely, and supporting families in need. Your nursing and caregiving can be part of that ministry.
+          </p>
+        </div>
+      </div>
+
+      <h2 style="margin-top:1rem;"><span class="icon">🧭</span>Life coaching with faith</h2>
+      <div class="care-item">
+        <h3>Faith-based life coaching themes</h3>
+        <p>
+          • Clarify your purpose with prayer and scripture study (James 1:5–6 as a starting point).<br />
+          • Set goals that align with following Jesus Christ—service, integrity, and compassion.<br />
+          • Use weekly reflection (like a personal “family home evening”) to review progress and invite the Spirit.
+        </p>
+        <p class="coach-note">
+          A simple framework: <strong>Ask</strong> (God for wisdom), <strong>Act</strong> (on promptings),
+          <strong>Adjust</strong> (with humility), and <strong>Anchor</strong> (your identity in Christ).
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div>Cholla Chapel · Church of Jesus Christ of Latter-day Saints · Henderson, Nevada</div>
+    <span>Scripture focus: James 1:5–6 · Centered on Jesus Christ · Joyful, reverent, and welcoming.</span>
+  </footer>
+
+  <script>
+    // Toggle James 1:5–6 visibility
+    const toggleJamesBtn = document.getElementById("toggle-james");
+    const jamesText = document.getElementById("james-text");
+
+    toggleJamesBtn.addEventListener("click", () => {
+      const isHidden = jamesText.style.display === "none";
+      jamesText.style.display = isHidden ? "block" : "none";
+    });
+
+    // Knock-knock jokes (church relatable)
+    const jokes = [
+      {
+        setup: "Knock, knock.",
+        punchline: "Who’s there?\n\nLettuce.\n\nLettuce who?\n\nLettuce pray together—church starts at 9:00, don’t be late!"
+      },
+      {
+        setup: "Knock, knock.",
+        punchline: "Who’s there?\n\nOlive.\n\nOlive who?\n\nOlive Jesus, and He olive you too!"
+      },
+      {
+        setup: "Knock, knock.",
+        punchline: "Who’s there?\n\nAmen.\n\nAmen who?\n\nAmen your schedule—there’s always room for Sunday service!"
+      },
+      {
+        setup: "Knock, knock.",
+        punchline: "Who’s there?\n\nPsalm.\n\nPsalm who?\n\nPsalm-body told me there’s a great choir at Cholla Chapel."
+      },
+      {
+        setup: "Knock, knock.",
+        punchline: "Who’s there?\n\nGrace.\n\nGrace who?\n\nGrace and peace be unto you—see you in sacrament meeting!"
+      },
+      {
+        setup: "Knock, knock.",
+        punchline: "Who’s there?\n\nWard.\n\nWard who?\n\nWard you like to sit with me at church today?"
+      }
+    ];
+
+    const jokeBtn = document.getElementById("new-joke");
+    const jokeSetupEl = document.getElementById("joke-setup");
+    const jokePunchlineEl = document.getElementById("joke-punchline");
+
+    function showRandomJoke() {
+      const random = jokes[Math.floor(Math.random() * jokes.length)];
+      jokeSetupEl.textContent = random.setup;
+      jokePunchlineEl.textContent = random.punchline;
+    }
+
+    jokeBtn.addEventListener("click", showRandomJoke);
+
+    // Show one joke on load
+    showRandomJoke();
+  </script>
+</body>
+</html>
