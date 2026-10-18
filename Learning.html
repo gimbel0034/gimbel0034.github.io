@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Learning Is Fun – Scripture Garden</title>
+  <style>
+    :root {
+      --sky: #e0f2fe;
+      --grass: #bbf7d0;
+      --tree-trunk: #92400e;
+      --tree-leaf: #22c55e...re questions and that He loves to teach us " +
+        "when we ask with faith and trust.";
+      noteText.textContent =
+        "You can bring every learning moment to God in prayer and invite Him to guide your mind and heart.";
+    });
+
+    btnChrist.addEventListener("click", () => {
+      scriptureText.textContent =
+        "Jesus said, “I am the way, the truth, and the life.”";
+      scriptureExtra.textContent =
+        "When we learn about Jesus Christ, we are not only gathering information; we are discovering a living " +
+        "Person who loves us and leads us.";
+      noteText.textContent =
+        "Let your questions about life and purpose turn you toward Christ, who offers light, truth, and peace.";
+    });
+
+    btnLife.addEventListener("click", () => {
+      scriptureText.textContent =
+        "Jesus came that we “might have life, and that [we] might have it more abundantly.”";
+      scriptureExtra.textContent =
+        "Abundant life includes growth, learning, service, and joy. Every new skill and every kind act can be " +
+        "part of that abundant life.";
+      noteText.textContent =
+        "Think of learning as planting seeds in a garden. With time, patience, and faith, those seeds become " +
+        "strong trees of experience and wisdom.";
+    });
+
+    btnFun.addEventListener("click", () => {
+      scene.style.transition = "transform 0.6s ease, box-shadow 0.6s ease";
+      scene.style.transform = "scale(1.03)";
+      scene.style.boxShadow = "0 18px 40px rgba(15, 23, 42, 0.35)";
+
+      noteText.textContent =
+        "The colors, shapes, and scriptures are here to remind you that learning can be playful, spiritual, " +
+        "and full of life all at once.";
+
+      setTimeout(() => {
+        scene.style.transform = "scale(1)";
+        scene.style.boxShadow = "0 12px 30px rgba(15, 23, 42, 0.25)";
+      }, 800);
+    });
+  </script>
+</body>
+</html>
