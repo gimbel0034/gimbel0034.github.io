@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Disney Health & Holiday Adventure Portal</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:linear-gradient(to bottom,#0f172a,#1e3a8a,#7c3aed);
+    color:white;
+}
+
+header{
+    text-align:center;
+    padding:40px;
+    background:rgba(0,0,0,.4);
+}
+
+header h1{
+    font-size:3rem;
+    color:#ffd700;
+}
+
+nav{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:10px;
+    padding:15px;
+    background:#111827;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    padding:10px 15px;
+    border-radius:25px;
+    background:#2563eb;
+}
+
+section{
+    padding:30px;
+}
+
+.card{
+    background:rgba(255,255,255,.12);
+    backdrop-filter:blur(10px);
+    border-radius:20px;
+    padding:20px;
+    margin-bottom:25px;
+    box-shadow:0 0 15px rgba(0,0,0,.3);
+}
+
+h2{
+    color:#ffd700;
+    margin-bottom:15px;
+}
+
+ul{
+    padding-left:20px;
+}
+
+.disney{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.character{
+    text-align:center;
+    background:rgba(255,255,255,.15);
+    padding:20px;
+    border-radius:15px;
+}
+
+button{
+    padding:12px 20px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    background:#22c55e;
+    color:white;
+    font-weight:bold;
+}
+
+.game-area{
+    text-align:center;
+}
+
+#playerTurn{
+    font-size:1.2rem;
+    margin:15px 0;
+}
+
+.board{
+    width:300px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:5px;
+}
+
+.cell{
+    background:white;
+    color:black;
+    height:90px;
+    font-size:2rem;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+}
+
+.food-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.food-item{
+    background:rgba(255,255,255,.15);
+    padding:15px;
+    border-radius:15px;
+}
+
+footer{
+    text-align:center;
+    padding:25px;
+    background:#111827;
+}
+
+.highlight{
+    color:#ffd700;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Disney Health & Holiday Adventure</h1>
+    <p>Healthcare • Mental Wellness • Disney Magic • Holidays • Online Games</p>
+</header>
+
+<nav>
+    <a href="#health">Healthcare</a>
+    <a href="#mental">Mental Health</a>
+    <a href="#disney">Disney</a>
+    <a href="#food">Disney Food</a>
+    <a href="#airport">Airport</a>
+    <a href="#shows">Michael J. Rosenbaum</a>
+    <a href="#game">2 Player Game</a>
+    <a href="#holidays">Holidays</a>
+</nav>
+
+<section id="health">
+
+<div class="card">
+<h2>🏥 Healthcare Awareness</h2>
+
+<p>
+Good healthcare includes physical wellness, emotional wellness,
+proper nutrition, exercise, sleep, and access to medical support.
+Regular checkups and healthy lifestyles can help people enjoy a
+higher quality of life.
+</p>
+</div>
+
+</section>
+
+<section id="mental">
+
+<div class="card">
+<h2>🧠 Mental Health Information</h2>
+
+<ul>
+<li><b>Schizoaffective Disorder</b> combines symptoms of schizophrenia and mood disorders.</li>
+<li><b>Bipolar Disorder</b> involves significant mood episodes including depression and mania or hypomania.</li>
+<li><b>Anxiety Disorders</b> may involve excessive worry, fear, panic attacks, or social anxiety.</li>
+<li><b>Obsessive Compulsive Disorder (OCD)</b> involves intrusive thoughts and repetitive behaviors.</li>
+<li><b>Eating Disorders</b> affect eating habits, body image, and overall health.</li>
+</ul>
+
+<br>
+
+<p>
+Mental health treatment may involve therapy, support systems,
+healthy coping skills, medication when prescribed, and professional care.
+If someone is struggling, seeking help from qualified healthcare
+professionals is important.
+</p>
+
+</div>
+
+</section>
+
+<section id="disney">
+
+<div class="card">
+<h2>🏰 Disney Magic</h2>
+
+<div class="disney">
+
+<div class="character">
+<h3>🐭 Mickey Mouse</h3>
+<p>
+One of Disney's most famous characters and a symbol of imagination,
+friendship, and fun.
+</p>
+</div>
+
+<div class="character">
+<h3>🎀 Minnie Mouse</h3>
+<p>
+Known for kindness, style, and cheerful adventures with Mickey.
+</p>
+</div>
+
+<div class="character">
+<h3>🏰 Disney Castle</h3>
+<p>
+A magical icon representing dreams, storytelling, and fantasy.
+</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="food">
+
+<div class="card">
+
+<h2>🍽 Disneyland & Disney World Foods</h2>
+
+<div class="food-grid">
+
+<div class="food-item">
+<h3>Disneyland Favorites</h3>
+<ul>
+<li>Dole Whip</li>
+<li>Churros</li>
+<li>Mickey Beignets</li>
+<li>Turkey Legs</li>
+</ul>
+</div>
+
+<div class="food-item">
+<h3>Disney World Favorites</h3>
+<ul>
+<li>Mickey Pretzels</li>
+<li>School Bread</li>
+<li>Cheeseburger Spring Rolls</li>
+<li>Night Blossom Drink</li>
+</ul>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="airport">
+
+<div class="card">
+<h2>✈️ Airport Travel Adventure</h2>
+
+<p>
+Airports connect people around the world. Travelers can explore
+different destinations, enjoy new cultures, and create memories
+through vacations and holiday celebrations.
+</p>
+
+</div>
+
+</section>
+
+<section id="shows">
+
+<div class="card">
+
+<h2>🎬 Michael J. Rosenbaum</h2>
+
+<p>
+Michael Rosenbaum is an actor, producer, and podcaster best known
+for portraying <span class="highlight">Lex Luthor</span> in the television
+series <span class="highlight">Smallville</span>.
+</p>
+
+<h3>Notable Shows & Projects</h3>
+
+<ul>
+<li>Smallville</li>
+<li>Impastor</li>
+<li>Breaking In</li>
+<li>Justice League (voice work as The Flash)</li>
+<li>Inside of You Podcast</li>
+</ul>
+
+</div>
+
+</section>
+
+<section id="game">
+
+<div class="card game-area">
+
+<h2>🎮 Online Two Player Tic-Tac-Toe</h2>
+
+<p id="playerTurn">Player X Turn</p>
+
+<div class="board">
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+</div>
+
+<br>
+
+<button onclick="resetGame()">Reset Game</button>
+
+<h3 id="result"></h3>
+
+</div>
+
+</section>
+
+<section id="holidays">
+
+<div class="card">
+
+<h2>🎄 Holiday Celebrations</h2>
+
+<h3>Christmas Eve</h3>
+<p>Family gatherings, holiday meals, lights, music, and gift preparation.</p>
+
+<br>
+
+<h3>Christmas Day</h3>
+<p>Celebrations with family, giving gifts, festive foods, and traditions.</p>
+
+<br>
+
+<h3>🎆 New Year's Eve</h3>
+<p>Countdown celebrations, fireworks, parties, and reflection on the year.</p>
+
+<br>
+
+<h3>🎉 New Year's Day</h3>
+<p>Fresh beginnings, goals, resolutions, and spending time with loved ones.</p>
+
+<br>
+
+<h3>Other Celebration Days</h3>
+
+<ul>
+<li>Valentine's Day ❤️</li>
+<li>Easter 🐰</li>
+<li>Halloween 🎃</li>
+<li>Thanksgiving 🦃</li>
+<li>Independence Day 🇺🇸</li>
+</ul>
+
+</div>
+
+</section>
+
+<footer>
+    Disney Health & Holiday Adventure Portal © 2026
+</footer>
+
+<script>
+
+let currentPlayer = "X";
+let gameOver = false;
+
+const cells = document.querySelectorAll(".cell");
+const result = document.getElementById("result");
+const playerTurn = document.getElementById("playerTurn");
+
+const winPatterns = [
+[0,1,2],[3,4,5],[6,7,8],
+[0,3,6],[1,4,7],[2,5,8],
+[0,4,8],[2,4,6]
+];
+
+cells.forEach(cell=>{
+    cell.addEventListener("click",()=>{
+        if(cell.textContent !== "" || gameOver) return;
+
+        cell.textContent = currentPlayer;
+
+        if(checkWinner()){
+            result.textContent = "Player " + currentPlayer + " Wins!";
+            gameOver = true;
+            return;
+        }
+
+        if([...cells].every(c=>c.textContent !== "")){
+            result.textContent = "Draw Game!";
+            gameOver = true;
+            return;
+        }
+
+        currentPlayer = currentPlayer === "X" ? "O" : "X";
+        playerTurn.textContent = "Player " + currentPlayer + " Turn";
+    });
+});
+
+function checkWinner(){
+    return winPatterns.some(pattern=>{
+        return pattern.every(index=>{
+            return cells[index].textContent === currentPlayer;
+        });
+    });
+}
+
+function resetGame(){
+    cells.forEach(cell=>cell.textContent="");
+    gameOver = false;
+    currentPlayer = "X";
+    result.textContent = "";
+    playerTurn.textContent = "Player X Turn";
+}
+
+</script>
+
+</body>
+</html>
