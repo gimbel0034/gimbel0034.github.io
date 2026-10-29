@@ -251,3 +251,29 @@ window.onload = function(){
 holidayCountdown();
 
 };
+function animateDiagram(){
+
+const nodes =
+document.querySelectorAll(".node");
+
+let index = 0;
+
+setInterval(()=>{
+
+nodes.forEach(node=>{
+node.style.background="#1e3a8a";
+});
+
+nodes[index].style.background="#22c55e";
+
+index++;
+
+if(index >= nodes.length){
+index = 0;
+}
+
+},2000);
+
+}
+
+window.onload = animateDiagram;
