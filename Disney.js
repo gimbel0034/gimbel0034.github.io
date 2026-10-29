@@ -13,7 +13,7 @@ tips[Math.floor(Math.random()*tips.length)];
 
 }
 
-function motiva*ion(){
+function motivation(){
 
 const messages = [
 "You matter.",
