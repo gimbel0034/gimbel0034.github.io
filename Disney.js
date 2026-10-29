@@ -12,18 +12,28 @@ document.getElementById("tip").innerHTML =
 tips[Math.floor(Math.random()*tips.length)];
 
 }
-
 function motivation(){
 
 const messages = [
-"You matter.",
-"Every small step counts.",
-"Believe in yourself.",
-"Learning happens one day at a time.",
-"You are stronger than you realize."
+
+"Every day is a new beginning.",
+
+"You are stronger than you think.",
+
+"Small steps create big achievements.",
+
+"Your story matters.",
+
+"Keep believing in yourself.",
+
+"You can learn something new today."
+
 ];
 
-document.getElementById("message").innerHTML =
-messages[Math.floor(Math.random()*messages.length)];
+let random =
+Math.floor(Math.random()*messages.length);
+
+document.getElementById("message")
+.innerHTML = messages[random];
 
 }
