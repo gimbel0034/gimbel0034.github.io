@@ -43,6 +43,16 @@ section{
     border-radius:20px;
     box-shadow:0 0 15px rgba(0,0,0,.3);
 }
+.castle-path{
+
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:50px;
+
+margin-top:40px;
+
+}
 
 .holiday-card h3{
     color:#ffd700;
