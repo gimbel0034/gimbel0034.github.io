@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Farm Fresh Pumpkin Pie Project</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Georgia,serif;
+    background:linear-gradient(#fff8ec,#ffe7c2,#ffd6a5);
+    color:#4b2f16;
+    line-height:1.7;
+}
+
+header{
+    text-align:center;
+    padding:60px 20px;
+    background:linear-gradient(135deg,#ff7b00,#d35400);
+    color:white;
+}
+
+header h1{
+    font-size:4rem;
+}
+
+header h2{
+    margin-top:10px;
+    font-weight:normal;
+}
+
+.hero{
+    text-align:center;
+    padding:40px;
+}
+
+.pumpkin{
+    width:250px;
+    height:200px;
+    background:#ff8a00;
+    border-radius:50%;
+    margin:auto;
+    position:relative;
+    animation:float 4s ease-in-out infinite;
+}
+
+.pumpkin:before,
+.pumpkin:after{
+    content:"";
+    position:absolute;
+    top:10px;
+    width:80px;
+    height:180px;
+    border-radius:50%;
+    background:#ff9d29;
+}
+
+.pumpkin:before{
+    left:35px;
+}
+
+.pumpkin:after{
+    right:35px;
+}
+
+.stem{
+    position:absolute;
+    width:35px;
+    height:60px;
+    background:#4f8b36;
+    left:108px;
+    top:-40px;
+    border-radius:5px;
+}
+
+@keyframes float{
+    0%,100%{
+        transform:translateY(0px);
+    }
+    50%{
+        transform:translateY(-15px);
+    }
+}
+
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:auto;
+}
+
+.section{
+    background:white;
+    margin:30px 0;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 0 20px rgba(0,0,0,.15);
+}
+
+.section h2{
+    color:#d35400;
+    margin-bottom:15px;
+}
+
+.step{
+    margin:15px 0;
+    padding:15px;
+    border-left:8px solid orange;
+    background:#fff9f0;
+}
+
+button{
+    padding:15px 25px;
+    border:none;
+    border-radius:10px;
+    background:#e67e22;
+    color:white;
+    cursor:pointer;
+    font-size:1rem;
+}
+
+button:hover{
+    background:#c95f00;
+}
+
+#factBox{
+    margin-top:20px;
+    padding:15px;
+    min-height:80px;
+    background:#fff3e6;
+    border-radius:10px;
+    font-size:1.1rem;
+}
+
+.recipe-card{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:25px;
+}
+
+.ingredients,
+.filling{
+    background:#fff8f0;
+    padding:20px;
+    border-radius:15px;
+}
+
+.ingredients ul,
+.filling ul{
+    margin-left:20px;
+}
+
+footer{
+    text-align:center;
+    padding:30px;
+    background:#d35400;
+    color:white;
+    margin-top:40px;
+}
+
+.progress{
+    width:100%;
+    height:30px;
+    background:#eee;
+    border-radius:20px;
+    overflow:hidden;
+    margin-top:20px;
+}
+
+.progress-bar{
+    height:100%;
+    width:0%;
+    background:linear-gradient(to right,#ff9f1a,#ff6600);
+    transition:1s;
+}
+
+.counter{
+    text-align:center;
+    margin-top:15px;
+    font-size:1.2rem;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🎃 Farm Fresh Pumpkin Pie 🎃</h1>
+<h2>Garden to Table Complete Processing Project</h2>
+</header>
+
+<div class="hero">
+<div class="pumpkin">
+<div class="stem"></div>
+</div>
+</div>
+
+<div class="container">
+
+<div class="section">
+<h2>🌱 Step 1: Harvest Your Pumpkin</h2>
+
+<div class="step">Choose a ripe sugar pumpkin from the garden.</div>
+<div class="step">Wash thoroughly under cool running water.</div>
+<div class="step">Scrub away dirt and garden debris.</div>
+
+</div>
+
+<div class="section">
+<h2>🔪 Step 2: Clean Pumpkin</h2>
+
+<div class="step">Cut off stem.</div>
+<div class="step">Slice pumpkin in half.</div>
+<div class="step">Scoop out seeds.</div>
+<div class="step">Remove stringy fibers.</div>
+
+</div>
+
+<div class="section">
+<h2>🔥 Step 3: Roast Pumpkin</h2>
+
+<div class="step">Preheat oven to 375°F.</div>
+<div class="step">Place pumpkin halves face down.</div>
+<div class="step">Bake 45–60 minutes.</div>
+<div class="step">Cool completely.</div>
+
+</div>
+
+<div class="section">
+<h2>🥄 Step 4: Create Pumpkin Puree</h2>
+
+<div class="step">Scoop out soft flesh.</div>
+<div class="step">Blend until silky smooth.</div>
+<div class="step">Drain excess moisture.</div>
+<div class="step">Measure 2 cups puree.</div>
+
+</div>
+
+<div class="section recipe-card">
+
+<div class="ingredients">
+<h2>🥧 Pie Ingredients</h2>
+
+<ul>
+<li>2 cups fresh pumpkin puree</li>
+<li>3 eggs</li>
+<li>1 cup heavy cream</li>
+<li>3/4 cup brown sugar</li>
+<li>1 tsp cinnamon</li>
+<li>1/2 tsp ginger</li>
+<li>1/4 tsp nutmeg</li>
+<li>1 tsp vanilla</li>
+<li>Homemade pie crust</li>
+</ul>
+
+</div>
+
+<div class="filling">
+<h2>🥄 Make Filling</h2>
+
+<ul>
+<li>Mix pumpkin puree</li>
+<li>Add eggs</li>
+<li>Add cream</li>
+<li>Add spices</li>
+<li>Whisk until smooth</li>
+<li>Pour into crust</li>
+</ul>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<h2>🔥 Bake Pie</h2>
+
+<div class="step">Bake 15 minutes at 425°F.</div>
+<div class="step">Reduce to 350°F.</div>
+<div class="step">Bake another 45 minutes.</div>
+<div class="step">Cool completely.</div>
+
+<button onclick="startBaking()">Start Baking Process</button>
+
+<div class="progress">
+<div class="progress-bar" id="bar"></div>
+</div>
+
+<div class="counter" id="status">
+Ready To Bake
+</div>
+
+</div>
+
+<div class="section">
+
+<h2>🎃 Fun Pumpkin Facts</h2>
+
+<button onclick="showFact()">Show Fact</button>
+
+<div id="factBox">
+Click the button for a fresh pumpkin fact!
+</div>
+
+</div>
+
+</div>
+
+<footer>
+🌱 Garden Harvest → Clean Pumpkin → Roast → Puree → Pie Filling → Bake → Enjoy Homemade Pumpkin Pie 🥧
+</footer>
+
+<script>
+function showFact(){
+
+const facts = [
+"Pumpkins are fruits because they contain seeds.",
+"Sugar pumpkins make better pies than carving pumpkins.",
+"Pumpkin seeds can be roasted and eaten.",
+"Fresh pumpkin puree has a natural garden flavor.",
+"Pumpkins belong to the squash family.",
+"The largest pumpkins can weigh over 2,000 pounds.",
+"Fresh pie pumpkins are sweeter and less watery."
+];
+
+const random =
+facts[Math.floor(Math.random()*facts.length)];
+
+document.getElementById("factBox").innerHTML=random;
+}
+
+function startBaking(){
+
+let width = 0;
+let stages = [
+"Harvesting Pumpkin...",
+"Cleaning Pumpkin...",
+"Roasting Pumpkin...",
+"Making Puree...",
+"Preparing Filling...",
+"Baking Pie...",
+"Cooling Pie...",
+"Ready To Eat! 🥧"
+];
+
+let index = 0;
+
+const bar =
+document.getElementById("bar");
+
+const status =
+document.getElementById("status");
+
+const interval = setInterval(function(){
+
+width += 14;
+
+if(index < stages.length){
+status.innerHTML = stages[index];
+}
+
+bar.style.width = width + "%";
+
+index++;
+
+if(width >= 100){
+clearInterval(interval);
+bar.style.width="100%";
+status.innerHTML =
+"🥧 Fresh Farm Pumpkin Pie Complete!";
+}
+
+},800);
+
+}
+</script>
+
+</body>
+</html>
