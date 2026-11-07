@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mental Health Assessment & Safety Plan</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#263238;
+    color:white;
+    line-height:1.6;
+}
+
+header{
+    background:#0D47A1;
+    padding:25px;
+    text-align:center;
+    border-bottom:5px solid #1B5E20;
+}
+
+header h1{
+    font-size:2rem;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:20px;
+}
+
+section{
+    background:#37474F;
+    margin-bottom:20px;
+    padding:20px;
+    border-radius:12px;
+    border-left:8px solid #1B5E20;
+    box-shadow:0 0 12px rgba(0,0,0,.3);
+}
+
+h2{
+    color:#81C784;
+    margin-bottom:15px;
+}
+
+label{
+    display:block;
+    margin-top:10px;
+    font-weight:bold;
+}
+
+input, textarea, select{
+    width:100%;
+    padding:10px;
+    margin-top:5px;
+    border:none;
+    border-radius:6px;
+    background:#ECEFF1;
+}
+
+textarea{
+    min-height:100px;
+    resize:vertical;
+}
+
+button{
+    background:#1B5E20;
+    color:white;
+    padding:15px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    width:100%;
+    font-size:18px;
+}
+
+button:hover{
+    background:#2E7D32;
+}
+
+.output{
+    background:#0D47A1;
+    margin-top:20px;
+    padding:20px;
+    border-radius:10px;
+    display:none;
+}
+
+footer{
+    text-align:center;
+    padding:20px;
+    background:#102027;
+    margin-top:20px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Mental Health Questionnaire & Safety Plan</h1>
+<p>Educational Personal Wellness Assessment Tool</p>
+</header>
+
+<div class="container">
+
+<section>
+<h2>About Mental Health</h2>
+
+<p>
+Mental health includes emotional, psychological, and social well-being.
+It affects how people think, feel, act, manage stress, relate to others,
+and make healthy choices. Mental health is an important part of overall health
+through every stage of life.
+</p>
+</section>
+
+<section>
+<h2>Brief History of Mental Health</h2>
+
+<p>
+Throughout history, mental health conditions were often misunderstood. During
+ancient times many societies believed mental illness was connected to spiritual
+or supernatural causes. Medical understanding improved during the 18th, 19th,
+and 20th centuries as psychology, psychiatry, and neuroscience advanced. Today,
+healthcare professionals recognize mental health conditions as real medical
+conditions that can often be treated with therapy, education, support systems,
+lifestyle changes, and medications when appropriate.
+</p>
+</section>
+
+<section>
+
+<h2>Mental Health Questionnaire</h2>
+
+<label>Full Name</label>
+<input type="text" id="name">
+
+<label>Age</label>
+<input type="number" id="age">
+
+<label>How would you describe your mood recently?</label>
+<select id="mood">
+<option>Good</option>
+<option>Fair</option>
+<option>Stressed</option>
+<option>Depressed</option>
+<option>Anxious</option>
+<option>Mixed Emotions</option>
+</select>
+
+<label>Have you experienced increased stress?</label>
+<select id="stress">
+<option>Yes</option>
+<option>No</option>
+</select>
+
+<label>How many hours of sleep do you normally get?</label>
+<input type="number" id="sleep">
+
+<label>What coping skills help you manage stress?</label>
+<textarea id="coping"></textarea>
+
+<label>What are your current strengths?</label>
+<textarea id="strengths"></textarea>
+
+</section>
+
+<section>
+
+<h2>History of Mental Health Condition</h2>
+
+<label>Previous Mental Health Diagnoses</label>
+<textarea id="diagnosis"></textarea>
+
+<label>Previous Hospitalizations (if any)</label>
+<textarea id="hospital"></textarea>
+
+<label>Therapy History</label>
+<textarea id="therapy"></textarea>
+
+<label>Current Medications</label>
+<textarea id="medications"></textarea>
+
+</section>
+
+<section>
+
+<h2>Medical Information</h2>
+
+<label>Primary Medical Conditions</label>
+<textarea id="medical"></textarea>
+
+<label>Primary Care Provider</label>
+<input type="text" id="provider">
+
+<label>Emergency Contact</label>
+<input type="text" id="contact">
+
+</section>
+
+<section>
+
+<h2>Personal Safety Plan</h2>
+
+<label>Warning Signs That I Need Help</label>
+<textarea id="warning"></textarea>
+
+<label>Healthy Activities That Help Me Feel Better</label>
+<textarea id="activities"></textarea>
+
+<label>Family, Friends, or Support People I Can Contact</label>
+<textarea id="support"></textarea>
+
+<label>Professional Resources I Can Contact</label>
+<textarea id="resources"></textarea>
+
+<label>Personal Reasons for Hope and Recovery</label>
+<textarea id="hope"></textarea>
+
+</section>
+
+<button onclick="generateSummary()">
+Generate Mental Health Summary
+</button>
+
+<div class="output" id="output"></div>
+
+</div>
+
+<footer>
+Mental Health Education Project | Dark Blue • Grey • Dark Green Medical Theme
+</footer>
+
+<script>
+function generateSummary(){
+
+let summary = `
+<h2>Assessment Summary</h2>
+
+<p><strong>Name:</strong> ${document.getElementById("name").value}</p>
+
+<p><strong>Age:</strong> ${document.getElementById("age").value}</p>
+
+<p><strong>Mood:</strong> ${document.getElementById("mood").value}</p>
+
+<p><strong>Stress:</strong> ${document.getElementById("stress").value}</p>
+
+<p><strong>Sleep:</strong> ${document.getElementById("sleep").value} hours</p>
+
+<p><strong>Coping Skills:</strong><br>
+${document.getElementById("coping").value}</p>
+
+<p><strong>Strengths:</strong><br>
+${document.getElementById("strengths").value}</p>
+
+<p><strong>Mental Health History:</strong><br>
+${document.getElementById("diagnosis").value}</p>
+
+<p><strong>Medical Information:</strong><br>
+${document.getElementById("medical").value}</p>
+
+<p><strong>Warning Signs:</strong><br>
+${document.getElementById("warning").value}</p>
+
+<p><strong>Support System:</strong><br>
+${document.getElementById("support").value}</p>
+
+<p><strong>Hope and Recovery:</strong><br>
+${document.getElementById("hope").value}</p>
+
+<p><em>This educational form is not a medical diagnosis and should not replace professional healthcare advice.</em></p>
+`;
+
+document.getElementById("output").style.display="block";
+document.getElementById("output").innerHTML=summary;
+}
+</script>
+
+</body>
+</html>
