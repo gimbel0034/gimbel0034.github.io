@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Service, Duty, and Leadership</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, sans-serif;
+    background:#f4f7fa;
+    color:#222;
+    line-height:1.8;
+}
+
+header{
+    background:linear-gradient(90deg,#002868,#041e42,#bf0a30);
+    color:white;
+    text-align:center;
+    padding:40px;
+}
+
+header h1{
+    font-size:2.8rem;
+}
+
+header p{
+    font-size:1.2rem;
+}
+
+nav{
+    background:#1f2937;
+    text-align:center;
+    padding:15px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:15px;
+    font-weight:bold;
+}
+
+nav a:hover{
+    color:gold;
+}
+
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:auto;
+    padding:20px;
+}
+
+.card{
+    background:white;
+    margin:20px 0;
+    padding:25px;
+    border-left:8px solid #002868;
+    border-radius:10px;
+    box-shadow:0px 4px 10px rgba(0,0,0,0.1);
+}
+
+h2{
+    color:#002868;
+    margin-bottom:10px;
+}
+
+ul{
+    margin-left:25px;
+}
+
+.highlight{
+    background:#e8f4ff;
+    padding:15px;
+    border-radius:8px;
+    margin-top:10px;
+}
+
+button{
+    background:#bf0a30;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:6px;
+    cursor:pointer;
+    margin-top:15px;
+    font-size:1rem;
+}
+
+button:hover{
+    background:#8f0624;
+}
+
+#quoteBox{
+    background:#fff9db;
+    padding:18px;
+    margin-top:20px;
+    border-left:6px solid gold;
+    border-radius:8px;
+    font-weight:bold;
+}
+
+footer{
+    background:#041e42;
+    color:white;
+    text-align:center;
+    padding:20px;
+    margin-top:30px;
+}
+
+.symbol{
+    font-size:40px;
+    text-align:center;
+    margin-bottom:15px;
+}
+</style>
+
+</head>
+<body>
+
+<header>
+    <h1>Service, Duty, Leadership, and Justice</h1>
+    <p>United States Marine Corps, Military, and Police Officer Educational Outline</p>
+</header>
+
+<nav>
+    <a href="#marine">Marine Corps</a>
+    <a href="#military">Military</a>
+    <a href="#police">Police</a>
+    <a href="#values">Values</a>
+    <a href="#purpose">Purpose</a>
+</nav>
+
+<div class="container">
+
+<section id="marine" class="card">
+<div class="symbol">🦅🌎⚓</div>
+<h2>United States Marine Corps</h2>
+
+<p>
+The United States Marine Corps is known for readiness,
+discipline, courage, and commitment to national defense.
+Marines are trained to respond rapidly during conflicts,
+humanitarian missions, and emergency situations.
+</p>
+
+<div class="highlight">
+<strong>Core Values</strong>
+<ul>
+<li>Honor</li>
+<li>Courage</li>
+<li>Commitment</li>
+</ul>
+</div>
+</section>
+
+<section id="military" class="card">
+<div class="symbol">⭐🛡️🇺🇸</div>
+
+<h2>United States Military</h2>
+
+<p>
+The United States Military includes the Army, Navy,
+Marine Corps, Air Force, Coast Guard, and Space Force.
+These branches serve to protect the nation, support
+allies, and provide assistance during natural disasters
+and humanitarian crises.
+</p>
+
+<ul>
+<li>Leadership</li>
+<li>Teamwork</li>
+<li>Preparedness</li>
+<li>Service Before Self</li>
+<li>National Defense</li>
+</ul>
+
+</section>
+
+<section id="police" class="card">
+
+<div class="symbol">🚔⚖️</div>
+
+<h2>Police Officers</h2>
+
+<p>
+Police officers serve communities by protecting public
+safety, enforcing laws, assisting citizens, and promoting
+justice. Their work requires integrity, fairness,
+communication, and responsibility.
+</p>
+
+<ul>
+<li>Public Safety</li>
+<li>Justice</li>
+<li>Community Service</li>
+<li>Protection of Rights</li>
+<li>Ethical Leadership</li>
+</ul>
+
+</section>
+
+<section id="values" class="card">
+
+<div class="symbol">⚖️❤️🕊️</div>
+
+<h2>Shared Values</h2>
+
+<p>
+Military personnel, Marines, and police officers often
+share important professional values that support society.
+</p>
+
+<ul>
+<li>Duty</li>
+<li>Honor</li>
+<li>Justice</li>
+<li>Respect</li>
+<li>Service</li>
+<li>Leadership</li>
+<li>Integrity</li>
+<li>Courage</li>
+</ul>
+
+</section>
+
+<section id="purpose" class="card">
+
+<div class="symbol">🌟🚶‍♂️🌄</div>
+
+<h2>Life Purpose and Service</h2>
+
+<p>
+Service can inspire individuals to contribute positively
+to their communities. History shows that leadership,
+responsibility, education, and helping others can create
+meaningful opportunities for personal growth.
+</p>
+
+<p>
+Learning about public service professions helps students
+understand citizenship, responsibility, teamwork, and
+the importance of ethical decision-making.
+</p>
+
+<button onclick="showQuote()">
+Show Leadership Quote
+</button>
+
+<div id="quoteBox">
+Click the button to view a leadership quote.
+</div>
+
+</section>
+
+</div>
+
+<footer>
+    <h3>Leadership • Duty • Justice • Service</h3>
+    <p>Educational History and Civics Project</p>
+</footer>
+
+<script>
+
+const quotes = [
+"Leadership begins with responsibility.",
+"Integrity is doing the right thing even when no one is watching.",
+"Service to others strengthens communities.",
+"Courage and wisdom work together in effective leadership.",
+"Justice, fairness, and respect build trust."
+];
+
+function showQuote(){
+    let random =
+    quotes[Math.floor(Math.random()*quotes.length)];
+
+    document.getElementById("quoteBox").innerHTML =
+    random;
+}
+
+</script>
+
+</body>
+</html>
